@@ -52,8 +52,8 @@ public class TransferCallback extends BankTaskCallback {
             try {
                 transfer();
             } finally {
-                from.lock.unlock();
                 to.lock.unlock();
+                from.lock.unlock();
             }
         } else if (fromHashCode > toHashCode) {
             to.lock.lock();
@@ -61,8 +61,8 @@ public class TransferCallback extends BankTaskCallback {
             try {
                 transfer();
             } finally {
-                to.lock.unlock();
                 from.lock.unlock();
+                to.lock.unlock();
             }
         } else { //如果hashcode一样，则另外加锁让第一个先执行完
             sameHashCodeLock.lock();
@@ -72,8 +72,8 @@ public class TransferCallback extends BankTaskCallback {
                 try {
                     transfer();
                 } finally {
-                    from.lock.unlock();
                     to.lock.unlock();
+                    from.lock.unlock();
                 }
             } finally {
                 sameHashCodeLock.unlock();
