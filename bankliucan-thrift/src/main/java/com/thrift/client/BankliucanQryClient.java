@@ -15,11 +15,9 @@ public class BankliucanQryClient {
         client.start();
     }
     public void start() {
-        System.out.println("客户端启动....");
         TTransport transport = null;
         try {
             transport = new TSocket("127.0.0.1", 30002, 5000);
-            // 协议要和服务端一致
             TProtocol protocol = new TBinaryProtocol(transport);
             BankliucanQry.Client client = new BankliucanQry.Client(protocol);
             transport.open();

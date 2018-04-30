@@ -1,4 +1,4 @@
-package com.liucan;
+package com.liucan.utils;
 
 public class Utils {
     public static void printMethodName() {

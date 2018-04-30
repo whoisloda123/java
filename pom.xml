@@ -12,7 +12,7 @@
         <module>bankliucan-thrift</module>
         <module>bankliucan-base</module>
         <module>bankliucan-server</module>
-        <module>java-learningrecords</module>
+        <module>java-learn</module>
     </modules>
 
     <build>

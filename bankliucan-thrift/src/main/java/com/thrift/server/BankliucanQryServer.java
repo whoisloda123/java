@@ -1,7 +1,5 @@
 package com.thrift.server;
 
-import com.liucan.db.AccountDbMgr;
-import com.liucan.db.model.account;
 import com.thrift.BankliucanQry;
 import com.thrift.query.BankliucanQryImp;
 import org.apache.thrift.TProcessor;
@@ -16,12 +14,10 @@ public class BankliucanQryServer {
 
     public static void main(String[] args) {
         try {
-            System.out.println("thrift服务端开启....");
             TProcessor tprocessor = new BankliucanQry.Processor<BankliucanQry.Iface>(new BankliucanQryImp());
             TServerSocket serverTransport = new TServerSocket(DEFAULT_PORT);
 
             TServer.Args tArgs = new TServer.Args(serverTransport);
-            //设置处理类
             tArgs.processor(tprocessor);
             tArgs.protocolFactory(new TBinaryProtocol.Factory());
             TServer server = new TSimpleServer(tArgs);

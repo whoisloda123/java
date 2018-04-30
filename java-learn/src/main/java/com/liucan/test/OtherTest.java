@@ -1,11 +1,13 @@
-package com.liucan.others;
+package com.liucan.test;
 
-import com.liucan.Utils;
+import com.liucan.utils.Utils;
+import org.springframework.stereotype.Component;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
+@Component
 public class OtherTest {
     public void testAll() {
         testTime(); //测试时间
