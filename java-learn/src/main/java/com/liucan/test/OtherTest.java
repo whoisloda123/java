@@ -1,17 +1,14 @@
 package com.liucan.test;
-
-import com.google.common.collect.Lists;
-import com.liucan.utils.Utils;
+;
 import org.springframework.stereotype.Component;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
-public class OtherTest {
+public class OtherTest extends BaseTest {
+    @Override
     public void testAll() {
         testTime(); //测试时间
     }
@@ -22,8 +19,7 @@ public class OtherTest {
     * */
     public void testTime() {
         //参考https://my.oschina.net/benhaile/blog/193956
-        Utils.printMethodName();
-
+        super.testAll();
         //LocalDate
         LocalDate date = LocalDate.now();
         System.out.println("当前日期：" + date);

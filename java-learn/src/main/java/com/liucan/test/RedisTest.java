@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class RedisTest {
+public class RedisTest extends BaseTest{
     private final Ledis ledis;
 
     @Autowired
@@ -17,7 +17,9 @@ public class RedisTest {
         this.ledis = ledis;
     }
 
+    @Override
     public void testAll() {
+        super.testAll();
         //set
         String value = ledis.get("age");
         ledis.set("age", "36");
@@ -40,6 +42,7 @@ public class RedisTest {
         student.setId(1);
         student.setSex("male");
         student.setName("刘灿");
+
         ledis.hsetObject("hset", "3", student);
 
         Object object = ledis.hgetObject("hset", "3");
