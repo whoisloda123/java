@@ -59,6 +59,7 @@ public class StreamTest extends BaseTest {
 //        }
 
         List<Student> result = list.stream()
+                .sorted(Comparator.comparing(Student::getName))
                 .filter(e -> e.getSex().equals("male"))
                 .collect(Collectors.toList());
 
@@ -66,12 +67,14 @@ public class StreamTest extends BaseTest {
         result = list.stream().limit(3).collect(Collectors.toList());
         result = list.stream().skip(3).collect(Collectors.toList());
         List<String> sexs  = list.stream()
+                .sorted(Comparator.comparing(Student::getSex))
                 .filter(e -> e.getSex().equals("male"))
                 .map(Student::getSex)
                 .collect(Collectors.toList());
 
         //male 且年龄最大的
         OptionalInt maxAge = list.stream()
+                .sorted(Comparator.comparing(Student::getName))
                 .filter(e -> e.getSex().equals("male"))
                 .mapToInt(Student::getAge)
                 .max();

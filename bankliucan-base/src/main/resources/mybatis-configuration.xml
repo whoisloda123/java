@@ -2,9 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  
-<!-- 注意：environments标签，当mybatis和spring整合之后，这个标签是不用配置的 -->
- 
-<!-- 可以配置多个运行环境，但是每个 SqlSessionFactory 实例只能选择一个运行环境  
+<!--environments标签，当mybatis和spring整合之后，这个标签是不用配置的 -->
+<!-- 可以配置多个运行环境，但是每个SqlSessionFactory 实例只能选择一个运行环境
   一、development:开发模式
    二、work：工作模式-->
  <environments default="development">
