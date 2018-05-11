@@ -14,6 +14,7 @@ public class MyController {
     private final OptionalTest optionalTest;
     private final FunctionalInterfaceTest functionalInterfaceTest;
     private final StreamTest streamTest;
+    private final CompareTest compareTest;
 
     @Autowired
     public MyController(
@@ -22,13 +23,15 @@ public class MyController {
             JsonTest jsonTest,
             OptionalTest optionalTest,
             FunctionalInterfaceTest functionalInterfaceTest,
-            StreamTest streamTest) {
+            StreamTest streamTest,
+            CompareTest compareTest) {
         this.otherTest = otherTest;
         this.redisTest = redisTest;
         this.jsonTest = jsonTest;
         this.optionalTest = optionalTest;
         this.functionalInterfaceTest = functionalInterfaceTest;
         this.streamTest = streamTest;
+        this.compareTest = compareTest;
     }
 
     @RequestMapping(value = "/test")
@@ -45,5 +48,7 @@ public class MyController {
         functionalInterfaceTest.testAll();
         //streamTest
         streamTest.testAll();
+        //compareTest
+        compareTest.testAll();
     }
 }

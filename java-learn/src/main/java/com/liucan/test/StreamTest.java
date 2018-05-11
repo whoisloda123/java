@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,7 +29,6 @@ public class StreamTest extends BaseTest {
          中间操作只是对操作进行了记录，惰性求值是用于描述stream流的，返回值是stream，
          只有结束操作才会触发实际的计算,及早求值，
          这也是Stream在迭代大集合时高效的原因之一
-
          */
 
         //对集合
