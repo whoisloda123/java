@@ -55,12 +55,12 @@ public class StreamTest extends BaseTest {
         Stream<String> stringStream1 = Stream.of("chaimm1","peter1","john1");
 
         //对文件,Java7简化了IO操作，把打开IO操作放在try后的括号中即可省略关闭IO的代码
-        try(Stream lines = Files.lines(Paths.get("c/xxx"), Charset.defaultCharset())) {
-            //可对lines做一些操作
-            lines.count();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try(Stream lines = Files.lines(Paths.get("c/xxx"), Charset.defaultCharset())) {
+//            //可对lines做一些操作
+//            lines.count();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         List<Student> result = list.stream()
                 .filter(e -> e.getSex().equals("male"))

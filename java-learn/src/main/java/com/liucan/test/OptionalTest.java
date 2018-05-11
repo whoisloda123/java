@@ -23,11 +23,11 @@ public class OptionalTest extends BaseTest {
         }
 
         /*get*/
-        try {
-            empty.get();
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            empty.get();
+//        } catch (NoSuchElementException e) {
+//            e.printStackTrace();
+//        }
 
         /*orElse*/
         String str = name.orElse("There is no value pressent1");
