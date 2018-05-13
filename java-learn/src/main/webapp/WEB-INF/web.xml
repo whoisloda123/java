@@ -15,9 +15,9 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!-- maven项目里面的classpath指的是在编译生成target目录下bank-liuan-server/WEB-INF/classes/mvc-dispatcher.xml
-             编译的时候会将mvc-dispatcher.xml拷贝到该目录下-->
-            <param-value>classpath:mvc-dispatcher.xml</param-value>
+            <!-- maven项目里面的classpath指的是在编译生成target目录下/WEB-INF/classes/spring-base.xml
+             编译的时候会将.xml拷贝到该目录下-->
+            <param-value>classpath:spring/*.xml</param-value>
         </init-param>
         <!--服务器启动就加载-->
         <load-on-startup>1</load-on-startup>

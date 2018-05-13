@@ -16,8 +16,6 @@ public class BankliucanQryImp implements BankliucanQry.Iface {
         accountRes.code = 1;
         accountRes.msg = account.getMoney().toString();
 
-        dbMgr.close();
-
         return accountRes;
     }
 }

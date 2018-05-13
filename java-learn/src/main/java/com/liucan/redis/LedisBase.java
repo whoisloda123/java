@@ -24,7 +24,7 @@ public class LedisBase {
     }
 
     private void init() {
-        ResourceBundle bundle = ResourceBundle.getBundle("redis");
+        ResourceBundle bundle = ResourceBundle.getBundle("db/redis");
         if (bundle != null) {
             EXPIRE = Integer.valueOf(bundle.getString("redis.expire"));
 

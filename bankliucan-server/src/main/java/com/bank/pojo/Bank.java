@@ -40,7 +40,6 @@ public class Bank {
             accountUser.setUid(account.getUid());
             add(accountUser);
         }
-        dbMgr.close();
     }
 
     /*

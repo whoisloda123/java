@@ -21,8 +21,5 @@ public class BankTaskCallback implements InterfaceCallback {
         user.setSex(accountUser.getSex());
         user.setName(accountUser.getName());
         user.setMoney(Integer.valueOf(String.valueOf(accountUser.getMoney())));
-
-        dbMgr.updateByPrimaryKey(user);
-        dbMgr.close();
     }
 }
