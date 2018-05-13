@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="db/mysql.properties">
+    </properties>
+
+    <!--1.environments标签，当mybatis和spring整合之后，这个标签是不用配置的
+        2.可配置多个运行环境，但每个SqlSessionFactory实例只能选择一个运行环境
+    -->
+
+    <!-- development:开发模式,work：工作模式-->
+    <environments default="development">
+        <!--id属性必须和上面的default一样 -->
+        <environment id="development">
+            <!--事务管理器
+                1.JDBC：配置直接简单使用了JDBC的提交和回滚设置,依赖于从数据源得到的连接来管理事务范围
+                2.MANAGED：配置几乎没做什么。它从来不提交或回滚一个连接,会让容器来管理事务的整个生命周期
+                比如spring或JEE应用服务器的上下文，默认情况下关闭连接。然而一些容器并不希望这样，因此如果
+                你需要从连接中停止它，就可以将 closeConnection 属性设置为 false，比如：
+                <transactionManager type="MANAGED">
+                    <property name="closeConnection" value="false"/>
+                </transactionManager>
+            -->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!---->
+        <mapper resource="com/liucan/mybatis/mapper/UserInfoMapper.xml"/>
+        <mapper resource="com/liucan/mybatis/mapper/UserOrderMapper.xml"/>
+        <!-- 将包内的映射器接口实现全部注册为映射器
+        <package name="com.liucan.mybatis.dao"/>
+        -->
+    </mappers>
+</configuration>
