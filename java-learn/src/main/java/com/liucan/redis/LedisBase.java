@@ -45,13 +45,7 @@ public class LedisBase {
             try {
                 jedis = jedisPool.getResource();
             } catch (JedisConnectionException jce) {
-                //ExceptionUtil.getTrace(jce);
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    //ExceptionUtil.getTrace(e);
-                }
-                jedis = jedisPool.getResource();
+                jce.printStackTrace();
             }
         }
     }
