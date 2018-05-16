@@ -1,7 +1,5 @@
 package com.liucan.utils.serialize;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.*;
 
 public class ObjectsTranscoder extends SerializeTranscoder {

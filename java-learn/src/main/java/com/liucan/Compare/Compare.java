@@ -1,4 +1,4 @@
-package com.liucan.test;
+package com.liucan.Compare;
 
 import com.liucan.pojo.Student;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 
 @Component
-public class CompareTest extends BaseTest {
-    @Override
-    public void testAll() {
-        super.testAll();
+public class Compare {
+    public void example() {
         /* *
          * Comparator和Comparable比较
          * Comparable:

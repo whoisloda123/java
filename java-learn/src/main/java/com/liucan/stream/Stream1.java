@@ -1,21 +1,15 @@
-package com.liucan.test;
+package com.liucan.stream;
 
 import com.liucan.pojo.Student;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class StreamTest extends BaseTest {
-    @Override
-    public void testAll() {
-        super.testAll();
+public class Stream1 {
+    public void example() {
         /*
         概念：
          流用来处理集合的数据，因为集合操作麻烦，而流的话让我们可以像sql语句一样

@@ -1,6 +1,6 @@
-package com.liucan.test.FunctionalInterface;
+package com.liucan.FunctionalInterface;
 
-@FunctionalInterface
+@java.lang.FunctionalInterface
 public interface MyInterface {
     void run(int a);
 

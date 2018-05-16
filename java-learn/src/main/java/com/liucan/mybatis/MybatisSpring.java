@@ -1,4 +1,4 @@
-package com.liucan.test;
+package com.liucan.mybatis;
 
 import com.google.common.collect.Lists;
 import com.liucan.mybatis.dao.DaoMapper;
@@ -19,7 +19,7 @@ import java.util.List;
  * @brief
  */
 @Component
-public class MybatisSpringTest extends BaseTest {
+public class MybatisSpring {
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
@@ -27,10 +27,7 @@ public class MybatisSpringTest extends BaseTest {
     @Autowired
     private DaoMapper daoMapper;
 
-    @Override
-    public void testAll() {
-        super.testAll();
-
+    public void example() {
         try {
             List<UserInfo> userInfoList = daoMapper.selectUserInfoInUids(Lists.newArrayList("1231313","1316766"));
             long count = userInfoMapper.countByExample(null);

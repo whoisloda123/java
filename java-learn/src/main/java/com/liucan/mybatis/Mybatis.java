@@ -1,4 +1,4 @@
-package com.liucan.test;
+package com.liucan.mybatis;
 
 import com.liucan.mybatis.dao.UserInfoMapper;
 import com.liucan.mybatis.mode.UserInfo;
@@ -20,12 +20,10 @@ import java.io.InputStream;
  * 2.每个线程都应该有它自己的 SqlSession 实例。SqlSession 的实例不是线程安全的，因此是不能被共享的
  */
 @Component
-public class MybatisTest extends BaseTest {
+public class Mybatis {
     private SqlSessionFactory sessionFactory;
 
-    @Override
-    public void testAll() {
-        super.testAll();
+    public void example() {
         getSqlSessionFactoryFromXml();
         UserInfo userInfo = selectByPrimaryKey(8);
         long count = getUserCount();
@@ -40,6 +38,7 @@ public class MybatisTest extends BaseTest {
             session.close();
         }
     }
+
     private void getSqlSessionFactoryFromXml() {
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis/mybatis-cfg.xml");

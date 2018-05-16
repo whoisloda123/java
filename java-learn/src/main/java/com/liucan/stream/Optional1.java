@@ -1,15 +1,15 @@
-package com.liucan.test;
+package com.liucan.stream;
 
-import com.liucan.test.JsonData.Country;
-import com.liucan.test.JsonData.World;
+import com.liucan.pojo.Country;
+import com.liucan.pojo.World;
 import org.springframework.stereotype.Component;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Component
-public class OptionalTest extends BaseTest {
-    private void testOptional1() {
+public class Optional1 {
+    //参考资料：http://www.importnew.com/26066.html
+    public void example1() {
         //参考资料http://www.importnew.com/26066.html
         //调用工厂方法创建Optional实例
         Optional<String> name = Optional.of("YanWei");
@@ -52,14 +52,14 @@ public class OptionalTest extends BaseTest {
         name.flatMap((value) -> Optional.of(value.toUpperCase()));
     }
 
-    private String testOptional2(World world) {
+    public String example2(World world) {
         return Optional.ofNullable(world)
                 .map(World::getCountry)
                 .map(Country::getName)
                 .orElse("default");
     }
 
-    private String testOptional3(World world) {
+    public String example3(World world) {
         String countryName = null;
         Optional<World> worldOptional = Optional.ofNullable(world);
         if (worldOptional.isPresent()) {
@@ -70,26 +70,5 @@ public class OptionalTest extends BaseTest {
             }
         }
         return countryName;
-    }
-
-    @Override
-    public void testAll() {
-        //参考资料：http://www.importnew.com/26066.html
-        super.testAll();
-        testOptional1();
-
-        World world = new World();
-        world.setId("1");
-        Country country = new Country();
-        //country.setName("222");
-        country.setPeople(Long.valueOf("1234"));
-        world.setCountry(country);
-
-        //正确使用Optional的姿势
-        String name = testOptional2(world);
-
-        //错误使用Optional的姿势-此方法和普通的判断没什么区别
-        //不要用
-        name = testOptional3(world);
     }
 }

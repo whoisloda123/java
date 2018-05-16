@@ -1,4 +1,4 @@
-package com.liucan.test;
+package com.liucan.Other;
 ;
 import org.springframework.stereotype.Component;
 
@@ -7,19 +7,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
 @Component
-public class OtherTest extends BaseTest {
-    @Override
-    public void testAll() {
-        testTime(); //测试时间
-    }
-
-    /*
-    *java.util.Date和SimpleDateFormatter都不是线程安全的，java8而LocalDate和LocalTime和最基本的String一样，
-    * 是不变类型，不但线程安全，而且不能修改
-    * */
-    public void testTime() {
+public class Other {
+    /* *
+     * java.util.Date和SimpleDateFormatter都不是线程安全的，java8而LocalDate和LocalTime和最基本的String一样，
+     * 是不变类型，不但线程安全，而且不能修改
+     */
+    public void time() {
         //参考https://my.oschina.net/benhaile/blog/193956
-        super.testAll();
         //LocalDate
         LocalDate date = LocalDate.now();
         System.out.println("当前日期：" + date);

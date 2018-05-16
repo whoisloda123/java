@@ -1,15 +1,13 @@
-package com.liucan.test;
+package com.liucan.json;
 
 import com.alibaba.fastjson.JSON;
-import com.liucan.test.JsonData.Country;
-import com.liucan.test.JsonData.World;
+import com.liucan.pojo.Country;
+import com.liucan.pojo.World;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JsonTest extends BaseTest {
-    @Override
-    public void testAll() {
-        super.testAll();
+public class Json {
+    public void example() {
         Country country = new Country();
         country.setName("中国");
         country.setPeople(Long.valueOf("1234"));

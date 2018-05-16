@@ -1,6 +1,5 @@
-package com.liucan.test;
+package com.liucan.FunctionalInterface;
 
-import com.liucan.test.FunctionalInterface.MyInterface;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -9,11 +8,8 @@ import java.util.List;
 import java.util.function.*;
 
 @Component
-public class FunctionalInterfaceTest extends BaseTest {
-    @Override
-    public void testAll() {
-        super.testAll();
-
+public class FunctionalInterface {
+    public void example() {
         /*
          * Lambda 表达式通常使用 (argument) -> (body) 语法书写
          * 1.一个 Lambda 表达式可以有零个或多个参数

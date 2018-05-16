@@ -39,11 +39,17 @@ public class BaseJunit4Test {
 
     @Before
     public void before() {
-        System.out.println("before：");
+        printMethodName();
     }
 
     @After
     public void after() {
-        System.out.println("after：");
+        System.out.println("test fun end：");
+    }
+
+    private void printMethodName() {
+        StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+        StackTraceElement e = stacktrace[2];
+        System.out.println(e.getMethodName() + "--------------------------------------------------");
     }
 }

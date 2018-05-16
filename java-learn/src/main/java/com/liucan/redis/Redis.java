@@ -1,7 +1,6 @@
-package com.liucan.test;
+package com.liucan.redis;
 
 import com.liucan.pojo.Student;
-import com.liucan.redis.Ledis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,17 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class RedisTest extends BaseTest{
+public class Redis {
     private final Ledis ledis;
 
     @Autowired
-    public RedisTest(Ledis ledis) {
+    public Redis(Ledis ledis) {
         this.ledis = ledis;
     }
 
-    @Override
-    public void testAll() {
-        super.testAll();
+    public void example() {
         //set
         String value = ledis.get("age");
         ledis.set("age", "36");

@@ -1,4 +1,4 @@
-package com.liucan.test.JsonData;
+package com.liucan.pojo;
 
 import lombok.Data;
 
