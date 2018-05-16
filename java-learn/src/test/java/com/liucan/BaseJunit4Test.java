@@ -5,9 +5,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 /* *
@@ -18,24 +18,23 @@ import org.springframework.transaction.annotation.Transactional;
  * 3.对数据库操作有回滚处理，防止测试数据
  */
 
-//使用junit4.SpringJUnit4ClassRunner作为Junit测试环境
+//使用SpringJUnit4ClassRunner作为Junit测试环境,调用测试方法
 @RunWith(SpringJUnit4ClassRunner.class)
 //加载spring配置文件
-@ContextConfiguration(locations = {"classpath:spring/spring-base.xml", "classpath:spring/spring-mybatis.xml"})
-//控制事务配置（此处和下面一起用），也在测试类的方法上
-@Transactional
-//这里的事务关联到配置文件中的事务控制器（transactionManager = "transactionManager"），
-// 同时//指定自动回滚（defaultRollback = true）这样做操作的数据才不会污染数据库！
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@ContextConfiguration(locations = {"classpath:spring/*.xml"})
+//控制事务配置（此处和下面一起用），可在测试类的方法上加
+@Transactional(transactionManager = "transactionManager")
+//自动回滚，操作的数据才不会污染数据库，可在测试类的方法上加
+@Rollback(value = true)
 public class BaseJunit4Test {
     @BeforeClass
     public static void beforeClass() {
-        System.out.println("单元测试开始：");
+        System.out.println("junit test begin:");
     }
 
     @AfterClass
     public static void afterClass() {
-        System.out.println("单元测试结束");
+        System.out.println("junit test end:");
     }
 
     @Before
