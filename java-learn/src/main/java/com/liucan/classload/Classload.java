@@ -1,4 +1,4 @@
-package classload;
+package com.liucan.classload;
 
 /* *
  *类加载
