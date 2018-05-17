@@ -1,4 +1,4 @@
-package com.liucan.Compare;
+package com.liucan.compare;
 
 import com.liucan.pojo.Student;
 import org.springframework.stereotype.Component;

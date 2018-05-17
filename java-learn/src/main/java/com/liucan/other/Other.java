@@ -1,4 +1,4 @@
-package com.liucan.Other;
+package com.liucan.other;
 ;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.liucan.FunctionalInterface;
+package com.liucan.functionalInterface;
 
 import org.springframework.stereotype.Component;
 

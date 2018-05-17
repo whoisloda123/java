@@ -1,4 +1,4 @@
-package com.liucan.Other;
+package com.liucan.other;
 
 import com.liucan.BaseJunit4Test;
 import org.junit.Test;

@@ -15,6 +15,11 @@ public class RedisTest extends BaseJunit4Test {
 
     @Test
     public void testExample() {
-        redis.example();
+        try {
+            redis.init();
+            redis.example();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

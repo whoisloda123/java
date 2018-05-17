@@ -1,4 +1,4 @@
-package com.liucan.FunctionalInterface;
+package com.liucan.compare;
 
 import com.liucan.BaseJunit4Test;
 import org.junit.Test;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2018/5/16
  * @brief
  */
-public class FunctionalInterfaceTest extends BaseJunit4Test {
+public class CompareTest extends BaseJunit4Test {
     @Autowired
-    FunctionalInterface functionalInterface;
+    Compare compare;
 
     @Test
     public void testExample() {
-        functionalInterface.example();
+        compare.example();
     }
 }

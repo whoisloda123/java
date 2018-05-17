@@ -16,6 +16,10 @@ public class Redis {
         this.ledis = ledis;
     }
 
+    public void init() {
+        ledis.init();
+    }
+
     public void example() {
         //set
         String value = ledis.get("age");

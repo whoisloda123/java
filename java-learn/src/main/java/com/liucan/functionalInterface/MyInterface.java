@@ -1,4 +1,4 @@
-package com.liucan.FunctionalInterface;
+package com.liucan.functionalInterface;
 
 @java.lang.FunctionalInterface
 public interface MyInterface {

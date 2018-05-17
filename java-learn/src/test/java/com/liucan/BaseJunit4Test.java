@@ -44,7 +44,7 @@ public class BaseJunit4Test {
 
     @After
     public void after() {
-        System.out.println("test fun end：");
+        System.out.println("test fun end:");
     }
 
     private void printMethodName() {

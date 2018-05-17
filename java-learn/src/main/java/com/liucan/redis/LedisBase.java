@@ -15,15 +15,7 @@ public class LedisBase {
     protected int EXPIRE = 130;
     protected Jedis jedis;
 
-    public LedisBase() {
-        try {
-            init();
-        } catch (Exception e) {
-            LOG.error("init falled!", e);
-        }
-    }
-
-    private void init() {
+    public void init() {
         ResourceBundle bundle = ResourceBundle.getBundle("db/redis");
         if (bundle != null) {
             EXPIRE = Integer.valueOf(bundle.getString("redis.expire"));
