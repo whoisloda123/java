@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 //使用SpringJUnit4ClassRunner作为Junit测试环境,调用测试方法
-@RunWith(SpringJUnit4ClassRunner.class)
-//加载spring配置文件
-@ContextConfiguration(locations = {"classpath:spring/*.xml"})
-//控制事务配置（此处和下面一起用），可在测试类的方法上加
-@Transactional(transactionManager = "transactionManager")
-//自动回滚，操作的数据才不会污染数据库，可在测试类的方法上加
-@Rollback(value = true)
+//@RunWith(SpringJUnit4ClassRunner.class)
+////加载spring配置文件
+//@ContextConfiguration(locations = {"classpath:spring/*.xml"})
+////控制事务配置（此处和下面一起用），可在测试类的方法上加
+//@Transactional(transactionManager = "transactionManager")
+////自动回滚，操作的数据才不会污染数据库，可在测试类的方法上加
+//@Rollback(value = true)
 public class BaseJunit4Test {
     @BeforeClass
     public static void beforeClass() {
@@ -39,7 +39,7 @@ public class BaseJunit4Test {
 
     @Before
     public void before() {
-        printMethodName();
+
     }
 
     @After

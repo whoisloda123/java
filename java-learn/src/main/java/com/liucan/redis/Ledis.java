@@ -10,7 +10,7 @@ public class Ledis extends LedisBase {
     public String set(String key, String value) {
         String rtn = null;
         try {
-            rtn = jedis.setex(key, EXPIRE, value);
+            rtn = getJedis().setex(key, EXPIRE, value);
         } catch (Exception e) {
             LOG.error("set:", e);
         }
@@ -20,7 +20,7 @@ public class Ledis extends LedisBase {
     public String get(String key) {
         String rtn = null;
         try {
-            rtn = jedis.get(key);
+            rtn = getJedis().get(key);
         } catch (Exception e) {
             LOG.error("get:", e);
         }
@@ -31,7 +31,7 @@ public class Ledis extends LedisBase {
     public List<String> mget(String... keys) {
         List<String> strings = new ArrayList<>();
         try {
-            strings = jedis.mget(keys);
+            strings = getJedis().mget(keys);
         } catch (Exception e) {
             LOG.error("mget:", e);
         }
@@ -42,7 +42,7 @@ public class Ledis extends LedisBase {
     public String mset(String... keysvalues) {
         String rtn = null;
         try {
-            rtn = jedis.mset(keysvalues);
+            rtn = getJedis().mset(keysvalues);
         } catch (Exception e) {
             LOG.error("mset:", e);
         }
@@ -52,7 +52,7 @@ public class Ledis extends LedisBase {
     public Long mdel(String[] keys) {
         Long rtn = null;
         try {
-            rtn = jedis.del(keys);
+            rtn = getJedis().del(keys);
         } catch (Exception e) {
             LOG.error("mdel:", e);
         }
@@ -62,7 +62,7 @@ public class Ledis extends LedisBase {
     public Map<String, String> hgetall(String key) {
         Map<String, String> rtn = new HashMap<>();
         try {
-            rtn = jedis.hgetAll(key);
+            rtn = getJedis().hgetAll(key);
         } catch (Exception e) {
             LOG.error("hgetall:", e);
         }
@@ -72,7 +72,7 @@ public class Ledis extends LedisBase {
     public Long hset(String key, String filed, String value) {
         Long rtn = null;
         try {
-            rtn = jedis.hset(key, filed, value);
+            rtn = getJedis().hset(key, filed, value);
         } catch (Exception e) {
             LOG.error("hset:", e);
         }
@@ -82,7 +82,7 @@ public class Ledis extends LedisBase {
     public String hget(String key, String field) {
         String rtn = null;
         try {
-            rtn = jedis.hget(key, field);
+            rtn = getJedis().hget(key, field);
         } catch (Exception e) {
             LOG.error("hget:", e);
         }
@@ -93,7 +93,7 @@ public class Ledis extends LedisBase {
     public Long hsetObject(String key, String filed, Object obj) {
         Long rtn = null;
         try {
-            rtn = jedis.hset(key.getBytes(), filed.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
+            rtn = getJedis().hset(key.getBytes(), filed.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
         } catch (Exception e) {
             LOG.error("hsetObject:", e);
         }
@@ -103,7 +103,7 @@ public class Ledis extends LedisBase {
     public Object hgetObject(String key, String field) {
         byte[] rtn = null;
         try {
-            rtn = jedis.hget(key.getBytes(), field.getBytes());
+            rtn = getJedis().hget(key.getBytes(), field.getBytes());
         } catch (Exception e) {
             LOG.error("hgetObject:", e);
         }
@@ -112,8 +112,8 @@ public class Ledis extends LedisBase {
 
     public void saddObject(String key, Object obj) {
         try {
-            jedis.sadd(key.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
-            jedis.expire(key.getBytes(), EXPIRE);
+            getJedis().sadd(key.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
+            getJedis().expire(key.getBytes(), EXPIRE);
         } catch (Exception e) {
             LOG.error("saddObject:", e);
         }
@@ -122,7 +122,7 @@ public class Ledis extends LedisBase {
     public List<Object> smembersAllObject(String key) {
         List<Object> list = new ArrayList<Object>();
         try {
-            Set<byte[]> set = jedis.smembers(key.getBytes());
+            Set<byte[]> set = getJedis().smembers(key.getBytes());
             if (set != null && !set.isEmpty()) {
                 Iterator<byte[]> it = set.iterator();
                 for (; it.hasNext();) {
@@ -139,13 +139,13 @@ public class Ledis extends LedisBase {
 
     public void delAllObject(String key) {
         try {
-            jedis.del(key.getBytes());
+            getJedis().del(key.getBytes());
         } catch (Exception e) {
             LOG.error("delAllObject:", e);
         }
     }
 
     public void flush() {
-        jedis.flushAll();
+        getJedis().flushAll();
     }
 }

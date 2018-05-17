@@ -21,30 +21,26 @@ import java.io.InputStream;
  */
 @Component
 public class Mybatis {
-    private SqlSessionFactory sessionFactory;
+    private static SqlSessionFactory sessionFactory;
 
-    public void example() {
-        getSqlSessionFactoryFromXml();
-        UserInfo userInfo = selectByPrimaryKey(8);
-        long count = getUserCount();
-    }
-
-    private SqlSession openSession() {
-        return sessionFactory.openSession();
-    }
-
-    private void closeSession(SqlSession session) {
-        if (session != null) {
-            session.close();
-        }
-    }
-
-    private void getSqlSessionFactoryFromXml() {
+    //初始化一次
+    static {
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis/mybatis-cfg.xml");
             sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    public SqlSession openSession() {
+       return Mybatis.sessionFactory.openSession();
+    }
+
+    public void closeSession(SqlSession session) {
+        if (session != null) {
+            session.close();
         }
     }
 
@@ -59,6 +55,11 @@ public class Mybatis {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    public void example() {
+        UserInfo userInfo = selectByPrimaryKey(8);
+        long count = getUserCount();
     }
 
     public UserInfo selectByPrimaryKey(int id) {

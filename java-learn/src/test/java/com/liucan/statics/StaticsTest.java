@@ -1,20 +1,16 @@
-package com.liucan.redis;
+package com.liucan.statics;
 
 import com.liucan.BaseJunit4Test;
+import junit.framework.TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author liucan
- * @date 2018/5/16
- * @brief
- */
-public class RedisTest extends BaseJunit4Test {
+public class StaticsTest extends BaseJunit4Test {
     @Autowired
-    Redis redis;
+    public Statics statics;
 
     @Test
     public void testExample() {
-        redis.example();
+        statics.example();
     }
 }

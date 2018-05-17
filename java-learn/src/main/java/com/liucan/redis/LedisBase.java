@@ -5,44 +5,43 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import java.util.ResourceBundle;
 
 public class LedisBase {
     protected final Logger LOG = LoggerFactory.getLogger(LedisBase.class);
-    private JedisPool jedisPool;
-    protected int EXPIRE = 130;
-    protected Jedis jedis;
+    private static Jedis jedis;
+    public static int EXPIRE = 3000;
 
-    public void init() {
-        ResourceBundle bundle = ResourceBundle.getBundle("db/redis");
-        if (bundle != null) {
-            EXPIRE = Integer.valueOf(bundle.getString("redis.expire"));
+    //只初始化一次
+    static {
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle("db/redis");
+            if (bundle != null) {
+                EXPIRE = Integer.valueOf(bundle.getString("redis.pool.expire"));
 
-            JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-            jedisPoolConfig.setMinIdle(Integer.valueOf(bundle.getString("redis.pool.minIdle")));
-            jedisPoolConfig.setMaxIdle(Integer.valueOf(bundle.getString("redis.pool.maxIdle")));
-            jedisPoolConfig.setMaxTotal(Integer.valueOf(bundle.getString("redis.pool.maxActive")));
-            jedisPoolConfig.setMaxWaitMillis(Long.valueOf(bundle.getString("redis.pool.maxWait")));
-            jedisPoolConfig.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnBorrow")));
-            jedisPoolConfig.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnReturn")));
+                JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+                jedisPoolConfig.setMinIdle(Integer.valueOf(bundle.getString("redis.pool.minIdle")));
+                jedisPoolConfig.setMaxIdle(Integer.valueOf(bundle.getString("redis.pool.maxIdle")));
+                jedisPoolConfig.setMaxTotal(Integer.valueOf(bundle.getString("redis.pool.maxActive")));
+                jedisPoolConfig.setMaxWaitMillis(Long.valueOf(bundle.getString("redis.pool.maxWait")));
+                jedisPoolConfig.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnBorrow")));
+                jedisPoolConfig.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnReturn")));
 
-            jedisPool = new JedisPool(
-                    jedisPoolConfig,
-                    bundle.getString("redis.ip"),
-                    Integer.valueOf(bundle.getString("redis.port")),
-                    Integer.valueOf(bundle.getString("redis.timeout")),
-                    bundle.getString("redis.password"));
-            try {
+                JedisPool jedisPool = new JedisPool(
+                        jedisPoolConfig,
+                        bundle.getString("redis.ip"),
+                        Integer.valueOf(bundle.getString("redis.port")),
+                        Integer.valueOf(bundle.getString("redis.timeout")),
+                        bundle.getString("redis.password"));
                 jedis = jedisPool.getResource();
-            } catch (JedisConnectionException jce) {
-                jce.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void returnResource() {
-        jedisPool.destroy();
+    Jedis getJedis() {
+        return LedisBase.jedis;
     }
 }

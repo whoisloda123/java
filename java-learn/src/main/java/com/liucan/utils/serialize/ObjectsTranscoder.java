@@ -4,7 +4,6 @@ import java.io.*;
 
 public class ObjectsTranscoder extends SerializeTranscoder {
     private static ObjectsTranscoder objectsTranscoder = new ObjectsTranscoder();
-
     public static ObjectsTranscoder getObjectsTranscoder() {
         return objectsTranscoder;
     }
