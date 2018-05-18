@@ -37,6 +37,11 @@ public class Stream1 {
         }
         Stream<Student> studentStream = list.stream();
 
+        //对结果按照sex分组保持
+        Map<String, List<Student>> maps = list.stream().collect(Collectors.groupingBy(Student::getSex));
+        //对结果按照sex,并计算其count保存
+        Map<String, Long> map = list.stream().collect(Collectors.groupingBy(Student::getSex, Collectors.counting()));
+
         //对数组
         String[] names = {"chaimm","peter","john"};
         Stream<String> stringStream = Arrays.stream(names);
@@ -79,5 +84,8 @@ public class Stream1 {
         List <Integer> together = Stream.of(Arrays.asList(1,2), Arrays.asList(3,4))
                 .flatMap(numbers -> numbers.stream())
                 .collect(Collectors.toList());
+
+        //collector后续看一下:
+        //https://www.cnblogs.com/woshimrf/p/java8-learn-collector.html
     }
 }

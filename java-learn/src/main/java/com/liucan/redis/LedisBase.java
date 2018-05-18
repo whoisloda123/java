@@ -18,7 +18,7 @@ public class LedisBase {
         try {
             ResourceBundle bundle = ResourceBundle.getBundle("db/redis");
             if (bundle != null) {
-                EXPIRE = Integer.valueOf(bundle.getString("redis.pool.expire"));
+                EXPIRE = Integer.valueOf(bundle.getString("redis.expire"));
 
                 JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
                 jedisPoolConfig.setMinIdle(Integer.valueOf(bundle.getString("redis.pool.minIdle")));
