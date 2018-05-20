@@ -15,9 +15,11 @@
 
     <!-- spring自动去扫描base-pack下面或者子包下面的Java文件
      扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean
-     注意：如果配置了<context:component-scan>那么<context:annotation-config/>标签
+     注意：
+     如果配置了<context:component-scan>那么<context:annotation-config/>标签（开启注解）
      就可以不用再xml中配置了，因为前者包含了后者  -->
     <context:component-scan base-package="com.liucan.*"/>
+
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
 

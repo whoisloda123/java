@@ -1,4 +1,4 @@
-package com.liucan.mybatis;
+package com.liucan.ioc;
 
 import com.liucan.BaseJunit4Test;
 import org.junit.Test;
@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author liucan
- * @date 2018/5/16
+ * @date 2018/5/20
  * @brief
  */
-public class MybatisSpringTest extends BaseJunit4Test {
+public class IocTest extends BaseJunit4Test {
     @Autowired
-    MybatisSpring mybatisSpring;
+    Ioc ioc;
 
     @Test
     public void testExample() {
-        mybatisSpring.example();
+        ioc.example();
     }
 }
