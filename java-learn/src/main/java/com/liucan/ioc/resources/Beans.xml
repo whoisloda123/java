@@ -23,6 +23,11 @@
         <property name="message3" value="Namaste India!"/>
     </bean>
 
+    <bean id="helloIndia1" class="com.liucan.ioc.HelloIndia" parent="beanTemplate">
+        <property name="message2" value="Hello India1!"/>
+        <property name="message3" value="Namaste India1!"/>
+    </bean>
+
     <bean id="helloChina" class="com.liucan.ioc.HelloChina" parent="beanTemplate">
         <property name="message2" value="Hello China!"/>
     </bean>
