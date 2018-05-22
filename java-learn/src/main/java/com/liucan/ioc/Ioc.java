@@ -1,5 +1,6 @@
 package com.liucan.ioc;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -22,13 +23,11 @@ public class Ioc {
      *  有一点很重要，即Spring不能对该Bean的整个生命周期负责,
      *  具有prototype作用域的Bean创建后交由调用者负责销毁对象回收资源
      *  后续有时间看一下？
-     *
      * 生命周期：
      *  init-method 在实例化bean的时候立即调用
      *  destroy-method 在容器中移除bean之后调用
      *  default-init-method 有太多具有相同名称的初始化，不需要在每一个bean上声明初始化方法和销毁方法 在beans上面加
      *  default-destroy-method 同理
-     *
      * 后置处理器：
      *  后续有时间看一下？
      *
@@ -59,6 +58,12 @@ public class Ioc {
      *    e.required = false一般仅会在开发期或测试期碰到（如为了快速启动 Spring 容器，仅引入一些模块的 Spring 配置文件）
      *   3.@Qualifier注释
      *    配合@Autowired使用，有多个类型一样但是id不一样的bean时候指定哪一个真正的 bean装配
+     *
+     * 五.基于java注解
+     *  @Configuration 和 @Bean 注解
+     *   1.@Configuration 的注解类表示这个类可以使用 Spring IoC 容器作为 bean 定义的来源。
+     *     @Bean 注解告诉 Spring，一个带有 @Bean 的注解方法将返回一个对象，该对象应该被注册为在 Spring 应用程序上下文中的 bean
+     *   2.其效果和在xml里面加bean一样的
      */
     public void example() {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("com/liucan/ioc/resources/Beans.xml");
@@ -86,6 +91,12 @@ public class Ioc {
 
         //注解
         Annotation annotation = (Annotation) context.getBean("annotation");
+
+        //基于jav注解
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(HelloConfig.class);
+        ctx.refresh();
+        HelloJapan helloJapan = ctx.getBean(HelloJapan.class);
 
         //确保正常关闭，并且调用相关的 destroy 方法
         //context.registerShutdownHook(); 是一个钩子方法，当jvm关闭退出的时候会调用这个钩子方法
