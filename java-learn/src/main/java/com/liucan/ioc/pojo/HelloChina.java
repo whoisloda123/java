@@ -1,14 +1,14 @@
-package com.liucan.ioc;
+package com.liucan.ioc.pojo;
 
 import lombok.Data;
 
 /**
  * @author liucan
- * @date 2018/5/22
+ * @date 2018/5/20
  * @brief
  */
 @Data
-public class HelloJapan {
+public class HelloChina {
     private String message1;
     private String message2;
 }

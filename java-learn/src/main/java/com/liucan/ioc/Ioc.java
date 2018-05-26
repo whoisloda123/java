@@ -1,5 +1,9 @@
 package com.liucan.ioc;
 
+import com.liucan.ioc.annottion.Annotation;
+import com.liucan.ioc.annottion.HelloConfig;
+import com.liucan.ioc.springevent.publisher.EventPublisher;
+import com.liucan.ioc.pojo.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -64,9 +68,20 @@ public class Ioc {
      *   1.@Configuration 的注解类表示这个类可以使用 Spring IoC 容器作为 bean 定义的来源。
      *     @Bean 注解告诉 Spring，一个带有 @Bean 的注解方法将返回一个对象，该对象应该被注册为在 Spring 应用程序上下文中的 bean
      *   2.其效果和在xml里面加bean一样的
+     *
+     * 六.spring事件
+     *  1.Spring 的核心是 ApplicationContext,负责管理 beans 的完整生命周期,加载 beans 时，ApplicationContext 发布某些类型的事件
+     *    如：ContextStartedEvent，ContextStoppedEvent等等
+     *  2.通过 ApplicationEvent 类和 ApplicationListener 接口来提供在 ApplicationContext 中处理事件
+     *  3. Spring 的事件处理是单线程的，所以如果一个事件被发布，直至并且除非所有的接收者得到的该消息，该进程被阻塞并且流程将不会继续
+     *  4.可自定义spring事件，继承ApplicationEvent，ApplicationEventPublisher用来发布
+     *    后面有时间看一下他的用处？
      */
     public void example() {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("com/liucan/ioc/resources/Beans.xml");
+
+        //start springevent.
+        context.start();
 
         //beans
         HelloWorld objA = (HelloWorld)context.getBean("helloWorld");
@@ -98,8 +113,15 @@ public class Ioc {
         ctx.refresh();
         HelloJapan helloJapan = ctx.getBean(HelloJapan.class);
 
+        //自定义spring
+        EventPublisher cvp = (EventPublisher) context.getBean("customEventPublisher");
+        cvp.publishCustomEvent();
+
         //确保正常关闭，并且调用相关的 destroy 方法
         //context.registerShutdownHook(); 是一个钩子方法，当jvm关闭退出的时候会调用这个钩子方法
         context.registerShutdownHook();
+
+        //stop springevent.
+        context.stop();
     }
 }

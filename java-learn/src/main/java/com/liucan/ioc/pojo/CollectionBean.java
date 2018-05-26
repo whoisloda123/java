@@ -1,4 +1,4 @@
-package com.liucan.ioc;
+package com.liucan.ioc.pojo;
 
 import lombok.Data;
 

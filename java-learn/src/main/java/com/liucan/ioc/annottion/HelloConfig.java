@@ -1,5 +1,7 @@
-package com.liucan.ioc;
+package com.liucan.ioc.annottion;
 
+import com.liucan.ioc.pojo.HelloJapan;
+import com.liucan.ioc.pojo.HelloWorld;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 
