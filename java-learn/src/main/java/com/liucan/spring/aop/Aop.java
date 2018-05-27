@@ -29,11 +29,17 @@ public class Aop {
      *  2.通过@Aspect方式，这种方式比较方便
      *
      * 三：场景
-     *  日志记录、审计、声明式事务、安全性和缓存等
+     *  日志记录、审计、声明式事务(spring的，后续看一下，使用< aop:advisor>)、安全性和缓存等
      *  后续有时间详细看一下？
      *
      * 四：框架和应用场景
      *  后续有时间一定要详细看一下？
+     *
+     * 五：< aop:advisor>和< aop:aspect>区别
+     *   1.<aop:aspect>实际上是定义横切逻辑，就是在连接点上做什么，在一个连接点的开始，结束，抛异常之后做什么
+     *   2.<aop:advisor>则定义了在哪些连接点上应用什么<aop:aspect>，一般一个类继承多个before，after基类，然后可以重用
+     *   3.这样做的好处就是可以让多个横切逻辑 （即<aop:aspect>定义的）多次使用，提供可重用性
+     *   后续有时间一定要看一下
      */
     public void example() {
         AbstractApplicationContext context =

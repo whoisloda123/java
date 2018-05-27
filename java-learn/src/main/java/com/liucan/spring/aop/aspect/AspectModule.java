@@ -54,7 +54,7 @@ public class AspectModule {
     }
 
     /**
-     * 捕获printThrowException抛出的异常
+     * 捕获printThrowException抛出的异常,如果函数里面已经捕获了异常，则该切点捕获不到
      */
     @AfterThrowing(pointcut = "execution(* com.liucan.spring.aop.aspect.School.printThrowException(..))", throwing = "ex")
     public void doAfterThrowingTask1(Exception ex) {
