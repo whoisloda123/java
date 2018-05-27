@@ -32,7 +32,8 @@ public class Aop {
      *  日志记录、审计、声明式事务、安全性和缓存等
      *  后续有时间详细看一下？
      *
-     *
+     * 四：框架和应用场景
+     *  后续有时间一定要详细看一下？
      */
     public void example() {
         AbstractApplicationContext context =

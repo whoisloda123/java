@@ -76,6 +76,9 @@ public class Ioc {
      *  3. Spring 的事件处理是单线程的，所以如果一个事件被发布，直至并且除非所有的接收者得到的该消息，该进程被阻塞并且流程将不会继续
      *  4.可自定义spring事件，继承ApplicationEvent，ApplicationEventPublisher用来发布
      *    后面有时间看一下他的用处？
+     *
+     *  七.框架和应用场景
+     *   后续有时间一定要详细看一下？
      */
     public void example() {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("com/liucan/spring/resources/IocBeans.xml");
