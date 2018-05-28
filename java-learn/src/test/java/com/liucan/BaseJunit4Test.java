@@ -24,8 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = {"classpath:spring/*.xml"})
 //控制事务配置（此处和下面一起用），可在测试类的方法上加
 @Transactional(transactionManager = "transactionManager")
-//自动回滚，操作的数据才不会污染数据库，可在测试类的方法上加
-@Rollback(value = true)
+//默认自动回滚value=true，操作的数据才不会污染数据库，可在测试类的方法上加,此处不设置自动回滚
+@Rollback(value = false)
 public class BaseJunit4Test {
     @BeforeClass
     public static void beforeClass() {

@@ -43,14 +43,14 @@ public class Transaction {
      *   d.事务只读属性:默认为读写事务
      *
      *  4.事务回滚规则
-     *   a.默认配置spring只有在抛出的异常为运行时unchecked异常时才回滚该事务，就是抛出的异常为RuntimeException的子类(Errors也会导致事务回滚)，
-     *     而抛出checked异常则不会导致事务回滚。可以明确的配置在抛出那些异常时回滚事务，包括checked异常。也可以明确定义那些异常抛出时不回滚事务
+     *   a.默认只有抛出unchecked异常时才回滚事务，就是抛出的异常为RuntimeException的子类(Errors也会导致事务回滚)，
+     *     抛出checked异常不会事务回滚。可以明确的配置在抛出那些异常时回滚事务，包括checked异常。也可以明确定义那些异常抛出时不回滚事务
      *
      *  5.注意事项
      *   a.@Transactional注解只被应用到public方法上,在其他类型方法上使用，被忽略不会抛出任何异常。
      *   b.默认情况下，只有来自外部的方法调用才会被AOP代理捕获，内部方法调用类内部的其他方法并不会引起事务行为，
      *     即使被调用方法使用@Transactional注解进行修饰
-     *
+     *   c.作用于类上时，该类的所有 public 方法将都具有该类型的事务属性
      *
      *  后面有时间一定详细看一下？
      */
@@ -61,7 +61,7 @@ public class Transaction {
         ProgrammingTransaction programmingTransaction = (ProgrammingTransaction)context.getBean("programmingTransaction");
         programmingTransaction.example();
 
-        //声明式事务管理xml方式
+        //声明式事务管理（xml方式）
         try {
             StatementTransactionByXml statementTransactionByXml = (StatementTransactionByXml)context.getBean("statementTransactionByXml");
             statementTransactionByXml.example();
@@ -69,7 +69,7 @@ public class Transaction {
             e.printStackTrace();
         }
 
-        //声明式事务管理注解方式
+        //声明式事务管理（注解方式）
         try {
             statementTransactionByAnno.insert();
         } catch (Exception e) {

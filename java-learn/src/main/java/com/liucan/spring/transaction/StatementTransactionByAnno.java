@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author liucan
@@ -20,10 +20,12 @@ public class StatementTransactionByAnno {
     @Autowired
     private UserOrderMapper userOrderMapper;
 
-    //@Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional(rollbackFor = {RuntimeException.class, IOException.class})
+    @Transactional(rollbackForClassName = "RuntimeException")
+    @Transactional(rollbackForClassName = {"RuntimeException", "IOException"})
+    @Transactional(noRollbackFor = Exception.class, timeout = 2)
     public void insert() {
-        long count = userOrderMapper.countByExample(null);
-        List<UserOrder> list = userOrderMapper.selectByExample(null);
         UserOrder userOrder = new UserOrder();
         userOrder.setUserId(354545);
         userOrder.setOrderId("31313");
@@ -32,6 +34,6 @@ public class StatementTransactionByAnno {
         userOrder.setCreateTime(Date.from(Instant.now()));
         userOrder.setUpdateTime(Date.from(Instant.now()));
         userOrderMapper.insert(userOrder);
-        //throw new RuntimeException("sfs"); //抛出unchecked异常，触发事物，回滚
+        throw new RuntimeException("sfs"); //抛出unchecked异常，触发事物，回滚
     }
 }

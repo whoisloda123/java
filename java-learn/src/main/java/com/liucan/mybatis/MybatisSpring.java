@@ -10,6 +10,8 @@ import com.liucan.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,16 +37,31 @@ public class MybatisSpring {
             String email = daoMapper.getUserEmail("7878746", "15928672109");
             String phone = daoMapper.getUserPhone("7878746");
 
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(14);
+            userInfo.setUserName("liucan10");
+            userInfoMapper.updateByPrimaryKeySelective(userInfo);
+
+            UserOrder userOrder = new UserOrder();
+            userOrder.setId(67);
+            userOrder.setUserId(354545);
+            userOrder.setOrderId("31313");
+            userOrder.setOrderStat(8);
+            userOrder.setPrice(60);
+            userOrder.setCreateTime(Date.from(Instant.now()));
+            userOrder.setUpdateTime(Date.from(Instant.now()));
+            userOrderMapper.updateByPrimaryKey(userOrder);
+
             List<Student> students = new LinkedList<>();
             Student student = new Student();
-            student.setName("liucan8");
+            student.setName("liucan10");
             student.setEmail("524242624@qq.com");
-            student.setId(323131);
+            student.setId(323141);
             students.add(student);
             student = new Student();
-            student.setName("liucan9");
+            student.setName("liucan11");
             student.setEmail("524242627@qq.com");
-            student.setId(323132);
+            student.setId(323142);
             students.add(student);
             daoMapper.insertUserInfo(students);
         } catch (Exception e) {
