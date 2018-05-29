@@ -256,14 +256,13 @@
                 column:要重新设置的列名；
                 注意，一个table元素中可以有多个columnOverride元素哈~
              -->
-            <columnOverride column="username">
+            <columnOverride column="register_time">
             <!-- 使用property属性来指定列要生成的属性名称 -->
             <!--<property name="property" value="userName"/>-->
 
             <!-- javaType用于指定生成的domain的属性类型，使用类型的全限定名
             <property name="javaType" value=""/>
              -->
-                <property name="javaType" value="LocalDateTime"/>
             <!-- jdbcType用于指定该列的JDBC类型
             <property name="jdbcType" value=""/>
              -->

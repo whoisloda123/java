@@ -7,6 +7,35 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
 
+    <!--========================================api方式实现aop===================================-->
+    <bean id="sleep" class="com.liucan.spring.aop.springapi.Sleep"/>
+
+    <!-- 定义一个增强 advice通知 -->
+    <bean id="sleepAdvice" class="com.liucan.spring.aop.springapi.SleepAdvice"/>
+
+    <!-- 定义切点 匹配所有的sleep方法 -->
+    <bean id="sleepPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+        <property name="pattern" value="com.liucan.spring.aop.springapi.Sleep.*"/>
+    </bean>
+
+    <!-- 切面(通知 + 切点结合) -->
+    <bean id="sleepAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="sleepAdvice"/>
+        <property name="pointcut" ref="sleepPointcut"/>
+    </bean>
+
+    <!-- 手动定义代理对象 -->
+    <bean id="sleepProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="sleep"/>
+        <property name="interceptorNames" value="sleepAdvisor"/>
+    </bean>
+
+    <!-- 自动代理配置,可替换上
+     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+     -->
+
+
+    <!--=================================xml方式实现aop=====================================-->
     <aop:config>
         <aop:aspect id="log" ref="logging">
             <aop:pointcut id="selectAll" expression="execution(* com.liucan.spring.aop.xml.Student.*(..))"/>

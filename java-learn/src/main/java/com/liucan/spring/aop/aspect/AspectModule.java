@@ -19,25 +19,26 @@ public class AspectModule {
      * 2.一个切入点标签包含一个名称和任意数量的参数。方法的真正内容是不相干的，并且实际上它应该是空的
      */
     @Pointcut("execution(* com.liucan.spring.aop.aspect.School.getName(..))")
-    private void aspectId() {}
+    private void pointcutId() {
+    }
 
-    //aspectId()为pointcutId
-    @Before("aspectId()")
+    //pointcutId()为pointcutId
+    @Before("pointcutId()")
     public void doBeforeTask(JoinPoint jp) {
         System.out.println("函数准备执行了");
     }
 
-    @After("aspectId()")
+    @After("pointcutId()")
     public void doAfterTask(JoinPoint jp) {
         System.out.println("函数开始执行了");
     }
 
-    @AfterReturning(pointcut = "aspectId()", returning = "retVal")
+    @AfterReturning(pointcut = "pointcutId()", returning = "retVal")
     public void doAfterReturningTask(JoinPoint jp, Object retVal) {
         System.out.println("函数执行完成了，返回值:"+ retVal);
     }
 
-    @AfterThrowing(pointcut = "aspectId()", throwing = "ex")
+    @AfterThrowing(pointcut = "pointcutId()", throwing = "ex")
     public void doAfterThrowingTask(JoinPoint jp, Exception ex) {
         System.out.println("函数抛异常了:"+ ex);
     }

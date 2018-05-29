@@ -116,7 +116,7 @@ public class Ioc {
         ctx.refresh();
         HelloJapan helloJapan = ctx.getBean(HelloJapan.class);
 
-        //自定义spring
+        //自定义spring-event
         EventPublisher cvp = (EventPublisher) context.getBean("customEventPublisher");
         cvp.publishCustomEvent();
 

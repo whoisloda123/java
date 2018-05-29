@@ -1,8 +1,13 @@
 package com.liucan.spring.aop;
 
 import com.liucan.spring.aop.aspect.School;
+import com.liucan.spring.aop.noxml.ApplicationCfg;
+import com.liucan.spring.aop.noxml.AspectUser;
+import com.liucan.spring.aop.noxml.User;
+import com.liucan.spring.aop.springapi.Sleep;
 import com.liucan.spring.aop.xml.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -31,6 +36,7 @@ public class Aop {
      * 二：方式
      *  1.通过xml，<aop:config>方式
      *  2.通过@Aspect方式，这种方式比较方便
+     *  3.简答的java对象方式
      *
      * 三：场景
      *  1.日志记录、审计、声明式事务(spring的，后续看一下，使用< aop:advisor>)、安全性和缓存等
@@ -42,15 +48,14 @@ public class Aop {
      *   1.<aop:aspect>实际上是定义横切逻辑，就是在连接点上做什么，在一个连接点的开始，结束，抛异常之后做什么
      *   2.<aop:advisor>则定义了在哪些连接点上应用什么<aop:aspect>，一般一个类继承多个before，after基类，然后可以重用
      *   3.这样做的好处就是可以让多个横切逻辑 （即<aop:aspect>定义的）多次使用，提供可重用性
-     *
-     *   后续看一下是否要删掉?
-     *   <aop:aspect>：用来定义切面，该切面可以包含多个切入点和通知，而且标签内部的通知和切入
-     *   点定义是无序的；和advisor的区别就在此，advisor只包含一个通知和一个切入点。
+     *   4.<aop:aspect>：用来定义切面，该切面可以包含多个切入点和通知，而且标签内部的通知和切入点定义是无序的；
+     *   和advisor的区别就在此，advisor只包含一个通知和一个切入点。
      *
      * 五：框架和应用场景
      *   后续有时间一定要详细看一下，重中之重，包括JDK动态代理，预编译方式和运行期动态代理实现程序功能的横向多模块统一控制？
      */
     public void example() {
+        //xml方式
         AbstractApplicationContext context =
                 new ClassPathXmlApplicationContext("com/liucan/spring/resources/AopBeans.xml");
         Student student = (Student) context.getBean("student");
@@ -62,6 +67,7 @@ public class Aop {
             e.printStackTrace();
         }
 
+        //aspect方式
         System.out.println("aspect-----------------");
 
         school.setAge(123);
@@ -71,6 +77,22 @@ public class Aop {
         school.getAddress();
         school.getAge();
         school.getName();
-        school.printThrowException();
+        try {
+            school.printThrowException();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //简答的java对象方式
+        Sleep sleep = (Sleep) context.getBean("sleep");
+        sleep.sleeping();
+
+        //noxml方式
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(ApplicationCfg.class);
+        ctx.refresh();
+        AspectUser aspectUser = ctx.getBean(AspectUser.class);
+        User user = ctx.getBean(User.class);
+        user.show();
     }
 }
