@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 public class School {
     private String name;
     private Integer age;
+    private String address;
 
     public void setAge(Integer age) {
         this.age = age;
     }
 
     public Integer getAge() {
-        System.out.println("Age : " + age );
+        System.out.println("Age : " + age);
         return age;
     }
 
@@ -26,8 +27,17 @@ public class School {
     }
 
     public String getName() {
-        System.out.println("Name : " + name );
+        System.out.println("Name : " + name);
         return name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        System.out.println("Address : " + address);
+        return address;
     }
 
     public void printThrowException(){

@@ -1,9 +1,9 @@
 package com.liucan.spring.ioc.annottion;
 
 import com.liucan.classload.Classload;
-import com.liucan.spring.ioc.pojo.HelloChina;
-import com.liucan.spring.ioc.pojo.HelloIndia;
-import com.liucan.spring.ioc.pojo.HelloWorld;
+import com.liucan.spring.ioc.xml.HelloChina;
+import com.liucan.spring.ioc.xml.HelloIndia;
+import com.liucan.spring.ioc.xml.HelloWorld;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

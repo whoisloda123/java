@@ -1,5 +1,7 @@
 package com.liucan.spring.aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -21,28 +23,34 @@ public class AspectModule {
 
     //aspectId()为pointcutId
     @Before("aspectId()")
-    public void doBeforeTask() {
+    public void doBeforeTask(JoinPoint jp) {
         System.out.println("函数准备执行了");
     }
 
     @After("aspectId()")
-    public void doAfterTask() {
+    public void doAfterTask(JoinPoint jp) {
         System.out.println("函数开始执行了");
     }
 
     @AfterReturning(pointcut = "aspectId()", returning = "retVal")
-    public void doAfterReturningTask(Object retVal) {
+    public void doAfterReturningTask(JoinPoint jp, Object retVal) {
         System.out.println("函数执行完成了，返回值:"+ retVal);
     }
 
     @AfterThrowing(pointcut = "aspectId()", throwing = "ex")
-    public void doAfterThrowingTask(Exception ex) {
+    public void doAfterThrowingTask(JoinPoint jp, Exception ex) {
         System.out.println("函数抛异常了:"+ ex);
     }
 
-    //@Around("aspectId()")
-    public void doAroundTask() {
-        System.out.println("函数开始和结束都会执行一遍");
+    /**
+     * 增强处理方法体内，调用ProceedingJoinPoint参数的procedd()方法才会执行目标方法
+     */
+    @Around("execution(* com.liucan.spring.aop.aspect.School.getAddress(..))")
+    public Object doAroundTask(ProceedingJoinPoint jp) throws Throwable {
+        System.out.println("执行目标方法之前,可以通过getArgs()对参数修改");
+        Object obj = jp.proceed();
+        System.out.println("执行目标方法之后可对其进行再次修改：" + obj);
+        return obj;
     }
 
     /**

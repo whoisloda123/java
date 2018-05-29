@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
 
@@ -20,11 +19,15 @@ public class StatementTransactionByAnno {
     @Autowired
     private UserOrderMapper userOrderMapper;
 
-    @Transactional(rollbackFor = RuntimeException.class)
-    @Transactional(rollbackFor = {RuntimeException.class, IOException.class})
-    @Transactional(rollbackForClassName = "RuntimeException")
-    @Transactional(rollbackForClassName = {"RuntimeException", "IOException"})
-    @Transactional(noRollbackFor = Exception.class, timeout = 2)
+    /**
+     * 1.@Transactional(rollbackFor = RuntimeException.class)
+     * 2.@Transactional(rollbackFor = {RuntimeException.class, IOException.class})
+     * 3.@Transactional(rollbackForClassName = "RuntimeException")
+     * 4.@Transactional(rollbackForClassName = {"RuntimeException", "IOException"})
+     * 5.@Transactional(noRollbackFor = Exception.class, timeout = 2)
+     * 6.@Transactional(noRollbackForClassName = "RuntimeException")
+     */
+    @Transactional
     public void insert() {
         UserOrder userOrder = new UserOrder();
         userOrder.setUserId(354545);

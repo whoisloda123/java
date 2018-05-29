@@ -1,5 +1,7 @@
 package com.liucan.spring.aop.xml;
 
+import org.aspectj.lang.JoinPoint;
+
 /**
  * @author liucan
  * @date 2018/5/26
@@ -10,14 +12,14 @@ public class Logging {
     /**
      * 方法执行之前
      */
-    public void beforeAdvice(){
+    public void beforeAdvice(JoinPoint jp) {
         System.out.println("Going to setup student profile.");
     }
 
     /**
      * 方法执行之后，在调用后不等其返回
      */
-    public void afterAdvice(){
+    public void afterAdvice(JoinPoint jp) {
         System.out.println("Student profile has been setup.");
     }
 

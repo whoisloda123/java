@@ -17,29 +17,38 @@ public class Aop {
     @Autowired
     private School school;
     /**
+     * 参考：https://www.cnblogs.com/best/p/5736422.html
+     *  https://blog.csdn.net/u014206695/article/details/61618034
+     *  https://www.cnblogs.com/sprinng/p/5581552.html
+     *
      * 一：面向方面的编程(AOP)
-     *  1.前置通知:方法执行之前，执行通知
-     *  2.后置通知:方法执行之后，不考虑其结果，执行通知
-     *  3.返回后通知:方法执行之后，只有在方法成功完成时，才能执行通知
-     *  4.抛出异常后通知:方法执行之后，只有在方法退出抛出异常时，才能执行通知
-     *  5.环绕通知:方法调用之前和之后，执行通知
+     * 1.Aspect(切面):通常是一个类，里面可以定义切入点和通知
+     * 2.JointPoint(连接点):程序执行过程中明确的点，一般是方法的调用
+     * 3.Advice(通知):AOP在特定的切入点上执行的增强处理，有before,after,afterReturning,afterThrowing,around
+     * 4.Pointcut(切入点):就是带有通知的连接点，在程序中主要体现为书写切入点表达式
+     * 5.AOP代理：AOP框架创建的对象，代理就是目标对象的加强。Spring中的AOP代理可以使JDK动态代理，也可以是CGLIB代理，前者基于接口，后者基于子类
      *
      * 二：方式
      *  1.通过xml，<aop:config>方式
      *  2.通过@Aspect方式，这种方式比较方便
      *
      * 三：场景
-     *  日志记录、审计、声明式事务(spring的，后续看一下，使用< aop:advisor>)、安全性和缓存等
+     *  1.日志记录、审计、声明式事务(spring的，后续看一下，使用< aop:advisor>)、安全性和缓存等
+     *  2.环绕通知around,在目标方法完成前后做增强处理,环绕通知是最重要的通知类型,像事务,日志等都是环绕通知,
+     *    注意编程中核心是一个ProceedingJoinPoint
      *  后续有时间详细看一下？
      *
-     * 四：框架和应用场景
-     *  后续有时间一定要详细看一下？
-     *
-     * 五：< aop:advisor>和< aop:aspect>区别
+     * 四：< aop:advisor>和< aop:aspect>区别
      *   1.<aop:aspect>实际上是定义横切逻辑，就是在连接点上做什么，在一个连接点的开始，结束，抛异常之后做什么
      *   2.<aop:advisor>则定义了在哪些连接点上应用什么<aop:aspect>，一般一个类继承多个before，after基类，然后可以重用
      *   3.这样做的好处就是可以让多个横切逻辑 （即<aop:aspect>定义的）多次使用，提供可重用性
-     *   后续有时间一定要看一下
+     *
+     *   后续看一下是否要删掉?
+     *   <aop:aspect>：用来定义切面，该切面可以包含多个切入点和通知，而且标签内部的通知和切入
+     *   点定义是无序的；和advisor的区别就在此，advisor只包含一个通知和一个切入点。
+     *
+     * 五：框架和应用场景
+     *   后续有时间一定要详细看一下，重中之重，包括JDK动态代理，预编译方式和运行期动态代理实现程序功能的横向多模块统一控制？
      */
     public void example() {
         AbstractApplicationContext context =
@@ -57,7 +66,9 @@ public class Aop {
 
         school.setAge(123);
         school.setName("重庆市凤鸣山中学");
+        school.setAddress("重庆市沙坪坝");
 
+        school.getAddress();
         school.getAge();
         school.getName();
         school.printThrowException();

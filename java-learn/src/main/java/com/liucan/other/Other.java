@@ -1,10 +1,12 @@
 package com.liucan.other;
-;
+
 import org.springframework.stereotype.Component;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+
+;
 
 @Component
 public class Other {
@@ -93,5 +95,9 @@ public class Other {
         nowStamp = localDateTime.toInstant(ZoneOffset.of("+8"));
         System.out.println("LocalDateTime to Instant：" + nowStamp.getEpochSecond());
         System.out.println("localDateTime.toEpochSecond：" + localDateTime.toEpochSecond(ZoneOffset.of("+8")));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.of(1986, Month.APRIL, 8, 12, 30);
+        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
     }
 }

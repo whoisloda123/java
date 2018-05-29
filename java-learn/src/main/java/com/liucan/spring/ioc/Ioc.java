@@ -2,8 +2,8 @@ package com.liucan.spring.ioc;
 
 import com.liucan.spring.ioc.annottion.Annotation;
 import com.liucan.spring.ioc.annottion.HelloConfig;
+import com.liucan.spring.ioc.xml.*;
 import com.liucan.spring.springevent.publisher.EventPublisher;
-import com.liucan.spring.ioc.pojo.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -78,7 +78,7 @@ public class Ioc {
      *    后面有时间看一下他的用处？
      *
      *  七.框架和应用场景
-     *   后续有时间一定要详细看一下？
+     *   后续有时间一定要详细看一下？ BeanFactory和ApplicationContext的主要区别？
      */
     public void example() {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("com/liucan/spring/resources/IocBeans.xml");
@@ -110,7 +110,7 @@ public class Ioc {
         //注解
         Annotation annotation = (Annotation) context.getBean("annotation");
 
-        //基于jav注解
+        //基于java注解
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(HelloConfig.class);
         ctx.refresh();

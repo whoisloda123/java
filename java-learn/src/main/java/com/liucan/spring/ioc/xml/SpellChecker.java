@@ -1,4 +1,4 @@
-package com.liucan.spring.ioc.pojo;
+package com.liucan.spring.ioc.xml;
 
 /**
  * @author liucan

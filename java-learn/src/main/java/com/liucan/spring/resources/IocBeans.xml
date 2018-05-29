@@ -13,27 +13,27 @@
         <property name="message1" value="Hello Temple!"/>
     </bean>
 
-    <bean id="helloWorld" class="com.liucan.spring.ioc.pojo.HelloWorld"
+    <bean id="helloWorld" class="com.liucan.spring.ioc.xml.HelloWorld"
           scope="prototype" init-method="init" parent="beanTemplate">
         <property name="message2" value="Hello World! message2"/>
     </bean>
 
-    <bean id="helloIndia" class="com.liucan.spring.ioc.pojo.HelloIndia" parent="beanTemplate">
+    <bean id="helloIndia" class="com.liucan.spring.ioc.xml.HelloIndia" parent="beanTemplate">
         <property name="message2" value="Hello India!"/>
         <property name="message3" value="Namaste India!"/>
     </bean>
 
-    <bean id="helloIndia1" class="com.liucan.spring.ioc.pojo.HelloIndia" parent="beanTemplate">
+    <bean id="helloIndia1" class="com.liucan.spring.ioc.xml.HelloIndia" parent="beanTemplate">
         <property name="message2" value="Hello India1!"/>
         <property name="message3" value="Namaste India1!"/>
     </bean>
 
-    <bean id="helloChina" class="com.liucan.spring.ioc.pojo.HelloChina" parent="beanTemplate">
+    <bean id="helloChina" class="com.liucan.spring.ioc.xml.HelloChina" parent="beanTemplate">
         <property name="message2" value="Hello China!"/>
     </bean>
 
     <!--di-->
-    <bean id="textEditor" class="com.liucan.spring.ioc.pojo.TextEditor" autowire="byName">
+    <bean id="textEditor" class="com.liucan.spring.ioc.xml.TextEditor" autowire="byName">
         <!--基于构造函数注入-->
         <constructor-arg index="0" ref="spellChecker"/>
         <constructor-arg index="1" value="hello"/>
@@ -43,7 +43,7 @@
 
         <!--内部bean和内部类类似-->
         <property name="helloIndia">
-            <bean id="helloIndia" class="com.liucan.spring.ioc.pojo.HelloIndia"/>
+            <bean id="helloIndia" class="com.liucan.spring.ioc.xml.HelloIndia"/>
         </property>
 
         <!--可以通过autowire="byName"byType"自动注入
@@ -51,11 +51,11 @@
         -->
     </bean>
 
-    <bean id="spellChecker" class="com.liucan.spring.ioc.pojo.SpellChecker">
+    <bean id="spellChecker" class="com.liucan.spring.ioc.xml.SpellChecker">
     </bean>
 
     <!--注入集合list,set,map,properties-->
-    <bean id="collectionBean" class="com.liucan.spring.ioc.pojo.CollectionBean">
+    <bean id="collectionBean" class="com.liucan.spring.ioc.xml.CollectionBean">
         <property name="addressList">
             <list>
                 <value>INDIA</value>

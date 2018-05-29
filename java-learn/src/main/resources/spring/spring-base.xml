@@ -25,7 +25,7 @@
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
 
-    <!--声明@AspectJ 支持是可用的-->
+    <!--声明@AspectJ 支持是可用的，Spring框架会自动为与AspectJ切面配置的Bean创建代理-->
     <aop:aspectj-autoproxy/>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

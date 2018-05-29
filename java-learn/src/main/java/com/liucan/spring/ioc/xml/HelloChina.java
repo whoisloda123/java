@@ -1,4 +1,4 @@
-package com.liucan.spring.ioc.pojo;
+package com.liucan.spring.ioc.xml;
 
 import lombok.Data;
 
@@ -8,8 +8,7 @@ import lombok.Data;
  * @brief
  */
 @Data
-public class HelloIndia {
+public class HelloChina {
     private String message1;
     private String message2;
-    private String message3;
 }
