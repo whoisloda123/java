@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author liucan
  * @date 2018/5/26
- * @brief
+ * @brief 注解方式
  */
 @Aspect
 @Component

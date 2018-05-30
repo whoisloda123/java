@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * @author liucan
  * @date 2018/5/27
- * @brief spring声明式事务管理，可通过配合aop来，建议用此配置，通过注解方式
+ * @brief spring声明式事务管理，可通过配合aop来，建议用此配置，通过注解方式，使用的是aop的around切面
  */
 @Component
 public class StatementTransactionByAnno {

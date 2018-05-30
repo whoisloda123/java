@@ -87,10 +87,10 @@
     <bean id="annotation" class="com.liucan.spring.ioc.annottion.Annotation"/>
 
     <!--spring 事件-->
-    <bean id="contextStartEventHandler" class="com.liucan.spring.springevent.listener.ContextStartEventListener"/>
-    <bean id="contextStopEventHandler" class="com.liucan.spring.springevent.listener.ContextStopEventListener"/>
+    <bean id="contextStartEventHandler" class="com.liucan.spring.ioc.springevent.listener.ContextStartEventListener"/>
+    <bean id="contextStopEventHandler" class="com.liucan.spring.ioc.springevent.listener.ContextStopEventListener"/>
 
     <!--spring自定义事件-->
-    <bean id="customEventHandler" class="com.liucan.spring.springevent.listener.CustomEventListener"/>
-    <bean id="customEventPublisher" class="com.liucan.spring.springevent.publisher.EventPublisher"/>
+    <bean id="customEventListener" class="com.liucan.spring.ioc.springevent.listener.CustomEventListener"/>
+    <bean id="customEventPublisher" class="com.liucan.spring.ioc.springevent.publisher.EventPublisher"/>
 </beans>

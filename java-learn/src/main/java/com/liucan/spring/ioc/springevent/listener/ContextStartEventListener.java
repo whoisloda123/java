@@ -1,4 +1,4 @@
-package com.liucan.spring.springevent.listener;
+package com.liucan.spring.ioc.springevent.listener;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextStartedEvent;

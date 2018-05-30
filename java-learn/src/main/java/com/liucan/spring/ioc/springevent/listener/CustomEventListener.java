@@ -1,6 +1,6 @@
-package com.liucan.spring.springevent.listener;
+package com.liucan.spring.ioc.springevent.listener;
 
-import com.liucan.spring.springevent.event.CustomEvent;
+import com.liucan.spring.ioc.springevent.event.CustomEvent;
 import org.springframework.context.ApplicationListener;
 
 /**

@@ -1,6 +1,6 @@
-package com.liucan.spring.springevent.publisher;
+package com.liucan.spring.ioc.springevent.publisher;
 
-import com.liucan.spring.springevent.event.CustomEvent;
+import com.liucan.spring.ioc.springevent.event.CustomEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
@@ -14,7 +14,7 @@ public class EventPublisher implements ApplicationEventPublisherAware {
 
     //spring 会在自动调用该函数设置ApplicationEventPublisher
     @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher publisher){
+    public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
         this.publisher = publisher;
     }
 

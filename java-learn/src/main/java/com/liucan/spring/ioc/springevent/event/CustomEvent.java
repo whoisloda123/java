@@ -1,4 +1,4 @@
-package com.liucan.spring.springevent.event;
+package com.liucan.spring.ioc.springevent.event;
 
 import org.springframework.context.ApplicationEvent;
 
