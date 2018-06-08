@@ -38,7 +38,7 @@
         <mapper resource="com/liucan/mybatis/mapper/UserInfoMapper.xml"/>
         <mapper resource="com/liucan/mybatis/mapper/UserOrderMapper.xml"/>
         <!-- 将包内的映射器接口实现全部注册为映射器
-        <package name="com.liucan.mybatis.dao"/>
+        <package name="com.liucan.mybatis.mybatis"/>
         -->
     </mappers>
 </configuration>

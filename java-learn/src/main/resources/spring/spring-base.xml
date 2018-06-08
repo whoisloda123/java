@@ -28,15 +28,16 @@
     <!--声明@AspectJ 支持是可用的，Spring框架会自动为与AspectJ切面配置的Bean创建代理-->
     <aop:aspectj-autoproxy/>
 
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter" />
-            </list>
-        </property>
-    </bean>
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" >
-        <property name="order" value="0" />
+    <!--
+        1.使用定义的规则来查找视图名称
+        2.DispatcherServlet 会根据controller里返回的视图名称，从 ViewResolver 获取帮助，为请求检取定义视图
+        3.确定视图后，DispatcherServlet 将把模型数据传递给视图，最后呈现在浏览器中
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀-->
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 </beans>

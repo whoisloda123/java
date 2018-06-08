@@ -66,7 +66,7 @@ public class Mybatis {
         SqlSession sqlSession = openSession();
         UserInfo userInfo = null;
         try {
-            userInfo = sqlSession.selectOne("com.liucan.mybatis.dao.UserInfoMapper.selectByPrimaryKey", id);
+            userInfo = sqlSession.selectOne("com.liucan.mybatis.mybatis.UserInfoMapper.selectByPrimaryKey", id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
