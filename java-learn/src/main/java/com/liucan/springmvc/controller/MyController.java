@@ -1,9 +1,11 @@
 package com.liucan.springmvc.controller;
 
+import com.liucan.mybatis.dao.UserInfoMapper;
+import com.liucan.mybatis.mode.UserInfo;
+import com.liucan.mybatis.mode.UserInfoExample;
 import com.liucan.pojo.Student;
-import com.liucan.springmvc.mybatis.dao.UserInfoMapper;
-import com.liucan.springmvc.mybatis.mode.UserInfo;
-import com.liucan.springmvc.mybatis.mode.UserInfoExample;
+import com.liucan.springmvc.common.exception.BusinessException;
+import com.liucan.springmvc.common.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,10 +61,13 @@ public class MyController {
 
     @GetMapping(value = "/find_user")
     @ResponseBody
-    public UserInfo queryUser(@RequestParam("user_id") Integer userId) {
+    public CommonResponse queryUser(@RequestParam("user_id") Integer userId) {
+        if (true) {
+            throw new BusinessException("方式发送方");
+        }
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
-        return list.get(0);
+        return CommonResponse.ok(list.get(0));
     }
 }

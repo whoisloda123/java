@@ -22,7 +22,7 @@
      就可以不用再xml中配置了，因为前者包含了后者  -->
     <context:component-scan base-package="com.liucan.*"/>
 
-    <!-- 配置注解驱动 -->
+    <!-- mvc配置注解驱动 -->
     <mvc:annotation-driven/>
 
     <!--声明@AspectJ 支持是可用的，Spring框架会自动为与AspectJ切面配置的Bean创建代理-->

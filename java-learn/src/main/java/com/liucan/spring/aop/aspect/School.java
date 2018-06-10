@@ -41,7 +41,7 @@ public class School {
     }
 
     public void printThrowException(){
-        System.out.println("School Exception raised");
+        System.out.println("School exception raised");
         throw new IllegalArgumentException();
     }
 }
