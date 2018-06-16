@@ -20,7 +20,7 @@ public class CommonResponse {
     public static CommonResponse ok(Object data) {
         CommonResponse response = new CommonResponse();
         response.setCode(0);
-        response.setMessage("返回成功!");
+        response.setMessage("success");
         response.setData(data);
         return response;
     }

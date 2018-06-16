@@ -4,7 +4,6 @@ import com.liucan.mybatis.dao.UserInfoMapper;
 import com.liucan.mybatis.mode.UserInfo;
 import com.liucan.mybatis.mode.UserInfoExample;
 import com.liucan.pojo.Student;
-import com.liucan.springmvc.common.exception.BusinessException;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@Controller //一般用于返回页面
 @RequestMapping("/liucan")
 public class MyController {
     @Autowired
@@ -62,9 +61,6 @@ public class MyController {
     @GetMapping(value = "/find_user")
     @ResponseBody
     public CommonResponse queryUser(@RequestParam("user_id") Integer userId) {
-        if (true) {
-            throw new BusinessException("方式发送方");
-        }
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);

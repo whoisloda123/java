@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author liucan
@@ -18,8 +21,9 @@ import org.springframework.web.bind.annotation.*;
  *  3.@ControllerAdvice(annotations = RestController.class) 指向所有带有注解@RestController的控制器
  *  4.@ControllerAdvice("org.example.controllers") 指向所有指定包中的控制器
  *  5.还有ModelAttribute（在所有@RequestMapping之前对mode的操作）和InitBinder
+ *  6.@RestControllerAdvice = @ControllerAdvice + @ResponseBody 相当于 @RestController = @Controller + @ResponseBody
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class ControllerExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
@@ -27,7 +31,6 @@ public class ControllerExceptionHandler {
      * 处理所有不可知的异常
      */
     @ExceptionHandler(Exception.class)
-    @ResponseBody
     CommonResponse handleException(Exception e) {
         LOG.error(e.getMessage(), e);
         return CommonResponse.error("系统错误");
@@ -37,7 +40,6 @@ public class ControllerExceptionHandler {
      * 处理所有业务异常
      */
     @ExceptionHandler(BusinessException.class)
-    @ResponseBody
     CommonResponse handleBusinessException(BusinessException e) {
         LOG.error(e.getMessage(), e);
         return CommonResponse.error("业务系统错误");
