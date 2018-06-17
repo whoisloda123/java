@@ -5,10 +5,7 @@ import com.liucan.mybatis.mode.UserInfo;
 import com.liucan.mybatis.mode.UserInfoExample;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,14 @@ public class MyRestController {
 
     @GetMapping(value = "/find_user1")
     public CommonResponse queryUser(@RequestParam("user_id") Integer userId) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andUserIdEqualTo(userId);
+        List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
+        return CommonResponse.ok(list.get(0));
+    }
+
+    @GetMapping(value = "/find_user1/{userId}")
+    public CommonResponse queryUser1(@PathVariable("userId") Integer userId) {
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
