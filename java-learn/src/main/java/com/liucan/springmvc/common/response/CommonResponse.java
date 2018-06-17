@@ -25,6 +25,13 @@ public class CommonResponse {
         return response;
     }
 
+    public static CommonResponse ok() {
+        CommonResponse response = new CommonResponse();
+        response.setCode(0);
+        response.setMessage("success");
+        return response;
+    }
+
     public static CommonResponse ok(int code, String message, Object data) {
         CommonResponse response = new CommonResponse();
         response.setCode(code);
