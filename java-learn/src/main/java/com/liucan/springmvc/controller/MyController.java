@@ -33,15 +33,6 @@ public class MyController {
         return new ModelAndView("form/student", "command", new Student());
     }
 
-    @PostMapping(value = "/addStudent")
-    public String addStudent(@ModelAttribute("SpringWeb") Student student,
-                             ModelMap model) {
-        model.addAttribute("name", student.getName());
-        model.addAttribute("age", student.getAge());
-        model.addAttribute("id", student.getId());
-        return "form/result";
-    }
-
     @GetMapping(value = "/redirectIndex")
     public String index() {
         return "redirect/redirectIndex";
@@ -65,5 +56,31 @@ public class MyController {
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
         return CommonResponse.ok(list.get(0));
+    }
+
+    /**
+     * 1.@ModelAttribute 放在函数上面，在control里面的所有的requestMapping之前都会执行
+     * 通常被用来填充一些公共需要的属性或数据
+     * 2.@ModelAttribute放到函数参数里面，该方法参数的值将由model中取得。在model中存在以后，
+     * 请求中所有名称匹配的参数都会填充到该参数中。被称为数据绑定，一个非常有用的特性，
+     * 节约了你每次都需要手动从表格数据中转换这些字段数据的时间
+     */
+    @ModelAttribute("num")
+    public int addAccount(@RequestParam int number) {
+        return number;
+    }
+
+    @ModelAttribute
+    public void populateModel(@RequestParam String number, Model model) {
+        model.addAttribute("num1", number);
+    }
+
+    @PostMapping(value = "/addStudent")
+    public String addStudent(@ModelAttribute("student") Student student,
+                             ModelMap model) {
+        model.addAttribute("name", student.getName());
+        model.addAttribute("age", student.getAge());
+        model.addAttribute("id", student.getId());
+        return "form/result";
     }
 }

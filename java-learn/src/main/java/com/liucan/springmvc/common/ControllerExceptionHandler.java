@@ -4,6 +4,7 @@ import com.liucan.springmvc.common.exception.BusinessException;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -55,8 +56,15 @@ public class ControllerExceptionHandler {
 
     /**
      * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
+     * 1.从请求参数、路径变量、请求头属性或者cookie中抽取出来的String类型的值，可能需要被转换成其所绑定的目标方法参数或字段的类型
+     *  （比如，通过@ModelAttribute将请求参数绑定到方法参数上）。如果目标类型不是String，
+     *  Spring会自动进行类型转换。所有的简单类型诸如int、long、Date都有内置的支持。如果想进一步定制这个转换过程，
+     *  可以通过WebDataBinder
+     * 2.用于完成由表单到JavaBean属性的绑定
      */
     @InitBinder
     public void initBinder(WebDataBinder binder) {
+        //定制日期的formatter
+        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd"));
     }
 }

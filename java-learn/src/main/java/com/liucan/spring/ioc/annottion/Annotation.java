@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * @author liucan
@@ -21,6 +22,7 @@ public class Annotation {
     @Autowired
     @Qualifier("helloIndia1")
     private HelloIndia helloIndia;
+    @Resource //根据名称来注入，而@Autowired根据type来注入，@Resource是java本身，可减少和spring的耦合
     private HelloWorld helloWorld;
 
     //用于构造函数，当创建bean时，XML文件中没有使用元素配置bean，构造函数也会被自动连接
