@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author liucan
  * @date 2018/6/24
  * @brief 通用请求拦截器
- * 1.处理器拦截器会在浏览器特定的请求执行处理器Controller处理之前，之后拦截
- * 2.spring-mvc处理器拦截器在你需要为特定类型的请求应用一些功能时很有用，
- * 比如，检查用户身份,用户是否登录，记录日志等等。
+ *        1.处理器拦截器会在浏览器特定的请求执行处理器Controller处理之前，之后拦截
+ *        2.spring-mvc处理器拦截器在你需要为特定类型的请求应用一些功能时很有用，
+ *          比如，检查用户身份,用户是否登录，记录日志等等。
  */
 @Slf4j
 public class CommonInterceptor extends HandlerInterceptorAdapter {
@@ -73,8 +73,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response,
                                 Object handler,
-                                Exception ex)
-            throws Exception {
+                                Exception ex) throws Exception {
         log.info("==============执行afterCompletion================");
     }
 
