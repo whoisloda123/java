@@ -66,13 +66,13 @@ public class MyController {
      * 节约了你每次都需要手动从表格数据中转换这些字段数据的时间
      */
     @ModelAttribute("num")
-    public int addAccount(@RequestParam int number) {
-        return number;
+    public int addAccount() {
+        return 1;
     }
 
     @ModelAttribute
-    public void populateModel(@RequestParam String number, Model model) {
-        model.addAttribute("num1", number);
+    public void populateModel(Model model) {
+        model.addAttribute("num1", 1);
     }
 
     @PostMapping(value = "/addStudent")

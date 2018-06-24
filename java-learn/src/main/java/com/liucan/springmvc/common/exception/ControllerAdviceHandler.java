@@ -1,6 +1,5 @@
-package com.liucan.springmvc.common;
+package com.liucan.springmvc.common.exception;
 
-import com.liucan.springmvc.common.exception.BusinessException;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +24,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  *  6.@RestControllerAdvice = @ControllerAdvice + @ResponseBody 相当于 @RestController = @Controller + @ResponseBody
  */
 @RestControllerAdvice
-public class ControllerExceptionHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
+public class ControllerAdviceHandler {
+    private static final Logger LOG = LoggerFactory.getLogger(ControllerAdviceHandler.class);
 
     /**
      * 处理所有不可知的异常

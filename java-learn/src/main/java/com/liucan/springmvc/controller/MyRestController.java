@@ -33,7 +33,11 @@ public class MyRestController {
             UserInfoExample userInfoExample = new UserInfoExample();
             userInfoExample.createCriteria().andUserIdEqualTo(userId);
             List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
-            return CommonResponse.ok(list.get(0));
+            if (!list.isEmpty()) {
+                return CommonResponse.ok(list.get(0));
+            } else {
+                return CommonResponse.error("未查询到user");
+            }
         } else {
             return CommonResponse.error("cookie有问题");
         }
