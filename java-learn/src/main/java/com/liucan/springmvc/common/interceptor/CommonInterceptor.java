@@ -46,6 +46,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
             }
         }
         log.error("[拦截器] 用户还未登录", requestUri, contextPath, url);
+        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
         return false;
     }
 
