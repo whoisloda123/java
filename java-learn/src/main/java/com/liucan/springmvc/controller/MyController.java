@@ -1,9 +1,10 @@
 package com.liucan.springmvc.controller;
 
+import com.liucan.mybatis.dao.UserInfoMapper;
+import com.liucan.mybatis.mode.UserInfo;
+import com.liucan.mybatis.mode.UserInfoExample;
 import com.liucan.pojo.Student;
-import com.liucan.springmvc.mybatis.dao.UserInfoMapper;
-import com.liucan.springmvc.mybatis.mode.UserInfo;
-import com.liucan.springmvc.mybatis.mode.UserInfoExample;
+import com.liucan.springmvc.common.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@Controller //一般用于返回页面
 @RequestMapping("/liucan")
 public class MyController {
     @Autowired
@@ -30,15 +31,6 @@ public class MyController {
     @GetMapping(value = "/student")
     public ModelAndView student() {
         return new ModelAndView("form/student", "command", new Student());
-    }
-
-    @PostMapping(value = "/addStudent")
-    public String addStudent(@ModelAttribute("SpringWeb") Student student,
-                             ModelMap model) {
-        model.addAttribute("name", student.getName());
-        model.addAttribute("age", student.getAge());
-        model.addAttribute("id", student.getId());
-        return "form/result";
     }
 
     @GetMapping(value = "/redirectIndex")
@@ -59,10 +51,36 @@ public class MyController {
 
     @GetMapping(value = "/find_user")
     @ResponseBody
-    public UserInfo queryUser(@RequestParam("user_id") Integer userId) {
+    public CommonResponse queryUser(@RequestParam("user_id") Integer userId) {
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
-        return list.get(0);
+        return CommonResponse.ok(list.get(0));
+    }
+
+    /**
+     * 1.@ModelAttribute 放在函数上面，在control里面的所有的requestMapping之前都会执行
+     * 通常被用来填充一些公共需要的属性或数据
+     * 2.@ModelAttribute放到函数参数里面，该方法参数的值将由model中取得。在model中存在以后，
+     * 请求中所有名称匹配的参数都会填充到该参数中。被称为数据绑定，一个非常有用的特性，
+     * 节约了你每次都需要手动从表格数据中转换这些字段数据的时间
+     */
+    @ModelAttribute("num")
+    public int addAccount() {
+        return 1;
+    }
+
+    @ModelAttribute
+    public void populateModel(Model model) {
+        model.addAttribute("num1", 1);
+    }
+
+    @PostMapping(value = "/addStudent")
+    public String addStudent(@ModelAttribute("student") Student student,
+                             ModelMap model) {
+        model.addAttribute("name", student.getName());
+        model.addAttribute("age", student.getAge());
+        model.addAttribute("id", student.getId());
+        return "form/result";
     }
 }

@@ -1,8 +1,8 @@
 <html>
 <head>
-    <title>Hello Spring MVC</title>
+    <title>login</title>
 </head>
 <body>
-<h2>${message}</h2>
+<h2>You have not logged in yet, please log in first</h2>
 </body>
 </html>

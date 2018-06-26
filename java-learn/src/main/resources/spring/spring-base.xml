@@ -4,13 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 引入mysql.properties属性文件 -->
     <context:property-placeholder location="classpath:db/mysql.properties" />
@@ -22,8 +24,18 @@
      就可以不用再xml中配置了，因为前者包含了后者  -->
     <context:component-scan base-package="com.liucan.*"/>
 
-    <!-- 配置注解驱动 -->
+    <!-- mvc配置注解驱动 -->
     <mvc:annotation-driven/>
+
+    <!--配置拦截器, 多个拦截器,顺序执行 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+            <mvc:mapping path="/liucan/**"/>
+            <bean class="com.liucan.springmvc.common.interceptor.CommonInterceptor"/>
+        </mvc:interceptor>
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+    </mvc:interceptors>
 
     <!--声明@AspectJ 支持是可用的，Spring框架会自动为与AspectJ切面配置的Bean创建代理-->
     <aop:aspectj-autoproxy/>
@@ -39,5 +51,4 @@
         <!--后缀-->
         <property name="suffix" value=".jsp"/>
     </bean>
-
 </beans>

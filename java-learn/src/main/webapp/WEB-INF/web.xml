@@ -10,8 +10,11 @@
         <servlet-name>javalearn-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
+            <!--如果没有该配置，DispatcherServlet会查找默认路径：web应用/WEB-INF/[servlet-name]-servlet.xml下的配置文件
+                通过该文件DispatcherServlet执行初始化
+            -->
             <param-name>contextConfigLocation</param-name>
-            <!-- maven项目里面的classpath指的是在编译生成target目录下/WEB-INF/classes/spring-base.xml
+            <!-- maven项目里面的classpath指的是在编译生成target目录下/WEB-INF/classes
              编译的时候会将.xml拷贝到该目录下-->
             <param-value>classpath:spring/*.xml</param-value>
         </init-param>

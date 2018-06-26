@@ -24,7 +24,7 @@ public class StatementTransactionByAnno {
      * 2.@Transactional(rollbackFor = {RuntimeException.class, IOException.class})
      * 3.@Transactional(rollbackForClassName = "RuntimeException")
      * 4.@Transactional(rollbackForClassName = {"RuntimeException", "IOException"})
-     * 5.@Transactional(noRollbackFor = Exception.class, timeout = 2)
+     * 5.@Transactional(noRollbackFor = exception.class, timeout = 2)
      * 6.@Transactional(noRollbackForClassName = "RuntimeException")
      */
     @Transactional

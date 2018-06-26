@@ -27,7 +27,7 @@ public class Student {
     }
 
     public void printThrowException(){
-        System.out.println("Student Exception raised");
+        System.out.println("Student exception raised");
         throw new IllegalArgumentException();
     }
 }

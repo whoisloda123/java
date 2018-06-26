@@ -39,8 +39,17 @@ public class Stream1 {
 
         //对结果按照sex分组保持
         Map<String, List<Student>> maps = list.stream().collect(Collectors.groupingBy(Student::getSex));
-        //对结果按照sex,并计算其count保存
+        //对结果按照sex分组,并计算其count保存
         Map<String, Long> map = list.stream().collect(Collectors.groupingBy(Student::getSex, Collectors.counting()));
+        //对结果按照sex分组,并计算其平均值保存
+        Map<String, Double> map2 = list.stream().collect(Collectors.groupingBy(Student::getSex, Collectors.averagingInt(Student::getAge)));
+
+        //对结果按照age是否>2进行分区（特殊的分组）
+        Map<Boolean, List<Student>> map3 = list.stream().collect(Collectors.partitioningBy(e -> e.getAge() > 2));
+        //对结果按照ange是否>2进行分区，然后在分区里面对其sex进行分组，获得其个数
+        Map<Boolean, Map<String, Long>> map4 = list.stream().collect(Collectors.partitioningBy(e -> e.getAge() > 2,
+                Collectors.groupingBy(Student::getSex, Collectors.counting())));
+
 
         //对数组
         String[] names = {"chaimm","peter","john"};

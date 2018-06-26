@@ -201,7 +201,7 @@ public class BankliucanQry {
               _LOGGER.error("TTransportException writing to internal frame buffer", e);
               fb.close();
             } catch (java.lang.Exception e) {
-              _LOGGER.error("Exception writing to internal frame buffer", e);
+                _LOGGER.error("exception writing to internal frame buffer", e);
               onError(e);
             }
           }
@@ -218,14 +218,14 @@ public class BankliucanQry {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TApplicationException)e;
             } else {
-              _LOGGER.error("Exception inside handler", e);
+                _LOGGER.error("exception inside handler", e);
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
             }
             try {
               fcall.sendResponse(fb,msg,msgType,seqid);
             } catch (java.lang.Exception ex) {
-              _LOGGER.error("Exception writing to internal frame buffer", ex);
+                _LOGGER.error("exception writing to internal frame buffer", ex);
               fb.close();
             }
           }

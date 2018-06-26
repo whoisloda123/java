@@ -1,9 +1,9 @@
-package com.liucan.springmvc.common;
+package com.liucan.springmvc.common.exception;
 
 /**
  * @author liucan
  * @date 2018/6/3
- * @brief
+ * @brief 业务异常
  */
 public class BusinessException extends RuntimeException {
     public BusinessException(String message) {

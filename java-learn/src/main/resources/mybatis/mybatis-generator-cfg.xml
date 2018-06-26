@@ -5,7 +5,7 @@
 
 <!-- 配置生成器 -->
 <generatorConfiguration>
-    <properties resource="db/mysql.properties"></properties>
+    <properties resource="db/mysql.properties"/>
     <!-- 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
         resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties
         url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
