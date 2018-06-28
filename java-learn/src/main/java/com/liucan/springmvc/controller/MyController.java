@@ -83,4 +83,9 @@ public class MyController {
         model.addAttribute("id", student.getId());
         return "form/result";
     }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "form/upload";
+    }
 }
