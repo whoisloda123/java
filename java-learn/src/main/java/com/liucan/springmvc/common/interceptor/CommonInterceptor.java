@@ -39,12 +39,15 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         String url = requestUri.substring(contextPath.length());
 
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equalsIgnoreCase("uid")) {
-                log.info("[拦截器]用户已经登录uid:{}", cookie.getValue());
-                return true;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equalsIgnoreCase("uid")) {
+                    log.info("[拦截器]用户已经登录uid:{}", cookie.getValue());
+                    return true;
+                }
             }
         }
+
         log.error("[拦截器] 用户还未登录", requestUri, contextPath, url);
         request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
         return false;

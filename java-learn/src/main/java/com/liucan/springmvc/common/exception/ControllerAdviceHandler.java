@@ -4,12 +4,10 @@ import com.liucan.springmvc.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liucan
@@ -29,9 +27,12 @@ public class ControllerAdviceHandler {
 
     /**
      * 处理所有不可知的异常
+     * ResponseStatus放在方法的上面的时候，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行
      */
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.BAD_GATEWAY)
     CommonResponse handleException(Exception e) {
+        e.printStackTrace();
         LOG.error(e.getMessage(), e);
         return CommonResponse.error("系统错误");
     }
@@ -41,6 +42,7 @@ public class ControllerAdviceHandler {
      */
     @ExceptionHandler(BusinessException.class)
     CommonResponse handleBusinessException(BusinessException e) {
+        e.printStackTrace();
         LOG.error(e.getMessage(), e);
         return CommonResponse.error("业务系统错误");
     }
