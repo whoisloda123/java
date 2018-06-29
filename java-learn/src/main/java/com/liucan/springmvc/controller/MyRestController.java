@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -72,5 +74,17 @@ public class MyRestController {
         responseHeaders.set("content-type1", "231");
         Object responseBody = CommonResponse.ok(requestBody);
         return new ResponseEntity<>(responseBody, responseHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * 上传文件
+     */
+    @PostMapping(value = "/upload_file")
+    public CommonResponse uploadFile(@RequestParam(value = "name", required = false) String name,
+                                     @RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+        }
+        return CommonResponse.ok();
     }
 }
