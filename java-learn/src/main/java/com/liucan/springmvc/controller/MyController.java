@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller //一般用于返回页面
@@ -76,8 +78,13 @@ public class MyController {
     }
 
     @PostMapping(value = "/addStudent")
-    public String addStudent(@ModelAttribute("student") Student student,
+    public String addStudent(@ModelAttribute("student") @Valid Student student,
+                             BindingResult bindingResult,
                              ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            String message = bindingResult.getFieldError().getDefaultMessage();
+            return "error";
+        }
         model.addAttribute("name", student.getName());
         model.addAttribute("age", student.getAge());
         model.addAttribute("id", student.getId());

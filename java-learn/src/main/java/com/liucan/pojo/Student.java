@@ -2,6 +2,8 @@ package com.liucan.pojo;
 
 import lombok.Data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /* *
@@ -9,8 +11,10 @@ import java.io.Serializable;
  */
 @Data
 public class Student implements Serializable, Comparable<Student> {
+    @Max(value = 120, message = "id不能查过120")
     private Integer id;
     private String name;
+    @Min(value = 18, message = "未满18岁")
     private Integer age;
     private String address;
     private String email;
