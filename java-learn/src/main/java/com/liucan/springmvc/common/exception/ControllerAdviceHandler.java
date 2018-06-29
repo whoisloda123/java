@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  *  4.@ControllerAdvice("org.example.controllers") 指向所有指定包中的控制器
  *  5.还有ModelAttribute（在所有@RequestMapping之前对mode的操作）和InitBinder
  *  6.@RestControllerAdvice = @ControllerAdvice + @ResponseBody 相当于 @RestController = @Controller + @ResponseBody
+ *  7.如果@ExceptionHandler定义控制器内部定义的，那么它会接收并处理由控制器（或其任何子类）中的@RequestMapping方法抛出的异常
  */
 @RestControllerAdvice
 public class ControllerAdviceHandler {
@@ -40,8 +41,8 @@ public class ControllerAdviceHandler {
     /**
      * 处理所有业务异常
      */
-    @ExceptionHandler(BusinessException.class)
-    CommonResponse handleBusinessException(BusinessException e) {
+    @ExceptionHandler(BizException.class)
+    CommonResponse handleBusinessException(BizException e) {
         e.printStackTrace();
         LOG.error(e.getMessage(), e);
         return CommonResponse.error("业务系统错误");

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *          用户都会得到异常的界面。而目标方法正常执行，一般和@ExceptionHandler一起使用
  */
 @ResponseStatus(value = HttpStatus.BAD_GATEWAY, reason = "业务异常")
-public class BusinessException extends RuntimeException {
-    public BusinessException(String message) {
+public class BizException extends RuntimeException {
+    public BizException(String message) {
         super(message);
     }
 }
