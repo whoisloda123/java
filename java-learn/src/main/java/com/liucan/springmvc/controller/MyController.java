@@ -3,13 +3,17 @@ package com.liucan.springmvc.controller;
 import com.liucan.mybatis.dao.UserInfoMapper;
 import com.liucan.mybatis.mode.UserInfo;
 import com.liucan.mybatis.mode.UserInfoExample;
+import com.liucan.pojo.Person;
 import com.liucan.pojo.Student;
 import com.liucan.springmvc.common.response.CommonResponse;
+import com.liucan.springmvc.common.validtor.PersonValidtor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +37,12 @@ public class MyController {
     @GetMapping(value = "/student")
     public ModelAndView student() {
         return new ModelAndView("form/student", "command", new Student());
+    }
+
+    //form表单
+    @GetMapping(value = "/person")
+    public ModelAndView person() {
+        return new ModelAndView("form/person", "command", new Person());
     }
 
     @GetMapping(value = "/redirectIndex")
@@ -60,6 +70,11 @@ public class MyController {
         return CommonResponse.ok(list.get(0));
     }
 
+    @GetMapping("/upload")
+    public String upload() {
+        return "form/upload";
+    }
+
     /**
      * 1.@ModelAttribute 放在函数上面，在control里面的所有的requestMapping之前都会执行
      * 通常被用来填充一些公共需要的属性或数据
@@ -77,22 +92,53 @@ public class MyController {
         model.addAttribute("num1", 1);
     }
 
+    /**
+     * 使用javax的valid校验器
+     */
     @PostMapping(value = "/addStudent")
     public String addStudent(@ModelAttribute("student") @Valid Student student,
                              BindingResult bindingResult,
                              ModelMap model) {
         if (bindingResult.hasErrors()) {
-            String message = bindingResult.getFieldError().getDefaultMessage();
-            return "error";
+            StringBuilder sb = new StringBuilder();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                sb.append(error.getField() + ":").append(error.getDefaultMessage());
+            }
+            return sb.toString();
+        } else {
+            model.addAttribute("name", student.getName());
+            model.addAttribute("age", student.getAge());
+            model.addAttribute("id", student.getId());
+            return "form/result";
         }
-        model.addAttribute("name", student.getName());
-        model.addAttribute("age", student.getAge());
-        model.addAttribute("id", student.getId());
-        return "form/result";
     }
 
-    @GetMapping("/upload")
-    public String upload() {
-        return "form/upload";
+    /**
+     * 使用spring-jsr303的valid校验器
+     */
+    @PostMapping(value = "/addPerson")
+    public String addPerson(@ModelAttribute("person") @Valid Person person,
+                            BindingResult bindingResult,
+                            ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                sb.append(error.getField() + ":").append(error.getDefaultMessage());
+            }
+            return sb.toString();
+        } else {
+            model.addAttribute("name", person.getName());
+            model.addAttribute("age", person.getAge());
+            return "form/result";
+        }
     }
+
+    @InitBinder //在该control里面所有RequestMapping之前都会执行
+    public void initBinder(WebDataBinder webDataBinder) {
+        //添加PersonValidtor
+        if (webDataBinder.getTarget() instanceof Person) {
+            webDataBinder.addValidators(new PersonValidtor());
+        }
+    }
+
 }

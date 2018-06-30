@@ -3,7 +3,7 @@ package com.liucan.springmvc.controller;
 import com.liucan.mybatis.dao.UserInfoMapper;
 import com.liucan.mybatis.mode.UserInfo;
 import com.liucan.mybatis.mode.UserInfoExample;
-import com.liucan.springmvc.common.exception.BusinessException;
+import com.liucan.springmvc.common.exception.BizException;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -91,6 +91,6 @@ public class MyRestController {
 
     @GetMapping(value = "/bizException")
     public CommonResponse bizException() {
-        throw new BusinessException("业务异常");
+        throw new BizException("业务异常");
     }
 }
