@@ -14,9 +14,6 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- 引入mysql.properties属性文件 -->
-    <context:property-placeholder location="classpath:db/mysql.properties" />
-
     <!-- spring自动去扫描base-pack下面或者子包下面的Java文件
      扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean
      注意：
@@ -47,7 +44,7 @@
     -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--前缀-->
-        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
         <!--后缀-->
         <property name="suffix" value=".jsp"/>
     </bean>

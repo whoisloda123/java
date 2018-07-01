@@ -8,11 +8,9 @@ import org.springframework.validation.Validator;
 /**
  * @author liucan
  * @date 2018/6/30
- * @brief Person检验器, 有2种方法
- *        1.在类的属性上面添加类似于@Min注解，如在Student类上面加类似于@Min，简单方便
- *        2.重写Validator接口，在validate里面进行自定义校验，可以自己添加比较复杂的校验
+ * @brief Person局部检验器（在Controller里面添加@InitBinde）
  */
-public class PersonValidtor implements Validator {
+public class PersonValidator implements Validator {
     /**
      * 判断支持的JavaBean类型，此处支持Student类型
      */
@@ -25,10 +23,10 @@ public class PersonValidtor implements Validator {
      * 实现Validator中的validate接口进行校验
      */
     @Override
-    public void validate(Object obj, Errors errors) {
+    public void validate(Object target, Errors errors) {
         //把校验信息注册到Error的实现类里
-        if (obj instanceof Person) {
-            Person person = (Person) obj;
+        if (target instanceof Person) {
+            Person person = (Person) target;
             if (StringUtils.isEmpty(person.getAddress())) {
                 errors.rejectValue("address", null, "地址不能为空!!!!");
             }

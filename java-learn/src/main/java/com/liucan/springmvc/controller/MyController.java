@@ -6,7 +6,7 @@ import com.liucan.mybatis.mode.UserInfoExample;
 import com.liucan.pojo.Person;
 import com.liucan.pojo.Student;
 import com.liucan.springmvc.common.response.CommonResponse;
-import com.liucan.springmvc.common.validtor.PersonValidtor;
+import com.liucan.springmvc.common.validtor.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -137,7 +137,7 @@ public class MyController {
     public void initBinder(WebDataBinder webDataBinder) {
         //添加PersonValidtor
         if (webDataBinder.getTarget() instanceof Person) {
-            webDataBinder.addValidators(new PersonValidtor());
+            webDataBinder.addValidators(new PersonValidator());
         }
     }
 

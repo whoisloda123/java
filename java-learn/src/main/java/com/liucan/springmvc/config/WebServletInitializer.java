@@ -1,8 +1,7 @@
-package com.liucan.springmvc;
+package com.liucan.springmvc.config;
 
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
-import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.ServletException;
  *        1.基于XML的Spring配置方式：继承AbstractDispatcherServletInitializer
  *        2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer
  */
-public class MVCServletInitializer extends AbstractDispatcherServletInitializer {
+public class WebServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     private static final String SERVLET_NAME = "javalearn-dispatcher";
 
     /**
@@ -31,15 +30,27 @@ public class MVCServletInitializer extends AbstractDispatcherServletInitializer 
     }
 
     @Override
-    protected WebApplicationContext createRootApplicationContext() {
-        return null;
+    protected WebApplicationContext createServletApplicationContext() {
+        return super.createServletApplicationContext();
+//        XmlWebApplicationContext cxt = new XmlWebApplicationContext();
+//        cxt.setConfigLocation("classpath:spring/spring-dao.xml");
+//        return cxt;
     }
 
+    /**
+     * RootConfig配置
+     */
     @Override
-    protected WebApplicationContext createServletApplicationContext() {
-        XmlWebApplicationContext cxt = new XmlWebApplicationContext();
-        cxt.setConfigLocation("classpath:spring/*.xml");
-        return cxt;
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{RootConfig.class};
+    }
+
+    /**
+     * ServletConfig配置的定制化
+     */
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
     }
 
     @Override
