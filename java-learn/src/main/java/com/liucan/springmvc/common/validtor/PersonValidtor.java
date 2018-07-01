@@ -9,8 +9,8 @@ import org.springframework.validation.Validator;
  * @author liucan
  * @date 2018/6/30
  * @brief Person检验器, 有2种方法
- * 1.在类的属性上面添加类似于@Min注解，如在Student类上面加类似于@Min，简单方便
- * 2.重写Validator接口，在validate里面进行自定义校验，可以自己添加比较复杂的校验
+ *        1.在类的属性上面添加类似于@Min注解，如在Student类上面加类似于@Min，简单方便
+ *        2.重写Validator接口，在validate里面进行自定义校验，可以自己添加比较复杂的校验
  */
 public class PersonValidtor implements Validator {
     /**
