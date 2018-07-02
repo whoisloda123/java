@@ -14,11 +14,8 @@ import java.util.List;
  * @author liucan
  * @date 2018/7/1
  * @brief sprig-mvc默认配置的定制化，本身有默认配置
- * Configuration:相当于xml里面的beans
- * EnableWebMvc:相当于xml里面的<mvc:annotation-driven/>，配置注解驱动
  */
 @Configuration
-@EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
     /**
      * 转换与格式化
@@ -51,6 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
         //registry.addViewController("/liucan").setViewName("index");
     }
 

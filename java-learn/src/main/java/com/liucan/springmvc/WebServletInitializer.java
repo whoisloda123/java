@@ -1,6 +1,7 @@
-package com.liucan.springmvc.config;
+package com.liucan.springmvc;
 
-import org.springframework.web.context.WebApplicationContext;
+import com.liucan.springmvc.config.AppConfig;
+import com.liucan.springmvc.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -17,32 +18,11 @@ public class WebServletInitializer extends AbstractAnnotationConfigDispatcherSer
     private static final String SERVLET_NAME = "javalearn-dispatcher";
 
     /**
-     * 基类已经做了该做的工作了
-     */
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-    }
-
-    @Override
-    protected String getServletName() {
-        return SERVLET_NAME;
-    }
-
-    @Override
-    protected WebApplicationContext createServletApplicationContext() {
-        return super.createServletApplicationContext();
-//        XmlWebApplicationContext cxt = new XmlWebApplicationContext();
-//        cxt.setConfigLocation("classpath:spring/spring-dao.xml");
-//        return cxt;
-    }
-
-    /**
-     * RootConfig配置
+     * AppConfig配置
      */
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{RootConfig.class};
+        return new Class[]{AppConfig.class};
     }
 
     /**
@@ -53,8 +33,24 @@ public class WebServletInitializer extends AbstractAnnotationConfigDispatcherSer
         return new Class[]{WebConfig.class};
     }
 
+    /**
+     * url过滤器
+     */
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected String getServletName() {
+        return SERVLET_NAME;
+    }
+
+    /**
+     * 基类已经做了该做的工作了
+     */
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
     }
 }
