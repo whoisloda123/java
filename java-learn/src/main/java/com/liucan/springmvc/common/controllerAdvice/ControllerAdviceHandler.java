@@ -1,5 +1,6 @@
-package com.liucan.springmvc.common.exception;
+package com.liucan.springmvc.common.controllerAdvice;
 
+import com.liucan.springmvc.common.exception.BizException;
 import com.liucan.springmvc.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

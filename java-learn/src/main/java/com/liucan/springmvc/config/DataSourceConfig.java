@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  * @brief mysql配置
  */
 @Configuration
-@PropertySource(value = "classpath:db/mysql.properties")
+@PropertySource(value = "classpath:properties/mysql.properties")
 public class DataSourceConfig {
     @Value("${mysql.driver}")
     private String driver;

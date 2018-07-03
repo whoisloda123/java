@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Getter
 @Configuration
-@PropertySource(value = "classpath:db/redis.properties")
+@PropertySource(value = "classpath:properties/redis.properties")
 public class RedisConfig {
     @Value("${redis.timeout}")
     private String timeout;

@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 引入mysql.properties属性文件 -->
-    <context:property-placeholder location="classpath:db/mysql.properties"/>
+    <context:property-placeholder location="classpath:properties/mysql.properties"/>
 
     <!--数据库dataSource配置-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

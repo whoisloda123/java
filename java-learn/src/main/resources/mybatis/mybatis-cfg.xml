@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <properties resource="db/mysql.properties">
+    <properties resource="properties/mysql.properties">
     </properties>
 
     <!--1.environments标签，当mybatis和spring整合之后，这个标签是不用配置的
