@@ -25,11 +25,16 @@
             <scope>test</scope>
         </dependency>
 
-        <!--日志包-->
+        <!--日志包slf4j + logback-->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
         </dependency>
 
         <!--j2ee相关包 servlet、jsp、jstl-->

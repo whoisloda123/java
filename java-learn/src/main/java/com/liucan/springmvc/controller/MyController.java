@@ -7,6 +7,7 @@ import com.liucan.pojo.Person;
 import com.liucan.pojo.Student;
 import com.liucan.springmvc.common.response.CommonResponse;
 import com.liucan.springmvc.common.validtor.PersonValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @Controller //一般用于返回页面
 @RequestMapping("/liucan")
 public class MyController {

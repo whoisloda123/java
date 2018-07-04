@@ -1,9 +1,12 @@
 package com.liucan.utils.serialize;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class ListTranscoder extends SerializeTranscoder {
     private static ListTranscoder listTranscoder = new ListTranscoder();
 
@@ -62,9 +65,9 @@ public class ListTranscoder extends SerializeTranscoder {
                 bis.close();
             }
         } catch (IOException e) {
-            logger.error(String.format("Caught IOException decoding %d bytes of data", bytes.length) + e);
+            log.error(String.format("[序列化]Caught IOException decoding %d bytes of data", bytes.length) + e);
         } catch (ClassNotFoundException e) {
-            logger.error(String.format("Caught CNFE decoding %d bytes of data", bytes.length) + e);
+            log.error(String.format("[序列化]Caught CNFE decoding %d bytes of data", bytes.length) + e);
         }  finally {
             close(is);
             close(bis);

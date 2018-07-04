@@ -33,7 +33,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        log.info("==============执行preHandle================");
+        log.info("[拦截器]==============执行preHandle================");
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
         String url = requestUri.substring(contextPath.length());
@@ -62,7 +62,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        log.info("==============执行postHandle================");
+        log.info("[拦截器]==============执行postHandle================");
         if (modelAndView != null) {  //加入当前时间
             modelAndView.addObject("var", "测试postHandle");
         }
@@ -77,7 +77,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
                                 HttpServletResponse response,
                                 Object handler,
                                 Exception ex) throws Exception {
-        log.info("==============执行afterCompletion================");
+        log.info("[拦截器]==============执行afterCompletion================");
     }
 
 }

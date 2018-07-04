@@ -12,7 +12,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().setex(key, EXPIRE, value);
         } catch (Exception e) {
-            LOG.error("set:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -22,7 +22,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().get(key);
         } catch (Exception e) {
-            LOG.error("get:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -33,7 +33,7 @@ public class Ledis extends LedisBase {
         try {
             strings = getJedis().mget(keys);
         } catch (Exception e) {
-            LOG.error("mget:", e);
+            e.printStackTrace();
         }
         return strings;
     }
@@ -44,7 +44,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().mset(keysvalues);
         } catch (Exception e) {
-            LOG.error("mset:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -54,7 +54,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().del(keys);
         } catch (Exception e) {
-            LOG.error("mdel:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -64,7 +64,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().hgetAll(key);
         } catch (Exception e) {
-            LOG.error("hgetall:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -74,7 +74,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().hset(key, filed, value);
         } catch (Exception e) {
-            LOG.error("hset:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -84,7 +84,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().hget(key, field);
         } catch (Exception e) {
-            LOG.error("hget:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -95,7 +95,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().hset(key.getBytes(), filed.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
         } catch (Exception e) {
-            LOG.error("hsetObject:", e);
+            e.printStackTrace();
         }
         return rtn;
     }
@@ -105,7 +105,7 @@ public class Ledis extends LedisBase {
         try {
             rtn = getJedis().hget(key.getBytes(), field.getBytes());
         } catch (Exception e) {
-            LOG.error("hgetObject:", e);
+            e.printStackTrace();
         }
         return ObjectsTranscoder.getObjectsTranscoder().deserialize(rtn);
     }
@@ -115,7 +115,7 @@ public class Ledis extends LedisBase {
             getJedis().sadd(key.getBytes(), ObjectsTranscoder.getObjectsTranscoder().serialize(obj));
             getJedis().expire(key.getBytes(), EXPIRE);
         } catch (Exception e) {
-            LOG.error("saddObject:", e);
+            e.printStackTrace();
         }
     }
 
@@ -132,7 +132,7 @@ public class Ledis extends LedisBase {
                 }
             }
         } catch (Exception e) {
-            LOG.error("smembersAllObject:", e);
+            e.printStackTrace();
         }
         return list;
     }
@@ -141,7 +141,7 @@ public class Ledis extends LedisBase {
         try {
             getJedis().del(key.getBytes());
         } catch (Exception e) {
-            LOG.error("delAllObject:", e);
+            e.printStackTrace();
         }
     }
 

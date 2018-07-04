@@ -1,18 +1,15 @@
 package com.liucan.utils.serialize;
 
-
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Closeable;
 
 /*
  * 序列化虚类
  */
+@Slf4j
 public abstract class SerializeTranscoder {
-    protected static Logger logger = Logger.getLogger(SerializeTranscoder.class);
-
     public abstract  byte[] serialize(Object obj);
-
     public abstract Object deserialize(byte[] bytes);
 
     public void close(Closeable closeable) {
@@ -20,7 +17,7 @@ public abstract class SerializeTranscoder {
             try {
                 closeable.close();
             } catch (Exception e) {
-                logger.info("Unable to close" + closeable, e);
+                log.info("[序列化]Unable to close" + closeable, e);
             }
         }
     }

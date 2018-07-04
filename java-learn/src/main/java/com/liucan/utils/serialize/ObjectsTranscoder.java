@@ -1,9 +1,13 @@
 package com.liucan.utils.serialize;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 
+@Slf4j
 public class ObjectsTranscoder extends SerializeTranscoder {
     private static ObjectsTranscoder objectsTranscoder = new ObjectsTranscoder();
+
     public static ObjectsTranscoder getObjectsTranscoder() {
         return objectsTranscoder;
     }
@@ -50,9 +54,9 @@ public class ObjectsTranscoder extends SerializeTranscoder {
                 bis.close();
             }
         } catch (IOException e) {
-            logger.error(String.format("Caught IOException decoding %d bytes of data", bytes.length) + e);
+            log.error(String.format("[序列化]Caught IOException decoding %d bytes of data", bytes.length) + e);
         } catch (ClassNotFoundException e) {
-            logger.error(String.format("Caught CNFE decoding %d bytes of data", bytes.length) + e);
+            log.error(String.format("[序列化]Caught CNFE decoding %d bytes of data", bytes.length) + e);
         } finally {
             close(is);
             close(bis);

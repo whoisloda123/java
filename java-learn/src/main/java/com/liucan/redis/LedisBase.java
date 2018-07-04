@@ -1,7 +1,5 @@
 package com.liucan.redis;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -9,7 +7,6 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.util.ResourceBundle;
 
 public class LedisBase {
-    protected final Logger LOG = LoggerFactory.getLogger(LedisBase.class);
     private static Jedis jedis;
     public static int EXPIRE = 3000;
 
