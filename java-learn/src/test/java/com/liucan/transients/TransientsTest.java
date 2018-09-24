@@ -1,4 +1,4 @@
-package com.liucan.redis;
+package com.liucan.transients;
 
 import com.liucan.BaseJunit4Test;
 import org.junit.Test;
@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author liucan
- * @date 2018/5/16
+ * @date 2018/9/24
  * @brief
  */
-public class RedisTest extends BaseJunit4Test {
+public class TransientsTest extends BaseJunit4Test {
     @Autowired
-    Redis redis;
+    Transients transients;
 
     @Test
     public void testExample() {
-        redis.example();
+        transients.example();
     }
 }

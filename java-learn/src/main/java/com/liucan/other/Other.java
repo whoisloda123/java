@@ -6,15 +6,13 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
-;
-
 @Component
-public class Other {
+public final class Other {
     /* *
      * java.util.Date和SimpleDateFormatter都不是线程安全的，java8而LocalDate和LocalTime和最基本的String一样，
      * 是不变类型，不但线程安全，而且不能修改
      */
-    public void time() {
+    public final void time() {
         //参考https://my.oschina.net/benhaile/blog/193956
         //LocalDate
         LocalDate date = LocalDate.now();
@@ -99,5 +97,36 @@ public class Other {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.of(1986, Month.APRIL, 8, 12, 30);
         String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
+    }
+
+    public void other() {
+        Exe2 exe2;
+
+        char a = 'b'; //2字节,unicode字符
+
+        double b = 1231.31;
+        float c = (float) 131323.1;
+
+        byte bt = 1; //1字节
+        short f = 12; //2字节
+        int d = 1231; //4字节
+        long e = 31321; //8字节
+    }
+
+    //静态嵌套类，和文件类关系不大，很少用
+    public static class Exe1 {
+
+    }
+
+    //内部类-成员类
+    public abstract class Exe2 {
+        private transient int limit = 52;
+
+        public abstract void fun();
+
+        public synchronized void test() {
+
+        }
+
     }
 }

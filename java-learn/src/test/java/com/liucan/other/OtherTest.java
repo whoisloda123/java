@@ -16,5 +16,6 @@ public class OtherTest extends BaseJunit4Test {
     @Test
     public void testTime() {
         other.time();
+        other.other();
     }
 }
