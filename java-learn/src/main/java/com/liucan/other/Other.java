@@ -111,6 +111,20 @@ public final class Other {
         short f = 12; //2字节
         int d = 1231; //4字节
         long e = 31321; //8字节
+
+        //instanceof是运算符
+        boolean isOther = this instanceof Other;
+
+        Integer i1 = 100; //实际上是调用valueof(100)
+        Integer i2 = 100;
+        Integer i3 = 200;
+        Integer i4 = 200;
+        System.out.println(i1 == i2);
+        System.out.println(i3 == i4);
+
+        Double d1 = 100.0;
+        Double d2 = 100.0;
+        System.out.println(d1 == d2);
     }
 
     //静态嵌套类，和文件类关系不大，很少用
