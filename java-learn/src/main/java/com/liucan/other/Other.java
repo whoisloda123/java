@@ -125,6 +125,8 @@ public final class Other {
         Double d1 = 100.0;
         Double d2 = 100.0;
         System.out.println(d1 == d2);
+        System.out.print("she said \"hello\" to me");
+        String string = "hello world!";
     }
 
     //静态嵌套类，和文件类关系不大，很少用

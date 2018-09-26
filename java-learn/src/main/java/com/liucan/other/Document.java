@@ -18,5 +18,7 @@ public class Document {
      *   Byte,Short,Integer,Long,Character的valueOf的实现都是，如值（-128,127）返回缓存同样对象，如值（128，xx)返回新对象
      *   Boolean的valueOf都相等，Float,Double的valueOf都是返回新对象
      *   equals会先判断对象的类型是否相等，才判断其xxValue是否相等
+     *
+     * 4.String类是不可改变的，创建了String对象，值就无法改变了。如需要对字符串做很多修改，使用StringBuffer & StringBuilder 类
      */
 }
