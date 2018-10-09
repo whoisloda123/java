@@ -2,9 +2,14 @@ package com.liucan.other;
 
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Component
 public final class Other {
@@ -100,6 +105,81 @@ public final class Other {
     }
 
     public void other() {
+        //基本数据类型
+        baseType();
+
+        //string
+        baseString();
+
+        //操作数组和集合
+        collections();
+
+        //可变参数
+        printNumbers(1, 2, 3, 4);
+
+        //控制台输入
+        //stream();
+    }
+
+    private void fileStream() {
+        //从文件读取数据
+        try (FileInputStream fileInputStream = new FileInputStream("C:/user.txt")) {
+            byte[] file = new byte[1024];
+            int readLen;
+            int offset = 0;
+            do {
+                readLen = fileInputStream.read(file, offset, 200);
+                offset += readLen;
+            } while (readLen != -1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void stream() {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            //从输入流里面读取一个字符并作为整数返回
+            char c = (char) bufferedReader.read();
+            System.out.println(c);
+            //从输入流里面读取字符串
+            String str = bufferedReader.readLine();
+            System.out.println(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void printNumbers(int... numbers) {
+        for (int number : numbers) {
+            System.out.println(number);
+        }
+    }
+
+    private void collections() {
+        int[] arrayVar = {1, 6, 3, 4, 5};
+        Arrays.sort(arrayVar);
+        //二分查找
+        int ab = Arrays.binarySearch(arrayVar, 3);
+        Collections.emptyList();
+
+        //转义字符\"
+        System.out.println("she said \"hello\" to me");
+    }
+
+    private void baseString() {
+        String string = "hello world!";
+        int index = string.lastIndexOf("h");
+
+        //线程安全
+        StringBuffer sb = new StringBuffer(string);
+        sb.append(1);
+        sb.delete(1, 2);
+    }
+
+    private void baseType() {
         Exe2 exe2;
 
         char a = 'b'; //2字节,unicode字符
@@ -125,8 +205,6 @@ public final class Other {
         Double d1 = 100.0;
         Double d2 = 100.0;
         System.out.println(d1 == d2);
-        System.out.print("she said \"hello\" to me");
-        String string = "hello world!";
     }
 
     //静态嵌套类，和文件类关系不大，很少用
