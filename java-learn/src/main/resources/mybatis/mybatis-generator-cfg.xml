@@ -16,7 +16,8 @@
 
     <!-- 在MBG工作的时候，需要额外加载的依赖包
         location属性指明加载jar/zip包的全路径-->
-    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.13\mysql-connector-java-5.1.13.jar" />
+    <classPathEntry
+            location="/home/liucan/.m2/repository/mysql/mysql-connector-java/6.0.6/mysql-connector-java-6.0.6.jar"/>
 
     <!--
         context:生成一组对象的环境
