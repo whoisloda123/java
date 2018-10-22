@@ -35,5 +35,9 @@ public class Document {
      *   a.控制台输入System.in,输出System.out
      *   b.参考https://www.w3cschool.cn/java/java-files-io.html
      *   c.一个流被定义为一个数据序列，输入流用于从源读取数据，输出流用于向目标写数据
+     *
+     * 9.try-with-resource
+     *   a.凡是实现了AutoCloseable接口的都可以是使用try-with-resource,能保证走到finally里面关闭
+     *   b.在块中可以使用多个资源而且这些资源都能被自动地关闭
      */
 }

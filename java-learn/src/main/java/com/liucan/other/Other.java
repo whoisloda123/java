@@ -2,9 +2,7 @@ package com.liucan.other;
 
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
@@ -117,13 +115,17 @@ public final class Other {
         //可变参数
         printNumbers(1, 2, 3, 4);
 
+        //try-with-resource
+        tryWithResource();
+
         //控制台输入
         //stream();
+        fileStream();
     }
 
     private void fileStream() {
         //从文件读取数据
-        try (FileInputStream fileInputStream = new FileInputStream("C:/user.txt")) {
+        try (FileInputStream fileInputStream = new FileInputStream("/home/liucan/Documents/常用数据")) {
             byte[] file = new byte[1024];
             int readLen;
             int offset = 0;
@@ -135,6 +137,21 @@ public final class Other {
             e.printStackTrace();
         }
 
+        File file = new File("/tmp/usr/java");
+        if (!file.exists()) {
+            if (file.mkdirs()) {
+                System.out.println("创建文件夹成功" + file.getPath());
+            }
+        }
+
+        //写入到文件中
+        try (FileOutputStream fileOutputStream = new FileOutputStream("/tmp/usr/java/stream-test");
+             OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream)) {
+            writer.append("\"你好啊！\"\n");
+            writer.append("\'hello world !\'\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void stream() {
@@ -150,6 +167,36 @@ public final class Other {
             e.printStackTrace();
         }
 
+    }
+
+    private void tryWithResource() {
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream("~/Documents/常用数据");
+            byte[] file = new byte[1024];
+            inputStream.read(file, 0, 1024);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        }
+
+        //凡是实现了AutoCloseable接口的都可以是使用try-with-resource,能保证走到finally里面关闭
+        //在块中使用多个资源而且这些资源都能被自动地关闭
+        try (FileInputStream inputStream1 = new FileInputStream("~/Documents/常用数据");
+             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream1)) {
+            byte[] file = new byte[1024];
+            int m = inputStream1.read(file, 0, 1024);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void printNumbers(int... numbers) {
