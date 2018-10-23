@@ -121,6 +121,25 @@ public final class Other {
         //控制台输入
         //stream();
         fileStream();
+
+        //tryCatch
+        tryCatch();
+    }
+
+    private void tryCatch() {
+        System.out.println(tryCatch1());
+    }
+
+    private int tryCatch1() {
+        int b = 20;
+        try {
+            return b += 80;
+        } finally {
+            if (b > 50) {
+                System.out.println("do 1");
+            }
+            return 300;
+        }
     }
 
     private void fileStream() {

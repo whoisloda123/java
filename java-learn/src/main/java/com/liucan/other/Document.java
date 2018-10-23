@@ -39,5 +39,11 @@ public class Document {
      * 9.try-with-resource
      *   a.凡是实现了AutoCloseable接口的都可以是使用try-with-resource,能保证走到finally里面关闭
      *   b.在块中可以使用多个资源而且这些资源都能被自动地关闭
+     *
+     * 10.exception,error
+     *   a.Exception和Error都继承Throwable
+     *   b.error一般是系统错误、内存溢出、虚拟机错误、栈溢出等，和程序本身没有关系，且无法处理，表示jvm出了问题
+     *   c.注意，注意，注意：在try，catch里return语句，执行之后，返回之前，会执行finally语句，若finally语句有返回值，则从finally里面返回，也可以说用
+     *     finally返回值代替try，catch返回值
      */
 }
