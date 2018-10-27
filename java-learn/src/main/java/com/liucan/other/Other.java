@@ -124,6 +124,23 @@ public final class Other {
 
         //tryCatch
         tryCatch();
+
+        //只有方法才支持多态，变量不支持
+        B b = new B();
+        b.show();
+    }
+
+    public class A {
+        protected String string = "A";
+
+        protected void show() {
+            System.out.println(string);
+        }
+    }
+
+    public class B extends A {
+        protected String string = "B";
+
     }
 
     private void tryCatch() {
@@ -273,9 +290,8 @@ public final class Other {
         System.out.println(d1 == d2);
     }
 
-    //静态嵌套类，和文件类关系不大，很少用
+    //静态嵌套类，和文件类关系不大
     public static class Exe1 {
-
     }
 
     //内部类-成员类
@@ -284,9 +300,40 @@ public final class Other {
 
         public abstract void fun();
 
-        public synchronized void test() {
+        protected synchronized void test() {
 
         }
 
     }
+
+    public interface InterA {
+        void test();
+    }
+
+    public abstract class InterImpA implements InterA {
+        public abstract void test();
+    }
+
+    public interface InterB extends InterA {
+        @Override
+        void test();
+    }
+
+    public interface InterC {
+        void test1();
+    }
+
+    public class InterImpB implements InterA, InterC {
+
+        @Override
+        public void test() {
+
+        }
+
+        @Override
+        public void test1() {
+
+        }
+    }
+
 }
