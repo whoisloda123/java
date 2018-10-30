@@ -16,7 +16,7 @@ public class Person implements Serializable {
      */
     private static final long serialVersionUID = -766571861519198043L;
 
-    private String name; //姓名
+    private String name = "liucan"; //姓名
     private Integer age; //年龄
     private String address; //家庭地址
     private transient String password; //不能被序列化
