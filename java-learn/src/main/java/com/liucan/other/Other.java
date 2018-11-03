@@ -7,6 +7,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collections;
 
 @Component
@@ -128,6 +129,27 @@ public final class Other {
         //只有方法才支持多态，变量不支持
         B b = new B();
         b.show();
+
+        //bitset
+        bitSet();
+    }
+
+    public void bitSet() {
+        BitSet bitSet = new BitSet();
+        bitSet.clear(1);
+        int m = bitSet.cardinality();
+        boolean b = bitSet.get(0);
+        b = bitSet.get(3);
+        m = bitSet.length();
+        m = bitSet.size();
+        long[] longs = bitSet.toLongArray();
+        byte[] bytes = bitSet.toByteArray();
+        String string = bitSet.toString();
+
+        bitSet = BitSet.valueOf(new long[]{17});
+
+        BitSet bitSet1 = BitSet.valueOf(new long[]{3});
+        bitSet.and(bitSet1);
     }
 
     public class A {
