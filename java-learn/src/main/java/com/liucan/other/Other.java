@@ -6,9 +6,7 @@ import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collections;
+import java.util.*;
 
 @Component
 public final class Other {
@@ -132,6 +130,23 @@ public final class Other {
 
         //bitset
         bitSet();
+
+        //stack
+        stack();
+    }
+
+    private void dictionary() {
+        //Dictionary是抽象类需要自己实现和map一样，但是已经过时了，用map
+        Map<Integer, Integer> map = new HashMap<>(); //散列表
+        map = new TreeMap<>(); //红黑树
+        map = new Hashtable<>(); //t是小写，哈哈
+    }
+
+    private void stack() {
+        Stack stack = new Stack();
+        stack.push(1);
+        stack.push(2);
+        Integer i = (Integer) stack.peek();
     }
 
     private void bitSet() {

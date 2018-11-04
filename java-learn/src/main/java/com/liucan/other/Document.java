@@ -75,5 +75,18 @@ public class Document {
      *    e:参考
      *      https://blog.csdn.net/aitangyong/article/details/23204817
      *      https://www.cnblogs.com/CharlesGrant/p/7201858.html
+     *
+     *  15.Hashtable和HashMap和ConcurrentHashMap
+     *      参考：https://www.cnblogs.com/heyonggang/p/9112731.html
+     *     1.t没有大写
+     *     2.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
+     *     3.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
+     *     4.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
+     *     5.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
+     *     6.散列表采用数组+链表，如果链表的长度太大，则会变成树
+     *
+     *  16.volatile
+     *
+     *  17.fail-fast迭代器
      */
 }
