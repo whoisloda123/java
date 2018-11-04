@@ -134,9 +134,12 @@ public final class Other {
         bitSet();
     }
 
-    public void bitSet() {
+    private void bitSet() {
+        //注意BitSet里面的保存顺序为低位字节数据到高位字节
         BitSet bitSet = new BitSet();
-        bitSet.clear(1);
+        bitSet.set(0);
+        bitSet.set(1);
+        bitSet.set(3);
         int m = bitSet.cardinality();
         boolean b = bitSet.get(0);
         b = bitSet.get(3);
@@ -146,7 +149,7 @@ public final class Other {
         byte[] bytes = bitSet.toByteArray();
         String string = bitSet.toString();
 
-        bitSet = BitSet.valueOf(new long[]{17});
+        bitSet = BitSet.valueOf(new long[]{53});
 
         BitSet bitSet1 = BitSet.valueOf(new long[]{3});
         bitSet.and(bitSet1);
