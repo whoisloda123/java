@@ -78,15 +78,34 @@ public class Document {
      *
      *  15.Hashtable和HashMap和ConcurrentHashMap
      *      参考：https://www.cnblogs.com/heyonggang/p/9112731.html
-     *     1.t没有大写
-     *     2.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
-     *     3.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
-     *     4.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
-     *     5.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
-     *     6.散列表采用数组+链表，如果链表的长度太大，则会变成树
+     *     a.t没有大写
+     *     b.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
+     *     c.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
+     *     d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
+     *     e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
+     *     f.散列表采用数组+链表，如果链表的长度太大，则会变成树
      *
      *  16.volatile
+     *      参考：https://www.cnblogs.com/chengxiao/p/6528109.html
+     *     a.轻量级锁
+     *     b.能保证共享变量对所有线程的可见性，当写一个volatile变量时，JMM会把该线程对应的本地内存中的变量强制刷新到主内存中去
+     *     c.禁止指令重排序优化
+     *     d.volatile对于单个的共享变量的读/写具有原子性，但是像num++这种复合操作，volatile无法保证其原子性,可以用原子锁
      *
-     *  17.fail-fast迭代器
+     *  17.fail-fast,fail-safe迭代器
+     *      参考：https://blog.csdn.net/m0_37907797/article/details/80499422
+     *     a.fail-fast:快速失败，在迭代过程中，如果数据结构被修改（增加、删除）了则抛出异常，实现机制是modCount和expectedCount比较不相等则抛异常
+     *       而在插入和删除的时候会更新modCount
+     *
+     *       注意：快速失败的行为并不能得到正确的保证，一般来说，存在非同步的并发修改时，不可能做出任何坚决的保证的，fail-fast只是尽
+     *       最大努力来抛出异常，所以fail-fast仅用来检查程序的bug
+     *
+     *     b.fail-safe：安全失败，在迭代的时候，先拷贝一份，然后在迭代，不会抛出异常，但是内容可能不是最新的
+     *     c.java.util里面的容器都是快速失败，不支持异步，而java.util.concurrent包里面的容器都是安全失败，支持异步
+     *
+     *  18.Iterator迭代器
+     *
+     *  19.JMM（java内存模型）
+     *      有时间了解一下？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      */
 }
