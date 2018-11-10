@@ -133,6 +133,19 @@ public final class Other {
 
         //stack
         stack();
+
+        //iterator
+        iter();
+    }
+
+    private void iter() {
+        List<String> list = new LinkedList<>();
+        list.add("1");
+        list.add("2");
+        ListIterator<String> listIterator = list.listIterator(list.size());
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
     }
 
     private void dictionary() {

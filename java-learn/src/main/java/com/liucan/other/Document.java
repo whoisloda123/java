@@ -107,5 +107,12 @@ public class Document {
      *
      *  19.JMM（java内存模型）
      *      有时间了解一下？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+     *
+     *  20.各种数据集合
+     *      参考：http://www.cnblogs.com/skywang12345/p/3323085.html
+     *     1.List
+     *      a.Vector和ArrayList都是基于数组的，支持动态增长，Vector是线程安全的（synchronized），ArrayList是不安全的，但效率高
+     *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口
+     *      c.实现List接口的常用类有LinkedList，ArrayList，Vector和Stack,而Stack是继承与Vector
      */
 }
