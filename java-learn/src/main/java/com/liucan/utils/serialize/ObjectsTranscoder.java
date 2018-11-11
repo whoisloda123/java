@@ -18,21 +18,12 @@ public class ObjectsTranscoder extends SerializeTranscoder {
     public byte[] serialize(Object obj) {
         byte[] result = null;
         if (obj != null) {
-            ByteArrayOutputStream bos = null;
-            ObjectOutputStream os = null;
-
-            try {
-                bos = new ByteArrayOutputStream();
-                os = new ObjectOutputStream(bos);
+            try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                 ObjectOutputStream os = new ObjectOutputStream(bos)) {
                 os.writeObject(obj);
-                os.close();
-                bos.close();
                 result = bos.toByteArray();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new IllegalArgumentException("Non-serializable object", e);
-            } finally {
-                close(os);
-                close(bos);
             }
         }
         return result;
@@ -43,23 +34,13 @@ public class ObjectsTranscoder extends SerializeTranscoder {
     @Override
     public Object deserialize(byte[] bytes) {
         Object result = null;
-        ByteArrayInputStream bis = null;
-        ObjectInputStream is = null;
-        try {
-            if (bytes != null) {
-                bis = new ByteArrayInputStream(bytes);
-                is = new ObjectInputStream(bis);
-                result = is.readObject();
-                is.close();
-                bis.close();
-            }
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+             ObjectInputStream is = new ObjectInputStream(bis)) {
+            result = is.readObject();
         } catch (IOException e) {
             log.error(String.format("[序列化]Caught IOException decoding %d bytes of data", bytes.length) + e);
         } catch (ClassNotFoundException e) {
             log.error(String.format("[序列化]Caught CNFE decoding %d bytes of data", bytes.length) + e);
-        } finally {
-            close(is);
-            close(bis);
         }
         return result;
     }

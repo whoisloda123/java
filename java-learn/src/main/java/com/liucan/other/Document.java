@@ -114,5 +114,9 @@ public class Document {
      *      a.Vector和ArrayList都是基于数组的，支持动态增长，Vector是线程安全的（synchronized），ArrayList是不安全的，但效率高
      *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口
      *      c.实现List接口的常用类有LinkedList，ArrayList，Vector和Stack,而Stack是继承与Vector
+     *      d.ArrayList实现了Serializable接口（ObjectOutputStream,ObjectInputStream操作类）,序列化writeObject先写入size，再写入元素
+     *
+     *  21.序列化
+     *      ?
      */
 }

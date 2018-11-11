@@ -20,4 +20,8 @@ public class Person implements Serializable {
     private Integer age; //年龄
     private String address; //家庭地址
     private transient String password; //不能被序列化
+
+    private void test() {
+
+    }
 }

@@ -79,6 +79,10 @@ public class Reflect {
             Method m = clazz.getMethod("getName");
             //执行
             m.invoke(clazz.newInstance());
+            m = clazz.getDeclaredMethod("test");
+            //设置可以访问私用方法
+            m.setAccessible(true);
+            m.invoke(clazz.newInstance());
             //返回A类所有的public 方法
             Method[] ms = clazz.getMethods();
             //返回A类所有的方法，包括private
