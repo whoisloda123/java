@@ -117,6 +117,9 @@ public class Document {
      *      d.ArrayList实现了Serializable接口（ObjectOutputStream,ObjectInputStream操作类）,序列化writeObject先写入size，再写入元素
      *
      *  21.序列化
-     *      ?
+     *      参考：https://www.cnblogs.com/sharkli/p/5607895.html
+     *      a.继承Serializable接口
+     *      b.然后写2个private方法writeObject和readObject(手动序列化)，在里面写入自己的序列化和反序列化内容，
+     *      c.ObjectOutputStream的writeObject和ObjectInputStream的readObject里面会通过反射的方式调用类的private的writeObject和readObject方法
      */
 }

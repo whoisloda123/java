@@ -2,6 +2,9 @@ package com.liucan.pojo;
 
 import lombok.Data;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -21,7 +24,22 @@ public class Person implements Serializable {
     private String address; //家庭地址
     private transient String password; //不能被序列化
 
-    private void test() {
+    /**
+     * 序列化方法，手动序列化
+     * ObjectOutputStream的writeObject会通过反射的方式调用类的private的writeObject和readObject方法
+     */
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeInt(age);
+        out.writeObject(name);
+    }
 
+    /**
+     * 反序列化，手动序列化
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        age = in.readInt();
+        name = (String) in.readObject();
     }
 }
