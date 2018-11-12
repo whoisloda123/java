@@ -1,9 +1,12 @@
 package com.liucan.utils.serialize;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ListObjectTransform implements ISerializeTransform {
     @SuppressWarnings("unchecked")
     @Override
