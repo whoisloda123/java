@@ -1,5 +1,6 @@
 package com.liucan.pojo;
 
+import com.liucan.utils.serialize.SerializeUtil;
 import lombok.Data;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * @brief
  */
 @Data
-public class Person implements Serializable {
+public class Person implements Serializable, Cloneable {
     /**
      * 进行序列化时候最好指定这个UID
      */
@@ -23,6 +24,7 @@ public class Person implements Serializable {
     private Integer age; //年龄
     private String address; //家庭地址
     private transient String password; //不能被序列化
+    private Country country;
 
     /**
      * 序列化方法，手动序列化
@@ -41,5 +43,34 @@ public class Person implements Serializable {
         in.defaultReadObject();
         age = in.readInt();
         name = (String) in.readObject();
+    }
+
+    /**
+     * 深拷贝：先将对象序列化然后再反序列化
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        try {
+            byte[] bytes = SerializeUtil.objectSerializer(this);
+            return SerializeUtil.objectDeserialize(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CloneNotSupportedException(e.getMessage());
+        }
+    }
+
+    /**
+     * 深拷贝：先调用默认拷贝函数super.clone获取新对象，然后对对象引用变量拷贝
+     */
+    public Object clone1() throws CloneNotSupportedException {
+        Person person = (Person) super.clone();
+        Country countryNew = new Country();
+        Country countryOld = person.getCountry();
+        if (countryOld != null) {
+            countryNew.setPeople(countryOld.getPeople());
+            countryNew.setName(countryOld.getName());
+        }
+        person.setCountry(countryNew);
+        return person;
     }
 }

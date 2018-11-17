@@ -136,5 +136,14 @@ public class Document {
      *      c.主键是唯一能确定不一样的
      *      d.具体用法参考上面地址
      *      e.主表更新，字表也会跟着更新，如果主表删除，子表对应外键哪一行也会跟着删除，即级联删除、更新,从表插入在主表不存在的外键会报错
+     *
+     *   23.clone
+     *      a.浅拷贝，深拷贝
+     *      b.继承Cloneable接口，重写clone方法，并设为public,而object的clone方法是native
+     *      c.浅拷贝有危险，需要深拷贝,默认super.clone是浅拷贝
+     *      d.深拷贝一般有2中方法。1.先把对象序列化，再反序列化，2.调用super.clone方法产生新对象，再手动给拷贝，一般用第一种
+     *
+     *   24.Native
+     *      是调用其他语言接口实现的，JNI（java native interface）
      */
 }
