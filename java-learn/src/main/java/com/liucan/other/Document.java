@@ -145,5 +145,9 @@ public class Document {
      *
      *   24.Native
      *      是调用其他语言接口实现的，JNI（java native interface）
+     *
+     *   25.RandomAccess
+     *      a.空接口，表示list支持快速随机访问
+     *      b.RandomAccess接口这个空架子的存在，是为了能够更好地判断集合是否ArrayList或者LinkedList，从而能够更好选择更优的遍历方式，提高性能
      */
 }
