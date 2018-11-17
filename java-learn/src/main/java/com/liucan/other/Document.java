@@ -112,7 +112,7 @@ public class Document {
      *      参考：http://www.cnblogs.com/skywang12345/p/3323085.html
      *     1.List
      *      a.Vector和ArrayList都是基于数组的，支持动态增长，Vector是线程安全的（synchronized），ArrayList是不安全的，但效率高
-     *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口
+     *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口,而ArrayList没有，因为插入和删除的效率比较低
      *      c.实现List接口的常用类有LinkedList，ArrayList，Vector和Stack,而Stack是继承与Vector
      *      d.ArrayList实现了Serializable接口（ObjectOutputStream,ObjectInputStream操作类）,序列化writeObject先写入size，再写入元素
      *
@@ -126,5 +126,15 @@ public class Document {
      *      d.在目标类中添加私有的writeObject和readObject方法可以覆盖默认的序列化和反序列化方法,
      *        objectOutputStream的writeObject和ObjectInputStream的readObject里面会通过反射的方式调用类的private的writeObject和readObject方法
      *      e.在目标类中添加私有的readResolve可以最终修改反序列化回来的对象，可用于单例模式防止序列化导致生成第二个对象的问题
+     *
+     *  22.主键，外建，主表，从表
+     *      参考：https://blog.csdn.net/WICHER_WU/article/details/80263486
+     *          https://www.cnblogs.com/Brambling/p/9263377.html
+     *          https://blog.csdn.net/relaxyu/article/details/81735450
+     *      a.B表里面的一个键是跟随A表的键值修改而修改的，B表里面的那个键叫外键，A表叫主表，B表叫从表，
+     *      b.作用是保持数据的一致性,主表更新和删除，子表也会跟着变动
+     *      c.主键是唯一能确定不一样的
+     *      d.具体用法参考上面地址
+     *      e.主表更新，字表也会跟着更新，如果主表删除，子表对应外键哪一行也会跟着删除，即级联删除、更新
      */
 }

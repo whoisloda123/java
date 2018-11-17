@@ -136,6 +136,14 @@ public final class Other {
 
         //iterator
         iter();
+
+        //vector
+        vector();
+    }
+
+    private void vector() {
+        Vector<Integer> vector = new Vector<>();
+        vector.add(1);
     }
 
     private void iter() {
