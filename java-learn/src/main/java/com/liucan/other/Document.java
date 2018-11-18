@@ -21,7 +21,8 @@ public class Document {
      *   Boolean的valueOf都相等，Float,Double的valueOf都是返回新对象
      *   equals会先判断对象的类型是否相等，才判断其xxValue是否相等
      *
-     * 4.String类是不可改变的，创建了String对象，值就无法改变了。如需要对字符串做很多修改，使用StringBuffer & StringBuilder 类,并且不产生多个对象
+     * 4.String
+     *   String类是不可改变的，创建了String对象，值就无法改变了。如需要对字符串做很多修改，使用StringBuffer & StringBuilder 类,并且不产生多个对象
      *   StringBuilder是java5提出来的是线程不安全的，而StringBuffer是线程安全的
      *
      * 5.Arrays专门操作数组,Collections专门操作集合（List，Set，Map等）
@@ -61,7 +62,9 @@ public class Document {
      *     大概是，类加载后，有各自的方法区，里面保存了
      *     指向不同方法的地址，若没有重写，则和父类的方法区方法地址一样，否则就是子类的方法区方法地址
      *
-     * 13.外部类，只能用public和default，因为外部类的上一级就是包，权限就只有在包内和包外，没有其他的
+     * 13.public,default,private
+     *    a.外部类，只能用public和default，因为外部类的上一级就是包，权限就只有在包内和包外，没有其他的
+     *    b.default在方法上，只有在本包内才可以调用
      *
      * 14.大端、小端字节序,网络字节序
      *    a.大端：高位字节数据放在内存的低地址
@@ -110,11 +113,20 @@ public class Document {
      *
      *  20.各种数据集合
      *      参考：http://www.cnblogs.com/skywang12345/p/3323085.html
-     *     1.List
+     *     一.List
      *      a.Vector和ArrayList都是基于数组的，支持动态增长，Vector是线程安全的（synchronized），ArrayList是不安全的，但效率高
      *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口,而ArrayList没有，因为插入和删除的效率比较低
      *      c.实现List接口的常用类有LinkedList，ArrayList，Vector和Stack,而Stack是继承与Vector
      *      d.ArrayList实现了Serializable接口（ObjectOutputStream,ObjectInputStream操作类）,序列化writeObject先写入size，再写入元素
+     *     二.Map
+     *      1.TreeMap
+     *          a.是通过红黑树实现的(http://www.cnblogs.com/skywang12345/p/3245399.html)，
+     *            每个节点有left,right,parent,color,key,value
+     *          b.实现NavigableMap接口，提供导航方法，返回比指定key大于小于的值
+     *          c.实现Cloneable,Serializable支持复制，序列化
+     *          d.key默认是自增的，可以通过构造函数传入自定义Comparator比较器
+     *          e.时间复杂度log(n)
+     *          e.非同步，fail-fast迭代器
      *
      *  21.序列化
      *      参考：https://www.cnblogs.com/sharkli/p/5607895.html

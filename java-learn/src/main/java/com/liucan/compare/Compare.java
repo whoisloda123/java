@@ -47,12 +47,7 @@ public class Compare {
         student = new Student();
         student.setName("canliu");
         list.add(student);
-        Collections.sort(list, new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        Collections.sort(list, Comparator.comparing(Student::getName));
 
         list = new ArrayList<>();
         student = new Student();

@@ -7,6 +7,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.function.Function;
 
 @Component
 public final class Other {
@@ -139,6 +140,44 @@ public final class Other {
 
         //vector
         vector();
+
+        //treeMap
+        treeMap();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void treeMap() {
+        //自定义比较器
+        TreeMap<Integer, Integer> treeMap = new TreeMap(Comparator.comparing(Function.identity()).reversed());
+        treeMap.put(4, 0);
+        treeMap.put(3, 0);
+        treeMap.put(10, 0);
+        treeMap.put(50, 0);
+
+        //遍历key
+        Iterator keyIterator = treeMap.keySet().iterator();
+        while (keyIterator.hasNext()) {
+            System.out.println(keyIterator.next());
+        }
+
+        //遍历entryKey
+        Iterator entryIterator = treeMap.entrySet().iterator();
+        while (entryIterator.hasNext()) {
+            System.out.println(entryIterator.next());
+        }
+
+        //遍历value
+        Iterator valueIterator = treeMap.values().iterator();
+        while (valueIterator.hasNext()) {
+            System.out.println(valueIterator.next());
+        }
+
+        //查找大于或者小于key的map
+        Map.Entry entry = treeMap.lowerEntry(50);
+        Map.Entry entry1 = treeMap.higherEntry(50);
+
+        //反向map
+        Map<Integer, Integer> treeMap1 = treeMap.descendingMap();
     }
 
     private void vector() {
