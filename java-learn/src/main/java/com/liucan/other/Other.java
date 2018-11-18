@@ -143,6 +143,24 @@ public final class Other {
 
         //treeMap
         treeMap();
+
+        //hashMap
+        hashMap();
+    }
+
+    private void weakHashMap() {
+        Map<Integer, Integer> weakHashMap = new WeakHashMap<>();
+    }
+
+    private void hashMap() {
+        Map<Integer, String> hashMap = new HashMap<>(32, 0.6f);
+        hashMap.put(1, "刘灿");
+        hashMap.put(2, "周雯媚");
+
+        //使用方式和treeMap实现一样
+        hashMap.entrySet();
+        hashMap.keySet();
+        hashMap.values();
     }
 
     @SuppressWarnings("unchecked")

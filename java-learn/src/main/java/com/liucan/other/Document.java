@@ -79,15 +79,6 @@ public class Document {
      *      https://blog.csdn.net/aitangyong/article/details/23204817
      *      https://www.cnblogs.com/CharlesGrant/p/7201858.html
      *
-     *  15.Hashtable和HashMap和ConcurrentHashMap
-     *      参考：https://www.cnblogs.com/heyonggang/p/9112731.html
-     *     a.t没有大写
-     *     b.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
-     *     c.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
-     *     d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
-     *     e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
-     *     f.散列表采用数组+链表，如果链表的长度太大，则会变成树
-     *
      *  16.volatile
      *      参考：https://www.cnblogs.com/chengxiao/p/6528109.html
      *     a.轻量级锁
@@ -127,6 +118,22 @@ public class Document {
      *          d.key默认是自增的，可以通过构造函数传入自定义Comparator比较器
      *          e.时间复杂度log(n)
      *          e.非同步，fail-fast迭代器
+     *       2.HashMap
+     *          a.影响hashMap性能的2个参数，容量和加载因子，容量为桶的大小，加载因子（默认0.75）为当容量在多少时候自动扩容(大约2倍)，重建内部结构
+     *          b.是个散列表，采用是拉链法（单链表）来解决hash冲突的，如果链表长度太大，会变成树
+     *          c.非同步，fail-fast迭代器
+     *       3.Hashtable
+     *          和HashMap实现差不多，只是是线程安全
+     *
+     *       4.Hashtable和HashMap和ConcurrentHashMap区别
+     *          参考：https://www.cnblogs.com/heyonggang/p/9112731.html
+     *          a.t没有大写
+     *          b.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
+     *          c.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
+     *          d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
+     *          e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
+     *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
+     *
      *
      *  21.序列化
      *      参考：https://www.cnblogs.com/sharkli/p/5607895.html
