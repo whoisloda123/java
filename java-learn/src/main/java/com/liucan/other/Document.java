@@ -6,7 +6,7 @@ package com.liucan.other;
  * @version 2018/9/22
  */
 public class Document {
-    /**
+    /* *
      * 1.接口和抽象类区别
      *   a.抽象类，除了有抽象方法外，还可以提供默认的实现,提供属性和方法
      *   b.接口，根本不是类，只是抽象方法的集合
@@ -124,6 +124,11 @@ public class Document {
      *          c.非同步，fail-fast迭代器
      *       3.Hashtable
      *          和HashMap实现差不多，只是是线程安全
+     *       4.WeakHashMap
+     *          a.实现和HashMap差不多
+     *          b.其键是弱引用键WeakReference,通过WeakReference和ReferenceQueue实现的
+     *          c.当某“弱键”不再被其它对象引用，并被GC回收时。在GC回收该“弱键”时，这个“弱键”也同时会被添加到ReferenceQueue(queue)队列中
+     *          d.当下一次操作WeakHashMap时，table中保存了全部的键值对，queue中保存被GC回收的键值对；同步它们，就是删除table中被GC回收的键值对。
      *
      *       4.Hashtable和HashMap和ConcurrentHashMap区别
      *          参考：https://www.cnblogs.com/heyonggang/p/9112731.html
@@ -133,7 +138,6 @@ public class Document {
      *          d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
      *          e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
      *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
-     *
      *
      *  21.序列化
      *      参考：https://www.cnblogs.com/sharkli/p/5607895.html
@@ -168,5 +172,17 @@ public class Document {
      *   25.RandomAccess
      *      a.空接口，表示list支持快速随机访问
      *      b.RandomAccess接口这个空架子的存在，是为了能够更好地判断集合是否ArrayList或者LinkedList，从而能够更好选择更优的遍历方式，提高性能
+     *
+     *   26.Reference（强引用，软引用，弱引用，虚引用,引用队列）
+     *      参考：https://www.cnblogs.com/huajiezh/p/5835618.html
+     *          https://www.cnblogs.com/dreamroute/p/5029899.html
+     *          https://blog.csdn.net/woblog/article/details/51332342
+     *      a.StrongReference强引用，经常用到，只要强引用还在就GC不会回收，可用赋值null方式手动回收
+     *      b.SoftReference软引用,有用但是不是非必须的对象，只有在内存不足的时候才会回收该对象，可以解决OOM内存溢出情况
+     *        可用来实现内存敏感的高速缓存,比如网页缓存、图片缓存等。使用软引用能防止内存泄露
+     *      c.WeakReference弱引用,弱引用的生命周期较软引用更加短暂,GC进行回收的时候，不管当前内存空间是否足够，都会回收
+     *      d.PhantomReference虚引用，该应用并不能获取到任何对象，也不会影响对象生命周期，主要是和引用队列一起使用，监控对象被回收的时候，做一些额外处理
+     *      e.ReferenceQueue引用队列，当引用对象所引用的值被回收了，该引用对象会被放到引用队列里面，不过需要我们手动处理来回收该引用对象，如WeakHashMap
+     *        引用队列一般和软引用，弱引用，虚引用一起用
      */
 }
