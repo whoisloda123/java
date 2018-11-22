@@ -146,21 +146,69 @@ public final class Other {
 
         //hashMap
         hashMap();
+
+        //weakHashMap
+        weakHashMap();
+
+        //hashSet
+        hashSet();
+
+        //treeSet
+        treeSet();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void treeSet() {
+        TreeSet<Integer> set = new TreeSet(Comparator.comparing(Function.identity()).reversed());
+        set.add(2);
+        set.add(3);
+        set.add(3);
+        Integer num = set.lower(2);
+    }
+
+    private void hashSet() {
+        Set<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        set.add(1);
     }
 
     private void weakHashMap() {
-        Map<Integer, Integer> weakHashMap = new WeakHashMap<>();
+        Map<String, Integer> weakHashMap = new WeakHashMap<>();
+        String string1 = new String("1");
+        String string2 = new String("2");
+        String string3 = new String("3");
+        weakHashMap.put(string1, 1);
+        weakHashMap.put(string2, 2);
+        weakHashMap.put(string3, 3);
+
+        string1 = null;
+        System.gc(); //内存回收
+
+        Iterator iterator = weakHashMap.keySet().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 
     private void hashMap() {
         Map<Integer, String> hashMap = new HashMap<>(32, 0.6f);
+        //同步hashMap
+        hashMap = Collections.synchronizedMap(hashMap);
         hashMap.put(1, "刘灿");
         hashMap.put(2, "周雯媚");
 
         //使用方式和treeMap实现一样
-        hashMap.entrySet();
+        Set<Map.Entry<Integer, String>> entry = hashMap.entrySet();
         hashMap.keySet();
         hashMap.values();
+
+        //边遍历边删除
+        Iterator iterator = entry.iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
     }
 
     @SuppressWarnings("unchecked")

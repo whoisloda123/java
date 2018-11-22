@@ -118,19 +118,19 @@ public class Document {
      *          d.key默认是自增的，可以通过构造函数传入自定义Comparator比较器
      *          e.时间复杂度log(n)
      *          e.非同步，fail-fast迭代器
-     *       2.HashMap
+     *      2.HashMap
      *          a.影响hashMap性能的2个参数，容量和加载因子，容量为桶的大小，加载因子（默认0.75）为当容量在多少时候自动扩容(大约2倍)，重建内部结构
      *          b.是个散列表，采用是拉链法（单链表）来解决hash冲突的，如果链表长度太大，会变成树
      *          c.非同步，fail-fast迭代器
-     *       3.Hashtable
+     *      3.Hashtable
      *          和HashMap实现差不多，只是是线程安全
-     *       4.WeakHashMap
+     *      4.WeakHashMap
      *          a.实现和HashMap差不多
      *          b.其键是弱引用键WeakReference,通过WeakReference和ReferenceQueue实现的
      *          c.当某“弱键”不再被其它对象引用，并被GC回收时。在GC回收该“弱键”时，这个“弱键”也同时会被添加到ReferenceQueue(queue)队列中
      *          d.当下一次操作WeakHashMap时，table中保存了全部的键值对，queue中保存被GC回收的键值对；同步它们，就是删除table中被GC回收的键值对。
      *
-     *       4.Hashtable和HashMap和ConcurrentHashMap区别
+     *      4.Hashtable和HashMap和ConcurrentHashMap区别
      *          参考：https://www.cnblogs.com/heyonggang/p/9112731.html
      *          a.t没有大写
      *          b.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
@@ -138,6 +138,12 @@ public class Document {
      *          d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
      *          e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
      *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
+     *
+     *     三.Set
+     *      1.HashSet
+     *          没有重复元素，完全是基于HashMap来实现的，里面有个HashMap对象的引用，直接操作HashMap,只关注HashMap的key
+     *      2.TreeSet
+     *          没有重复原因，完全是基于TreeMap来实现的，里面有个TreeMap对象的引用，直接操作TreeMap,只关注TreeMap的key
      *
      *  21.序列化
      *      参考：https://www.cnblogs.com/sharkli/p/5607895.html
