@@ -138,6 +138,8 @@ public class Document {
      *          d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
      *          e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
      *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
+     *      5.LinkedHashMap
+     *          参考：https://blog.csdn.net/justloveyou_/article/details/71713781
      *
      *     三.Set
      *      1.HashSet
