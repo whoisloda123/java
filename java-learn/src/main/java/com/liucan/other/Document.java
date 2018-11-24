@@ -140,6 +140,10 @@ public class Document {
      *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
      *      5.LinkedHashMap
      *          参考：https://blog.csdn.net/justloveyou_/article/details/71713781
+     *          a.继承HashMap,是Linked和HashMap的结合,是和HashMap无序不一样，是有序的，用链表来实现
+     *          b.在put的时候，除了和HashMap一样的会把Entry放到table数组里面，还会将Entry放到双链表里面
+     *          c.Entry里面除了有HashMap的可以，value，next之外，还有before，after指针，用于维护双链表
+     *          d.默认顺序是插入顺序，可以设置为操作顺序，可以用来实现LRU（最近最少使用）算法
      *
      *     三.Set
      *      1.HashSet

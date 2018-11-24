@@ -155,6 +155,50 @@ public final class Other {
 
         //treeSet
         treeSet();
+
+        //linkdeHashMap
+        linkedHashMap();
+    }
+
+    private void linkedHashMap() {
+        //无序的
+        Map<String, String> hashMap = new HashMap<>();
+        hashMap.put("name1", "1");
+        hashMap.put("name2", "2");
+        hashMap.put("name3", "3");
+
+        Iterator iterator = hashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        //插入顺序
+        Map<String, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("name1", "1");
+        linkedHashMap.put("name2", "2");
+        linkedHashMap.put("name3", "3");
+
+        iterator = linkedHashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        //操作顺序
+        linkedHashMap = new LinkedHashMap<>(50, 0.75f, true);
+        linkedHashMap.put("name4", "1");
+        linkedHashMap.put("name5", "2");
+        linkedHashMap.put("name6", "3");
+
+        iterator = linkedHashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        linkedHashMap.get("name5");
+        iterator = linkedHashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 
     @SuppressWarnings("unchecked")
