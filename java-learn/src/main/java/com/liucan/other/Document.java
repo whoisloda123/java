@@ -144,12 +144,20 @@ public class Document {
      *          b.在put的时候，除了和HashMap一样的会把Entry放到table数组里面，还会将Entry放到双链表里面
      *          c.Entry里面除了有HashMap的可以，value，next之外，还有before，after指针，用于维护双链表
      *          d.默认顺序是插入顺序，可以设置为操作顺序，可以用来实现LRU（最近最少使用）算法
+     *      6.IdentityHashMap
+     *          https://blog.csdn.net/f641385712/article/details/81880711
+     *          后续有时间看一下？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *
      *     三.Set
      *      1.HashSet
      *          没有重复元素，完全是基于HashMap来实现的，里面有个HashMap对象的引用，直接操作HashMap,只关注HashMap的key
      *      2.TreeSet
      *          没有重复原因，完全是基于TreeMap来实现的，里面有个TreeMap对象的引用，直接操作TreeMap,只关注TreeMap的key
+     *      3.LinkedHashSet
+     *          和LinkedHashMap一样的
+     *
+     *     四.并发包
+     *      1.后续再看？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *
      *  21.序列化
      *      参考：https://www.cnblogs.com/sharkli/p/5607895.html
