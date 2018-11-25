@@ -1,6 +1,6 @@
 package com.liucan.pojo;
 
-import com.liucan.utils.serialize.SerializeUtil;
+import com.liucan.util.SerializeUtil;
 import lombok.Data;
 
 import java.io.IOException;

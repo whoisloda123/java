@@ -1,5 +1,6 @@
 package com.liucan.other;
 
+import com.liucan.util.Constants;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -383,7 +384,7 @@ public final class Other {
             e.printStackTrace();
         }
 
-        File file = new File("/tmp/usr/java");
+        File file = new File(Constants.TMP_PATH);
         if (!file.exists()) {
             if (file.mkdirs()) {
                 System.out.println("创建文件夹成功" + file.getPath());
@@ -391,7 +392,7 @@ public final class Other {
         }
 
         //写入到文件中
-        try (FileOutputStream fileOutputStream = new FileOutputStream("/tmp/usr/java/stream-test");
+        try (FileOutputStream fileOutputStream = new FileOutputStream(Constants.TMP_PATH + "stream-test");
              OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream)) {
             writer.append("\"你好啊！\"\n");
             writer.append("\'hello world !\'\n");

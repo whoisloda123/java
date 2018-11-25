@@ -1,4 +1,4 @@
-package com.liucan.utils.serialize;
+package com.liucan.util;
 
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,7 @@
 package com.liucan.utils.serialize;
 
 import com.liucan.BaseJunit4Test;
+import com.liucan.serialize.Serialize;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
