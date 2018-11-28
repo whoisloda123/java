@@ -159,6 +159,14 @@ public final class Other {
 
         //linkdeHashMap
         linkedHashMap();
+
+        string();
+    }
+
+    private void string() {
+        String string = "Hello2312 Wor2ld!";
+        String tmp;
+        tmp = string.replaceAll("\\d+", "liucan");
     }
 
     private void linkedHashMap() {

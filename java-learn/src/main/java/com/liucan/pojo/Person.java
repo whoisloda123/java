@@ -62,6 +62,7 @@ public class Person implements Serializable, Cloneable {
     /**
      * 深拷贝：先调用默认拷贝函数super.clone获取新对象，然后对对象引用变量拷贝
      */
+    @Deprecated
     public Object clone1() throws CloneNotSupportedException {
         Person person = (Person) super.clone();
         Country countryNew = new Country();
