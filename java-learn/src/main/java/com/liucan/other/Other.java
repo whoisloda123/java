@@ -164,9 +164,25 @@ public final class Other {
     }
 
     private void string() {
-        String string = "Hello2312 Wor2ld!";
+        String string = "Hello2312.Wor2ld!";
         String tmp;
+        int index;
+        //string里面的replace方法里面都是用的regex
         tmp = string.replaceAll("\\d+", "liucan");
+
+        //字符串反转
+        tmp = new StringBuilder(string).reverse().toString();
+        index = string.indexOf("He");
+
+        //split里面其实是调用正则表达式的pattern.split方法
+        String[] split = string.split("\\.");
+
+        //转换大写
+        tmp = string.toUpperCase();
+        tmp = string.toLowerCase();
+
+        //测试字符串指定区域是否相等
+        boolean matches = string.regionMatches(false, 2, "反射31llo", 4, 3);
     }
 
     private void linkedHashMap() {

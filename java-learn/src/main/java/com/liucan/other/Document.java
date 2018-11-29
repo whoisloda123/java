@@ -212,5 +212,11 @@ public class Document {
      *          b.防止对象在 finalize 方法中被重新“救活”（可参考《深入理解 Java 虚拟机》一书）
      *      e.ReferenceQueue引用队列，当引用对象所引用的值被回收了，该引用对象会被放到引用队列里面，不过需要我们手动处理来回收该引用对象，如WeakHashMap
      *        引用队列一般和软引用，弱引用，虚引用一起用
+     *
+     *   27.String直接赋值和new区别
+     *      参考：https://blog.csdn.net/zqzq310918/article/details/54313262
+     *      a.直接赋值是如果不存在常量池（constant pool），就在常量池创建，以后同样的字符串赋值，则直接指向常量池
+     *      b.new是每次都在堆中开辟空间
+     *      c.常量池:存放字符串常量和基本类型常量（public static final）
      */
 }
