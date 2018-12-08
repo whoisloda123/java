@@ -4,11 +4,13 @@ import com.liucan.util.Constants;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 @Component
 public final class Other {
@@ -161,6 +163,56 @@ public final class Other {
         linkedHashMap();
 
         string();
+
+        arrays();
+
+        base64();
+    }
+
+    private void base64() {
+        //base64主要是用64个字符来表示二进制内容，比如说图片，程序等等，严格来说用于加密和解密不安全
+        String string = Base64.getUrlEncoder().encodeToString(String.valueOf("1313123sfs ").getBytes());
+        byte[] bytes = Base64.getUrlDecoder().decode(string);
+        string = new String(bytes, StandardCharsets.UTF_8);
+    }
+
+    private void arrays() {
+        Integer array[] = {1, -1, 3, 2};
+        Arrays.sort(array);
+        int key = Arrays.binarySearch(array, 2);
+
+        Integer des[] = new Integer[array.length];
+        System.arraycopy(array, 0, des, 0, array.length);
+
+        //二维数组
+        int[][] data = {{1, 3, 2}, {2}};
+        int length = data.length;
+        length = data[1].length;
+
+        Integer max = Collections.max(Arrays.asList(array));
+        Integer min = Stream.of(array).min(Integer::compareTo).get();
+
+        //并集
+        List<Integer> list1 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> list2 = new ArrayList<>(Arrays.asList(3, 4));
+        list1.addAll(list2);
+
+        //交集
+        List<Integer> list3 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> list4 = new ArrayList<>(Arrays.asList(3, 4));
+        list3.retainAll(list4);
+
+        //差集
+        List<Integer> list5 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> list6 = new ArrayList<>(Arrays.asList(3, 4));
+        list5.removeAll(list6);
+
+        //无重复并集
+        List<Integer> list7 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> list8 = new ArrayList<>(Arrays.asList(3, 4));
+        list7.removeAll(list8);
+        list8.addAll(list7);
+
     }
 
     private void string() {
@@ -556,6 +608,10 @@ public final class Other {
 
     public interface InterC {
         void test1();
+
+        default void test() {
+
+        }
     }
 
     public class InterImpB implements InterA, InterC {
