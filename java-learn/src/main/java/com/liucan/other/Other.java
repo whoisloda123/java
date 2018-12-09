@@ -550,10 +550,8 @@ public final class Other {
     }
 
     private void baseType() {
-        Exe2 exe2;
-
         char a = 'b'; //2字节,unicode字符
-
+        a = '\u0011'; //unicode文字使用 \\uxxxx 格式
         double b = 1231.31;
         float c = (float) 131323.1;
 
@@ -575,56 +573,6 @@ public final class Other {
         Double d1 = 100.0;
         Double d2 = 100.0;
         System.out.println(d1 == d2);
-    }
-
-    //静态嵌套类，和文件类关系不大
-    public static class Exe1 {
-    }
-
-    //内部类-成员类
-    public abstract class Exe2 {
-        private transient int limit = 52;
-
-        public abstract void fun();
-
-        protected synchronized void test() {
-
-        }
-
-    }
-
-    public interface InterA {
-        void test();
-    }
-
-    public abstract class InterImpA implements InterA {
-        public abstract void test();
-    }
-
-    public interface InterB extends InterA {
-        @Override
-        void test();
-    }
-
-    public interface InterC {
-        void test1();
-
-        default void test() {
-
-        }
-    }
-
-    public class InterImpB implements InterA, InterC {
-
-        @Override
-        public void test() {
-
-        }
-
-        @Override
-        public void test1() {
-
-        }
     }
 
 }
