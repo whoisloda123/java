@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author liucan
  * @version 18-11-24
  */
-public class TemplateTest extends BaseJunit4Test {
+public class GenericsTest extends BaseJunit4Test {
     @Autowired
-    private Template template;
+    private Generics generics;
 
     @Test
     public void example() {
-        template.example();
+        generics.example();
     }
 }

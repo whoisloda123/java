@@ -7,7 +7,7 @@ import java.util.Map;
  * @author liucan
  * @version 18-11-24
  */
-public class TemplateClass<K, V> {
+public class GenericClass<K, V> {
     private Map<K, V> map = new HashMap<>();
 
     public V get(K k) {

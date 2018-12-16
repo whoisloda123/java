@@ -4,7 +4,7 @@ package com.liucan.template;
  * @author liucan
  * @version 18-11-24
  */
-public class TemplateFunction {
+public class GenericsFunction {
 
     //泛型方法
     public static <T> void printArray(T[] inputArray) {
@@ -18,7 +18,7 @@ public class TemplateFunction {
         return x.compareTo(y) > 0 ? x : y;
     }
 
-    public static void upDown(TemplateClass<? extends Number, String> templateClass) {
-        templateClass.getMap();
+    public static void upDown(GenericClass<? extends Number, String> genericClass) {
+        genericClass.getMap();
     }
 }

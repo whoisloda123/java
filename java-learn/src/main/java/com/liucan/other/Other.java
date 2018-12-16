@@ -167,6 +167,15 @@ public final class Other {
         arrays();
 
         base64();
+
+        Integer m = 1;
+        String n = "123";
+        test(m, n);
+    }
+
+    private void test(Integer a, String b) {
+        a += 10;
+        b += "10";
     }
 
     private void base64() {
