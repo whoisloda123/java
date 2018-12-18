@@ -1,5 +1,6 @@
 package com.liucan.other;
 
+import com.liucan.pojo.PersonType;
 import com.liucan.util.Constants;
 import org.springframework.stereotype.Component;
 
@@ -171,6 +172,13 @@ public final class Other {
         Integer m = 1;
         String n = "123";
         test(m, n);
+
+        enumTest();
+    }
+
+    private void enumTest() {
+        PersonType[] personTypes = PersonType.values();
+        PersonType type = PersonType.valueOf("STUDENT");
     }
 
     private void test(Integer a, String b) {
@@ -559,6 +567,14 @@ public final class Other {
     }
 
     private void baseType() {
+        int num = 12; //十进制表示
+        num = 012; //八进制表示-0开头的
+        num = 0x12; //16进制表示-0x开头
+        num = 0b0101; //二进制表示-0b开头
+
+        long num1 = -12313L; //L表示long类型
+        num = (int) num1; //可能会溢出
+
         char a = 'b'; //2字节,unicode字符
         a = '\u0011'; //unicode文字使用 \\uxxxx 格式
         double b = 1231.31;
