@@ -174,6 +174,25 @@ public final class Other {
         test(m, n);
 
         enumTest();
+
+        random();
+    }
+
+    private void random() {
+        //第一种
+        //Math.random(),0-1之间的随机数
+        int randomNum = (int) (Math.random() * 100); //100以内的
+        randomNum = (int) (Math.random() * 50) + 50; //50-100以内的
+
+        //第二种
+        Random random = new Random();
+        random.nextBoolean(); //随机ture，false
+        random.nextDouble(); //0-1之间的随机数
+        random.nextInt(); //-2的31次方到2的31次方-1之间
+        random.nextInt(100); //[0,100)
+
+        //第三种
+        long random1 = System.currentTimeMillis() % 100;
     }
 
     private void enumTest() {
@@ -473,6 +492,8 @@ public final class Other {
                 readLen = fileInputStream.read(file, offset, 200);
                 offset += readLen;
             } while (readLen != -1);
+
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -584,7 +605,7 @@ public final class Other {
         short f = 12; //2字节
         int d = 1231; //4字节
         long e = 31321; //8字节
-
+        e = 122_123_123; //下划线字面量
         //instanceof是运算符
         boolean isOther = this instanceof Other;
 
