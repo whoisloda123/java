@@ -236,12 +236,6 @@ public class Document {
      *      6.而用补码来进行加减，可以得到正确结果，而且补码计算出来的-128（1000 0000）就是用反码表示的-0，计算出来的+0（0000 0000）可以表示0
      *        所以用补码来进行加减运算既能够解决+0和-0问题，而且能够多表示一位数字-128，所以说为什么byte的取值范围是[-128~127]
      *
-     * 　31.Class.forName和ClassLoader.loaderClass区别
-     *      参考：https://www.cnblogs.com/qiuyong/p/6407418.html?utm_source=itdadao&utm_medium=referral
-     *      http://www.importnew.com/25295.html
-     *      1.jvm类加载包括 加载-链接（校验-准备-解析）-初始化
-     *      2.Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
-     *
      *   31.java内存区域分配和gc（garbage collection）机制
      *      参考：https://www.cnblogs.com/zymyes2020/p/9052651.html
      *      https://www.cnblogs.com/xiaoxi/p/6486852.html
@@ -282,6 +276,34 @@ public class Document {
      *      4.本地方法栈：native方法栈
      *      5.程序计数器：记录当前线程执行的字节码到第几行
      *      其中堆区和方法区线程共享，其他非线程共享
+     *
+     *   32.jvm
+     *    1.每个java程序运行起来就会产生一个jvm实例，java程序结束jvm实例就会消失
+     *
+     *   33.类加载
+     *      参考：https://www.cnblogs.com/qiuyong/p/6407418.html?utm_source=itdadao&utm_medium=referral
+     *      http://www.importnew.com/25295.html
+     *    一.过程：jvm类加载过程包括 加载-链接（校验-准备-解析）-初始化
+     *      1.加载：
+     *          a.class文件加载内存
+     *          b.将静态数据结构(数据存在于class文件的结构)转化成方法区中运行时的数据结构(数据存在于JVM时的数据结构)
+     *          c.堆中生成java.lang.Class对象，作为数据访问入口
+     *      2.链接
+     *          a.验证：确保加载的类符合规范和安全
+     *          b.准备：为static变量分配空间，设置变量初始值
+     *          c.解析：将常量池的符号引用（符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可）转换为直接引用（指针）
+     *      3.初始化
+     *          a.执行类构造器<clinit>()方法,它将由编译器自动收集类中的所有类变量的赋值动作(准备阶段的a正是被赋值a)和静态变量与静态语句块static{}合并
+     *
+     *    二.类加载器
+     *      1.加载器
+     *          a.启动类加载器：Bootstrap ClassLoader,加载java_home/lib下的class类库
+     *          b.扩展类加载器：Extension ClassLoader,加载JAVA_HOME/lib/ext下的class类库
+     *          c.应用程序类加载器：Application ClassLoader,加载用户路径（classpath）上的类库
+     *      2.机制:双亲委派
+     *          双亲委派加载，调用父类的加载器加载，如果不行才自己加载，好处是安全，防止自己写string等,而且加载出来的只有一个object类
+     *      3.Class.forName和ClassLoader.loaderClass区别
+     *          Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
      *
      */
 }
