@@ -236,6 +236,12 @@ public class Document {
      *      6.而用补码来进行加减，可以得到正确结果，而且补码计算出来的-128（1000 0000）就是用反码表示的-0，计算出来的+0（0000 0000）可以表示0
      *        所以用补码来进行加减运算既能够解决+0和-0问题，而且能够多表示一位数字-128，所以说为什么byte的取值范围是[-128~127]
      *
+     * 　31.Class.forName和ClassLoader.loaderClass区别
+     *      参考：https://www.cnblogs.com/qiuyong/p/6407418.html?utm_source=itdadao&utm_medium=referral
+     *      http://www.importnew.com/25295.html
+     *      1.jvm类加载包括 加载-链接（校验-准备-解析）-初始化
+     *      2.Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
+     *
      *   31.java内存区域分配和gc（garbage collection）机制
      *      参考：https://www.cnblogs.com/zymyes2020/p/9052651.html
      *      https://www.cnblogs.com/xiaoxi/p/6486852.html
