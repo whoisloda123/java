@@ -283,6 +283,7 @@ public class Document {
      *   33.类加载
      *      参考：https://www.cnblogs.com/qiuyong/p/6407418.html?utm_source=itdadao&utm_medium=referral
      *      http://www.importnew.com/25295.html
+     *      jvm的生命周期一个类只被加载一次
      *    一.过程：jvm类加载过程包括 加载-链接（校验-准备-解析）-初始化
      *      1.加载：
      *          a.class文件加载内存
@@ -294,6 +295,13 @@ public class Document {
      *          c.解析：将常量池的符号引用（符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可）转换为直接引用（指针）
      *      3.初始化
      *          a.执行类构造器<clinit>()方法,它将由编译器自动收集类中的所有类变量的赋值动作(准备阶段的a正是被赋值a)和静态变量与静态语句块static{}合并
+     *      4.clinit和init区别
+     *          参考：https://blog.csdn.net/u013309870/article/details/72975536
+     *          a.init是对象构造器方法，在new一个对象时候，调用构造函数
+     *          b.  1.clinit是类构造器方法，在类加载的初始化阶段，只会加载一次，收集类变量赋值和静态语句块
+     *              2.子类clinit执行会保证父类的clinit执行
+     *              3.接口的clinit执行不会执行父接口的clinit方法，只有父接口定义变量使用才会初始化
+     *              4.接口实现类初始化一样不会执行接口的clinit方法
      *
      *    二.类加载器
      *      1.加载器
