@@ -316,6 +316,12 @@ public class Document {
      *          Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
      *
      *  34.为null对mysql索引的影响，空值和null区别
+     *      a.空值和null区别:空值不占用空间，用 = <> != 来判断，而null是占用空间的，用is null或is not null判断
+     *      b.null在计算数目或者sum等是不计算在内的
+     *      c.null对mysql索引影响
+     *          1.null需要占用额外空间
+     *          2.null不走索引，且会使索引统计更加复杂一些
+     *      d.最好把字段设置为不为null，设置默认值，字符串设为空值'',数字设为0
      *
      */
 }
