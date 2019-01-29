@@ -315,5 +315,7 @@ public class Document {
      *      3.Class.forName和ClassLoader.loaderClass区别
      *          Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
      *
+     *  34.为null对mysql索引的影响，空值和null区别
+     *
      */
 }
