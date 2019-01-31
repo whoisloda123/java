@@ -26,11 +26,29 @@ import org.springframework.stereotype.Component;
  * d.禁止指令重排序优化
  * e.volatile对于单个的共享变量的读/写具有原子性，但是像num++这种复合操作，volatile无法保证其原子性,可以用原子锁
  *
+ * 五.synchronized
+ *  参考：https://www.cnblogs.com/paddix/p/5367116.html
+ *  1.synchronized锁定是一个对象，其他试图访问该对象synchronized方法会被锁住,而每一个对象都可以做为一个锁（Monitor锁）
+ *  2.在普通方法前面，锁的是当前实例对象（其他的synchronized标志的方法也会被锁住,非synchronized的不会被锁住）
+ *  3.在静态方法前面，锁的是整个类
+ *  4.在方法块里面synchronized(object),锁的是括号里面的对象
+ *  5.实现机制
+ *      a.每个对象有个监视器锁（Monitor锁）
+ *      b.Monitor被占用的时候其他线程会阻塞，进入执行命令MonitorEnter获取Monitor,退出执行MonitorExit释放Monitor
+ *      c.notify/notifyAll和wait方法都依赖Monitor锁
+ *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
+ *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
+ *
  * @author liucan
  * @version 19-1-20
  */
 @Component
 public class Thread1 {
+
+    public static void main(String[] args) {
+        Thread1 thread1 = new Thread1();
+        thread1.example();
+    }
 
     public void example() {
         Thread thread = new Thread(() -> System.out.println(1));
@@ -39,13 +57,19 @@ public class Thread1 {
         thread.start();
 
         Print print = new Print();
-        new Thread(print, "C").start();
-        new Thread(print, "A").start();
-        new Thread(print, "B").start();
+//        new Thread(print, "C").start();
+//        new Thread(print, "A").start();
+//        new Thread(print, "B").start();
+
+        new Thread(() -> print.method1()).start();
+        new Thread(() -> print.method5()).start();
+        new Thread(() -> print.method2()).start();
+//        new Thread(() -> print.method3()).start();
+//        new Thread(() -> print.method4()).start();
     }
 
     /**
-     * 面试题：设计一个程序，启动三个线程A,B,C,各个线程只打印特定的字母，各打印10次，例如A线程只打印‘A’。要求在控制台依次显示“ABCABC…”
+     * 设计一个程序，启动三个线程A,B,C,各个线程只打印特定的字母，各打印10次，例如A线程只打印‘A’。要求在控制台依次显示“ABCABC…”
      * 下面的有点问题
      */
     private final Object lock = new Object();
@@ -57,7 +81,6 @@ public class Thread1 {
         //给线程执行的
         @Override
         public void run() {
-            //synchronized锁定一个对象，其他试图访问该对象会被锁住,而每一个对象都可以做为一个锁
             synchronized (lock) {
                 String threadName = Thread.currentThread().getName();
                 if (threadName.equals(currentPrint)) {
@@ -78,8 +101,51 @@ public class Thread1 {
             }
         }
 
-        public synchronized void add(Integer num) {
+        /**
+         * synchronized锁的是
+         */
+        private synchronized void method1() {
+            try {
+                Thread.sleep(3000);
+                System.out.println("method1" + Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
+        private synchronized void method2() {
+            try {
+                Thread.sleep(1000);
+                System.out.println("method2" + Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void method5() {
+            System.out.println("method5" + Thread.currentThread().getName());
+        }
+
+        private void method3() {
+            try {
+                synchronized (this) {
+                    Thread.sleep(3000);
+                    System.out.println("method3" + Thread.currentThread().getName());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void method4() {
+            try {
+                synchronized (this) {
+                    Thread.sleep(1000);
+                    System.out.println("method4" + Thread.currentThread().getName());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
