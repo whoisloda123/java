@@ -39,10 +39,11 @@ import org.springframework.stereotype.Component;
  *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
  *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
  *
- *  线程同步各种锁？
+ *  线程同步各种锁？:https://www.cnblogs.com/szlbm/p/5588457.html
  *  线程池？
  *  网络编程？
  *  netty？
+ *  NIO
  *
  * @author liucan
  * @version 19-1-20
