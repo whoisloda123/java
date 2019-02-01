@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  * 2.thread.setDaemon(true)必须在thread.start()之前设置
  * 3.在Daemon线程中产生的新线程也是Daemon的
  * 4.守护线程应该永远不去访问固有资源，如文件、数据库，因为它会在任何时候甚至在一个操作的中间发生中断
+ * 5.调用start方法的顺序不代表线程启动顺序
  * <p
  * 二.sleep和yield区别：https://www.cnblogs.com/hypnotizer/p/5579095.html
  * sleep线程处于阻塞状态，让出cpu时间片给其他线程执行，结束后才会转入就绪状态
