@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * 2.thread.setDaemon(true)必须在thread.start()之前设置
  * 3.在Daemon线程中产生的新线程也是Daemon的
  * 4.守护线程应该永远不去访问固有资源，如文件、数据库，因为它会在任何时候甚至在一个操作的中间发生中断
- * <p>
+ * <p
  * 二.sleep和yield区别：https://www.cnblogs.com/hypnotizer/p/5579095.html
  * sleep线程处于阻塞状态，让出cpu时间片给其他线程执行，结束后才会转入就绪状态
  * yield是暂停线程，不会阻塞线程，让线程运行状态转入就绪状态，线程调度器可以继续执行
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  *
  * 五.synchronized
  *  参考：https://www.cnblogs.com/paddix/p/5367116.html
- *  1.synchronized锁定是一个对象，其他试图访问该对象synchronized方法会被锁住,而每一个对象都可以做为一个锁（Monitor锁）
+ *  1.synchronized锁定是一个对象，其他试图访问该对象synchronized方法或代码块会被锁住,而每一个对象都可以做为一个锁（Monitor锁）
  *  2.在普通方法前面，锁的是当前实例对象（其他的synchronized标志的方法也会被锁住,非synchronized的不会被锁住）
  *  3.在静态方法前面，锁的是整个类
  *  4.在方法块里面synchronized(object),锁的是括号里面的对象
@@ -38,6 +38,11 @@ import org.springframework.stereotype.Component;
  *      c.notify/notifyAll和wait方法都依赖Monitor锁
  *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
  *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
+ *
+ *  线程同步各种锁？
+ *  线程池？
+ *  网络编程？
+ *  netty？
  *
  * @author liucan
  * @version 19-1-20
@@ -57,53 +62,85 @@ public class Thread1 {
         thread.start();
 
         Print print = new Print();
-//        new Thread(print, "C").start();
-//        new Thread(print, "A").start();
-//        new Thread(print, "B").start();
+        new Thread(print, "C").start();
+        new Thread(print, "A").start();
+        new Thread(print, "B").start();
 
-        new Thread(() -> print.method1()).start();
-        new Thread(() -> print.method5()).start();
-        new Thread(() -> print.method2()).start();
+//        new Thread(() -> print.method1()).start();
+//        new Thread(() -> print.method5()).start();
+//        new Thread(() -> print.method2()).start();
+
 //        new Thread(() -> print.method3()).start();
+//        new Thread(() -> print.method5()).start();
 //        new Thread(() -> print.method4()).start();
     }
 
-    /**
-     * 设计一个程序，启动三个线程A,B,C,各个线程只打印特定的字母，各打印10次，例如A线程只打印‘A’。要求在控制台依次显示“ABCABC…”
-     * 下面的有点问题
-     */
     private final Object lock = new Object();
+    private final Object lock1 = new Object();
+    private boolean waitSignal = true;
 
+    private void doWait() {
+        synchronized (lock1) {
+            //此处用while不用if是因为线程会出现假唤醒（spurious wakeups：由于莫名其妙的原因，线程会在没有notify的情况下唤醒）
+            while (waitSignal) {
+                try {
+                    //wait会释放当前对象上的监控器锁
+                    lock1.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void doNotify() {
+        synchronized (lock1) {
+            try {
+                waitSignal = false;
+                lock1.notifyAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 设计一个程序，启动三个线程A,B,C,各个线程只打印特定的字母，各打印5次，例如A线程只打印‘A’。要求在控制台依次显示“ABCABC…”
+     */
     private class Print implements Runnable {
 
         private String currentPrint = "A";
+        private int curCount = 0;
 
         //给线程执行的
         @Override
         public void run() {
             synchronized (lock) {
-                String threadName = Thread.currentThread().getName();
-                if (threadName.equals(currentPrint)) {
-                    System.out.println(currentPrint);
-                    if (currentPrint.equals("A")) {
-                        currentPrint = "B";
-                    } else if (currentPrint.equals("B")) {
-                        currentPrint = "C";
-                    }
-                    lock.notifyAll();
-                } else {
-                    try {
-                        lock.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                while (curCount < 5) {
+                    String threadName = Thread.currentThread().getName();
+                    if (threadName.equals(currentPrint)) {
+                        System.out.println(currentPrint);
+                        if (currentPrint.equals("A")) {
+                            currentPrint = "B";
+                        } else if (currentPrint.equals("B")) {
+                            currentPrint = "C";
+                            curCount++;
+                        } else {
+                            currentPrint = "A";
+                        }
+                        lock.notifyAll();
+                    } else {
+                        try {
+                            //调用wait会释放对象上的监视器锁Monitor锁
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         }
 
-        /**
-         * synchronized锁的是
-         */
         private synchronized void method1() {
             try {
                 Thread.sleep(3000);
@@ -120,10 +157,6 @@ public class Thread1 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-
-        private void method5() {
-            System.out.println("method5" + Thread.currentThread().getName());
         }
 
         private void method3() {
@@ -146,6 +179,10 @@ public class Thread1 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        private void method5() {
+            System.out.println("method5" + Thread.currentThread().getName());
         }
     }
 }
