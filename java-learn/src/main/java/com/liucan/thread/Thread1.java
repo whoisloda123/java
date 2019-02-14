@@ -40,7 +40,10 @@ import org.springframework.stereotype.Component;
  *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
  *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
  *
- *  线程同步各种锁？:https://www.cnblogs.com/szlbm/p/5588457.html
+ * 六.线程同步各种锁
+ *  参考：https://www.cnblogs.com/szlbm/p/5588457.html
+ *  1.在线程a里面调用Thread.currentThread()得到的线程未必是a的，是调用该函数的线程，如果是在run函数里面则是a
+ *
  *  线程池？
  *  网络编程？
  *  netty？
