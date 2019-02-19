@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * 三.suspend()、resume()和stop()已经过期不建议使用，因为调用后不会释放资源，容易造成死锁问题，改为用sleep和notify等待通知机制
  * <p>
  * 四.volatile 参考：https://www.cnblogs.com/chengxiao/p/6528109.html
- * a.多线程同时访问一个对象时（主内存），每个执行的线程可以拥有该对象的一份拷贝（本地内存），而本地内存的操作会在一个时机同步到主内存
+ * a.多线程同时访问一个对象时（主内存），每个执行的线程可以拥有该对象的一份拷贝（本地内存），而本地内存的操作会在一个时机(线程执行完毕)同步到主内存
  * 所以程序在执行过程中，一个线程看到的变量并不一定是最新的
  * b.轻量级锁
  * c.能保证共享变量对所有线程的可见性，当写一个volatile变量时，JMM会把该线程对应的本地内存中的变量强制刷新到主内存中去
@@ -43,7 +43,10 @@ import org.springframework.stereotype.Component;
  * 六.线程同步各种锁
  *  参考：https://www.cnblogs.com/szlbm/p/5588457.html
  *  1.在线程a里面调用Thread.currentThread()得到的线程未必是a的，是调用该函数的线程，如果是在run函数里面则是a
- *
+ *  2.sleep,yield,wait区别
+ *      a.sleep后，不会释放当前锁，会释放cpu时间片，暂停线程，时间到线程处于可以调用状态
+ *      b.yield后，不会释放当前锁，会释放cpu时间片，线程处于可以调度状态（ps：可能出现yield后，马上又被调用，完全取决于线程调度器）
+ *      c.wait后，释放当前锁，是否释放cpu时间片，暂停当前线程，直到被notify/notifyAll通知
  *  线程池？
  *  网络编程？
  *  netty？
