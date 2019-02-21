@@ -47,6 +47,10 @@ import org.springframework.stereotype.Component;
  *      a.sleep后，不会释放当前锁，会释放cpu时间片，暂停线程，时间到线程处于可以调用状态
  *      b.yield后，不会释放当前锁，会释放cpu时间片，线程处于可以调度状态（ps：可能出现yield后，马上又被调用，完全取决于线程调度器）
  *      c.wait后，释放当前锁，是否释放cpu时间片，暂停当前线程，直到被notify/notifyAll通知
+ *  3.interrupt
+ *      1.不是马上中断线程，而在线程阻塞的时候将线程的中断标记设为true，并产生一个InterruptedException异常，这样让线程中断，
+ *          如果线程没有阻塞则不起作用，只是将中断标记设置一下
+ *      2.isInterrupted，判断中断标记是否为true
  *  线程池？
  *  网络编程？
  *  netty？
@@ -136,6 +140,7 @@ public class Thread1 {
                         } else {
                             currentPrint = "A";
                         }
+                        //notify()方法不释放锁
                         lock.notifyAll();
                     } else {
                         try {
