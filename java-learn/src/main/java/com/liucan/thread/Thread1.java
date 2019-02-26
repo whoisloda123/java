@@ -2,6 +2,9 @@ package com.liucan.thread;
 
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.*;
+
 /**
  * 参考：https://blog.csdn.net/zsm2015/article/details/79553593
  * <p>
@@ -40,7 +43,7 @@ import org.springframework.stereotype.Component;
  *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
  *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
  *
- * 六.线程同步各种锁
+ * 六.线程同步
  *  参考：https://www.cnblogs.com/szlbm/p/5588457.html
  *  1.在线程a里面调用Thread.currentThread()得到的线程未必是a的，是调用该函数的线程，如果是在run函数里面则是a
  *  2.sleep,yield,wait区别
@@ -51,8 +54,11 @@ import org.springframework.stereotype.Component;
  *      1.不是马上中断线程，而在线程阻塞的时候将线程的中断标记设为true，并产生一个InterruptedException异常，这样让线程中断，
  *          如果线程没有阻塞则不起作用，只是将中断标记设置一下
  *      2.isInterrupted，判断中断标记是否为true
- *
- *  4.锁分类
+ *  4.ThreadLocal
+ *  参考：https://blog.csdn.net/renwei289443/article/details/79540809
+ *      1.每个线程独有一份，和TreadLocal在哪个地方和有多少个对象没有关系，和里面的map有关系，ThreadLocal里面是保存的是map（当前线程对应key，对应value）
+ *      2.想保存多个本地线程数据，就定义多个TreadLocal，因里面都是和Thread.currentThread操作有关系
+ * 七.锁分类
  *      a.公平锁/非公平锁：是否按照申请的顺序来获得锁,通过ReentrantLock构造函数来
  *          1.ReentrantLock构造函数来制定
  *          2.synchronized是非公平锁
@@ -70,7 +76,15 @@ import org.springframework.stereotype.Component;
  *
  *      f.CAS和AQS
  *          参考：https://www.cnblogs.com/waterystone/p/4920797.html
+ *          https://www.cnblogs.com/chengxiao/archive/2017/07/24/7141160.html
+ *          https://blog.csdn.net/zhangdong2012/article/details/79983404
+ *        1.CAS(compare and swap)，原子操作
+ *        2.AQS(AbstractQueuedSynchronizer)
+ *          a.是ReentrantLock、Semaphore，CountDownLatch等线程同步的基类，是构建锁和同步器的框架
+ *          b.
  *      d.CountDownLatch，Semaphore等线程同步类
+ *
+ *  同步包
  *  线程池？
  *  网络编程？
  *  netty？
@@ -81,6 +95,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Thread1 {
+
+    private final ThreadLocal<String> tl = new ThreadLocal<>();
+    private final Lock reentrantLock = new ReentrantLock();
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    private final Lock spinLock = new SpinLock();
 
     public static void main(String[] args) {
         Thread1 thread1 = new Thread1();
@@ -105,6 +124,24 @@ public class Thread1 {
 //        new Thread(() -> print.method3()).start();
 //        new Thread(() -> print.method5()).start();
 //        new Thread(() -> print.method4()).start();
+
+        tl.set("1");
+        tl.get();
+
+        Lock readLock = readWriteLock.readLock();
+        Lock writeLock = readWriteLock.writeLock();
+
+        try {
+            spinLock.tryLock(5, TimeUnit.SECONDS);
+            reentrantLock.lock();
+            Condition condition = reentrantLock.newCondition();
+            condition.await();
+            condition.signal();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            reentrantLock.unlock();
+        }
     }
 
     private final Object lock = new Object();
