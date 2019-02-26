@@ -51,6 +51,26 @@ import org.springframework.stereotype.Component;
  *      1.不是马上中断线程，而在线程阻塞的时候将线程的中断标记设为true，并产生一个InterruptedException异常，这样让线程中断，
  *          如果线程没有阻塞则不起作用，只是将中断标记设置一下
  *      2.isInterrupted，判断中断标记是否为true
+ *
+ *  4.锁分类
+ *      a.公平锁/非公平锁：是否按照申请的顺序来获得锁,通过ReentrantLock构造函数来
+ *          1.ReentrantLock构造函数来制定
+ *          2.synchronized是非公平锁
+ *      b.可重入锁（递归锁）:可多次加锁，ReentrantLock和synchronized都是
+ *      c.独享锁/共享锁(互斥锁/读写锁):读写锁，用ReentrantReadWriteLock，读锁共享，写锁互斥
+ *      d.乐观锁/悲观锁
+ *          1.悲观锁认为对于同一个数据操作其他线程会修改，一定要加锁：常用锁
+ *          2.乐观锁认为对于同一个数据操作其他线程不会修改，不需要加锁：用自旋锁
+ *      e.偏向锁/轻量级锁/重量级锁:指的是锁的状态，是针对synchronized的
+ *          1.偏向锁:一段代码一直被一个线程所访问，该线程会自动获取锁。降低获取锁的代价
+ *          2.轻量级锁:指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能。
+ *          3.重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，
+ *              该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低
+ *      e.自旋锁:线程不会阻塞，不会是否cpu时间片，而一直循环等待，采用原子锁cas（compare and swap）方式
+ *
+ *      f.CAS和AQS
+ *          参考：https://www.cnblogs.com/waterystone/p/4920797.html
+ *      d.CountDownLatch，Semaphore等线程同步类
  *  线程池？
  *  网络编程？
  *  netty？
