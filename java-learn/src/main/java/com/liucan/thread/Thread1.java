@@ -79,9 +79,16 @@ import java.util.concurrent.locks.*;
  *          https://www.cnblogs.com/chengxiao/archive/2017/07/24/7141160.html
  *          https://blog.csdn.net/zhangdong2012/article/details/79983404
  *        1.CAS(compare and swap)，原子操作
+ *          a.UnSafe类提供了硬件级别的原子操作，一般AtomicInteger等原子类都做了封装
  *        2.AQS(AbstractQueuedSynchronizer)
  *          a.是ReentrantLock、Semaphore，CountDownLatch等线程同步的基类，是构建锁和同步器的框架
- *          b.
+ *          b.通过一个volatile的status状态变量和FIFO队列来实现
+ *              1.队列里面保存线程的信息，头结点是获取锁的线程
+ *              2.其他线程获取锁先通过同步状态status来判断是否可以获取锁（如ReentrantLock的status如果不是当前线程最多是1
+ *                  如果是1，则不能获取锁除非是0），如果能获取则获取，否则构造队列节点放入尾部，然后将当前线程挂起
+ *              3.释放锁时，释放同步状态status（如ReentrantLock将状态变为0），同时唤醒后继节点
+ *              4.在写自定义同步器的时候只需重写tryAcquire，tryAcquireShared，tryRelease，tryReleaseShared几个方法，来决定同步状态的释放和获取即可
+ *              5.有共享模式和独占模式：ReentrantLock独占模式，一次只有一个获取锁的线程接口，CountDownLatch共享模式，一次有多个获取锁的线程节点
  *      d.CountDownLatch，Semaphore等线程同步类
  *
  *  同步包
