@@ -2,6 +2,8 @@ package com.liucan.thread;
 
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.*;
 
@@ -90,6 +92,7 @@ import java.util.concurrent.locks.*;
  *              4.在写自定义同步器的时候只需重写tryAcquire，tryAcquireShared，tryRelease，tryReleaseShared几个方法，来决定同步状态的释放和获取即可
  *              5.有共享模式和独占模式：ReentrantLock独占模式，一次只有一个获取锁的线程接口，CountDownLatch共享模式，一次有多个获取锁的线程节点
  *      d.CountDownLatch，Semaphore等线程同步类
+ *          CountDownLatch控制同时等待多少个线程执行结束后再进行，Semaphore可控制有多少个线程同时执行
  *
  *  同步包
  *  线程池？
@@ -107,6 +110,8 @@ public class Thread1 {
     private final Lock reentrantLock = new ReentrantLock();
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock spinLock = new SpinLock();
+    private final CountDownLatch countDownLatch = new CountDownLatch(10);
+    private final Semaphore semaphore = new Semaphore(10);
 
     public static void main(String[] args) {
         Thread1 thread1 = new Thread1();
@@ -139,6 +144,12 @@ public class Thread1 {
         Lock writeLock = readWriteLock.writeLock();
 
         try {
+            countDownLatch.countDown();
+            countDownLatch.await();
+
+            semaphore.acquire();
+            semaphore.release();
+
             spinLock.tryLock(5, TimeUnit.SECONDS);
             reentrantLock.lock();
             Condition condition = reentrantLock.newCondition();
