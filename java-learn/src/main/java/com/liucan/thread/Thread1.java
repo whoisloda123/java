@@ -94,6 +94,8 @@ import java.util.concurrent.locks.*;
  *      d.CountDownLatch，Semaphore等线程同步类
  *          CountDownLatch控制同时等待多少个线程执行结束后再进行，Semaphore可控制有多少个线程同时执行
  *
+ *  八.Concurrent同步包各种同步数据结果
+ *
  *  同步包
  *  线程池？
  *  网络编程？
@@ -144,6 +146,9 @@ public class Thread1 {
         Lock writeLock = readWriteLock.writeLock();
 
         try {
+            readLock.lock();
+            writeLock.lock();
+
             countDownLatch.countDown();
             countDownLatch.await();
 
@@ -159,6 +164,10 @@ public class Thread1 {
             e.printStackTrace();
         } finally {
             reentrantLock.unlock();
+            spinLock.unlock();
+            reentrantLock.unlock();
+            readLock.unlock();
+            writeLock.unlock();
         }
     }
 
