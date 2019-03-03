@@ -1,4 +1,4 @@
-package com.liucan.thread;
+package com.liucan.multthread.Lock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;

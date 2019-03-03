@@ -1,0 +1,22 @@
+package com.liucan.multthread.countdownlatch;
+
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * 允许一个或多个线程等待一系列指定操作的完成
+ *
+ * @author liucan
+ * @version 19-3-3
+ */
+public class countDonwLatch {
+
+    private void test() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        countDownLatch.countDown();
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}

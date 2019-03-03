@@ -1,6 +1,7 @@
 package com.liucan.thread;
 
 import com.liucan.BaseJunit4Test;
+import com.liucan.multthread.Thread1;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

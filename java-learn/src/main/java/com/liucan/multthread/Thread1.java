@@ -1,5 +1,8 @@
-package com.liucan.thread;
+package com.liucan.multthread;
 
+import com.liucan.multthread.Lock.SpinLock;
+import com.liucan.multthread.cyclicbarrier.CyclicBarrier1;
+import com.liucan.multthread.queue.Queue1;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
@@ -95,6 +98,7 @@ import java.util.concurrent.locks.*;
  *          CountDownLatch控制同时等待多少个线程执行结束后再进行，Semaphore可控制有多少个线程同时执行
  *
  *  八.Concurrent同步包各种同步数据结果
+ *      参考：https://blog.csdn.net/defonds/article/details/44021605#t8
  *
  *  同步包
  *  线程池？
@@ -114,13 +118,16 @@ public class Thread1 {
     private final Lock spinLock = new SpinLock();
     private final CountDownLatch countDownLatch = new CountDownLatch(10);
     private final Semaphore semaphore = new Semaphore(10);
-
-    public static void main(String[] args) {
-        Thread1 thread1 = new Thread1();
-        thread1.example();
-    }
+    private final Object lock = new Object();
+    private final Object lock1 = new Object();
+    private boolean waitSignal = true;
 
     public void example() {
+        new Queue1().test();
+        new CyclicBarrier1().test();
+    }
+
+    private void threadTest() {
         Thread thread = new Thread(() -> System.out.println(1));
         thread.setDaemon(true); //必须在启动前调用
         thread.setName("线程");
@@ -170,10 +177,6 @@ public class Thread1 {
             writeLock.unlock();
         }
     }
-
-    private final Object lock = new Object();
-    private final Object lock1 = new Object();
-    private boolean waitSignal = true;
 
     private void doWait() {
         synchronized (lock1) {

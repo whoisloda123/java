@@ -8,4 +8,5 @@ import java.io.Serializable;
 public class Country implements Serializable {
     private String name;
     private Long people;
+    private Integer age;
 }
