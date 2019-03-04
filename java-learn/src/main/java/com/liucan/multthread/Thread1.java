@@ -3,6 +3,7 @@ package com.liucan.multthread;
 import com.liucan.multthread.Lock.SpinLock;
 import com.liucan.multthread.cyclicbarrier.CyclicBarrier1;
 import com.liucan.multthread.queue.Queue1;
+import com.liucan.multthread.semaphore.Semaphore1;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
@@ -125,6 +126,7 @@ public class Thread1 {
     public void example() {
         new Queue1().test();
         new CyclicBarrier1().test();
+        new Semaphore1().test();
     }
 
     private void threadTest() {
