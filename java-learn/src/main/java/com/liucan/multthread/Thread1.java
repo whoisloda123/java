@@ -1,15 +1,11 @@
 package com.liucan.multthread;
 
-import com.liucan.multthread.Lock.SpinLock;
 import com.liucan.multthread.cyclicbarrier.CyclicBarrier1;
+import com.liucan.multthread.executor.Executor1;
+import com.liucan.multthread.future.Future1;
 import com.liucan.multthread.queue.Queue1;
 import com.liucan.multthread.semaphore.Semaphore1;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.*;
 
 /**
  * 参考：https://blog.csdn.net/zsm2015/article/details/79553593
@@ -114,11 +110,6 @@ import java.util.concurrent.locks.*;
 public class Thread1 {
 
     private final ThreadLocal<String> tl = new ThreadLocal<>();
-    private final Lock reentrantLock = new ReentrantLock();
-    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    private final Lock spinLock = new SpinLock();
-    private final CountDownLatch countDownLatch = new CountDownLatch(10);
-    private final Semaphore semaphore = new Semaphore(10);
     private final Object lock = new Object();
     private final Object lock1 = new Object();
     private boolean waitSignal = true;
@@ -127,6 +118,8 @@ public class Thread1 {
         new Queue1().test();
         new CyclicBarrier1().test();
         new Semaphore1().test();
+        new Future1().test();
+        new Executor1().test();
     }
 
     private void threadTest() {
@@ -150,34 +143,6 @@ public class Thread1 {
 
         tl.set("1");
         tl.get();
-
-        Lock readLock = readWriteLock.readLock();
-        Lock writeLock = readWriteLock.writeLock();
-
-        try {
-            readLock.lock();
-            writeLock.lock();
-
-            countDownLatch.countDown();
-            countDownLatch.await();
-
-            semaphore.acquire();
-            semaphore.release();
-
-            spinLock.tryLock(5, TimeUnit.SECONDS);
-            reentrantLock.lock();
-            Condition condition = reentrantLock.newCondition();
-            condition.await();
-            condition.signal();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            reentrantLock.unlock();
-            spinLock.unlock();
-            reentrantLock.unlock();
-            readLock.unlock();
-            writeLock.unlock();
-        }
     }
 
     private void doWait() {
