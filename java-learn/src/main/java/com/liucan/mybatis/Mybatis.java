@@ -26,6 +26,11 @@ import java.io.InputStream;
  *  直接用PageHelper.startPage(currentPage, pageSize).doSelect()就可以了
  *  参考：https://www.cnblogs.com/digdeep/p/4608933.html
  *
+ * 4.mysql一般常用的排序语句，order by case
+ *  如：select * from table order by case when xxx(condition) then xxx(result)
+ *                  when xxx(condition) then xxx(result)
+ *                  else xxx(result) end asc
+ *
  */
 @Component
 public class Mybatis {
