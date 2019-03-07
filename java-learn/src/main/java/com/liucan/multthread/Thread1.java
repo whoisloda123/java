@@ -115,11 +115,11 @@ public class Thread1 {
     private boolean waitSignal = true;
 
     public void example() {
+        new Executor1().test();
         new Queue1().test();
         new CyclicBarrier1().test();
         new Semaphore1().test();
         new Future1().test();
-        new Executor1().test();
     }
 
     private void threadTest() {
