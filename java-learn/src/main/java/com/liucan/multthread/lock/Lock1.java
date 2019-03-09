@@ -20,6 +20,7 @@ public class Lock1 {
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
 
+    //自旋锁
     private final Lock spinLock = new SpinLock();
 
     public void test() {

@@ -51,7 +51,7 @@ import org.springframework.stereotype.Component;
  *  2.sleep,yield,wait区别
  *      a.sleep后，不会释放当前锁，会释放cpu时间片，暂停线程，时间到线程处于可以调用状态
  *      b.yield后，不会释放当前锁，会释放cpu时间片，线程处于可以调度状态（ps：可能出现yield后，马上又被调用，完全取决于线程调度器）
- *      c.wait后，释放当前锁，是否释放cpu时间片，暂停当前线程，直到被notify/notifyAll通知
+ *      c.wait后，会释放当前锁，会释放cpu时间片，暂停当前线程，直到被notify/notifyAll通知
  *  3.interrupt
  *      1.不是马上中断线程，而在线程阻塞的时候将线程的中断标记设为true，并产生一个InterruptedException异常，这样让线程中断，
  *          如果线程没有阻塞则不起作用，只是将中断标记设置一下
@@ -69,12 +69,12 @@ import org.springframework.stereotype.Component;
  *      d.乐观锁/悲观锁
  *          1.悲观锁认为对于同一个数据操作其他线程会修改，一定要加锁：常用锁
  *          2.乐观锁认为对于同一个数据操作其他线程不会修改，不需要加锁：用自旋锁
- *      e.偏向锁/轻量级锁/重量级锁:指的是锁的状态，是针对synchronized的
+ *      e.偏向锁/轻量级锁/重量级锁:指的是锁的状态，是针对synchronized的---synchronized锁的优化
  *          1.偏向锁:一段代码一直被一个线程所访问，该线程会自动获取锁。降低获取锁的代价
  *          2.轻量级锁:指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能。
  *          3.重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，
  *              该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低
- *      e.自旋锁:线程不会阻塞，不会是否cpu时间片，而一直循环等待，采用原子锁cas（compare and swap）方式
+ *      e.自旋锁（无锁）:线程不会阻塞，不会释放cpu时间片，而一直循环等待，采用原子锁cas（compare and swap）方式
  *
  *      f.CAS和AQS
  *          参考：https://www.cnblogs.com/waterystone/p/4920797.html
@@ -120,6 +120,7 @@ public class Thread1 {
         new CyclicBarrier1().test();
         new Semaphore1().test();
         new Future1().test();
+        threadTest();
     }
 
     private void threadTest() {

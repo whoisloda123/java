@@ -62,6 +62,7 @@ public class Queue1 {
     private void priorityBlockingQueue() {
         //PriorityBlockingQueue带排序的队列和PriorityQueue差不多
         //thenComparing用在当第一个比较器相等的情况下的比较
+        //PriorityBlockingQueue不保证在第一个比较器相等的情况下，第二个比较器相等
         PriorityBlockingQueue<Country> priorityBlockingQueue = new PriorityBlockingQueue<>(5,
                 Comparator.comparingLong(Country::getPeople)
                         .thenComparing(Country::getAge));
