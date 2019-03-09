@@ -1,6 +1,7 @@
 package com.liucan.multthread;
 
 import com.liucan.multthread.cyclicbarrier.CyclicBarrier1;
+import com.liucan.multthread.exchanger.Exchanger1;
 import com.liucan.multthread.executor.Executor1;
 import com.liucan.multthread.future.Future1;
 import com.liucan.multthread.queue.Queue1;
@@ -99,8 +100,7 @@ import org.springframework.stereotype.Component;
  *
  *  九.Unsafe类，不建议自己使用，除非很了解他，因为可以像c语言一样，使用指针，操作内存，释放内存容易出现问题
  *      也可以对线程进行挂起和恢复
- *  同步包
- *  线程池？
+ *
  *  网络编程？
  *  netty？
  *  NIO
@@ -117,6 +117,7 @@ public class Thread1 {
     private boolean waitSignal = true;
 
     public void example() {
+        new Exchanger1().test();
         new Executor1().test();
         new Queue1().test();
         new CyclicBarrier1().test();

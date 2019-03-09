@@ -21,6 +21,9 @@ public class SpinLock implements Lock {
         while (!atomicReference.compareAndSet(false, true)) ;
     }
 
+    /**
+     * 处理中断由线程本身自己处理，而调用Thread.Interrupted只是设置一下状态位
+     */
     @Override
     public void lockInterruptibly() throws InterruptedException {
         if (Thread.interrupted()) {

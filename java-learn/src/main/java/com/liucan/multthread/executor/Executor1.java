@@ -10,10 +10,10 @@ import java.util.concurrent.*;
  *
  * 二.ThreadPoolExecutor线程池里面的4种拒绝策略
  *  场景,当一个任务通过execute(Runnable)方法欲添加到线程池时：
- *      a.如果线程数量小于corePoolSize,即使里面的线程都处于空闲，也会创建新线程
- *      b.如果线程数量等于corePoolSize,如果缓冲列表未满，任务会被放入队列里面
- *      c.如果线程数量大于corePoolSize,缓冲队列已满，且线程数量小于maximumPoolSize，创建新线程
- *      d.如果线程数量大于corePoolSize,缓冲队列已满，且线程数量等于maximumPoolSize，会使用拒绝策略来处理此任务
+ *      a.池中线程数小于corePoolSize，新任务都不排队而是直接添加新线程
+ *      b.池中线程数大于等于corePoolSize，workQueue未满，首选将新任务假如workQueue而不是添加新线程
+ *      c.池中线程数大于等于corePoolSize，workQueue已满，但是线程数小于maximumPoolSize，添加新的线程来处理被添加的任务
+ *      d.池中线程数大于大于corePoolSize，workQueue已满，并且线程数大于等于maximumPoolSize，新任务被拒绝，使用handler处理被拒绝的任务
  *  也就是：处理任务的优先级为：核心线程corePoolSize、任务队列workQueue、最大线程maximumPoolSize，如果三者都满了，使用handler处理被拒绝的任务
  *  当线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止。这样，线程池可以动态的调整池中的线程数
  *
@@ -69,7 +69,6 @@ public class Executor1 {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         try {
             executorService.submit(() -> "1").get();
-
             //并不会马上关闭，而是不接受新的任务，等所有正在执行的任务结束后，然后关闭
             executorService.shutdown();
             //马上关闭，即使有正在执行的任务，返回从未执行的任务列表
