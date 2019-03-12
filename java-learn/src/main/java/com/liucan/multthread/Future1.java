@@ -1,4 +1,4 @@
-package com.liucan.multthread.future;
+package com.liucan.multthread;
 
 import java.util.concurrent.FutureTask;
 

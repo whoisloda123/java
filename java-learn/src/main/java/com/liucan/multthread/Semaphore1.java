@@ -1,4 +1,4 @@
-package com.liucan.multthread.semaphore;
+package com.liucan.multthread;
 
 import java.util.concurrent.Semaphore;
 

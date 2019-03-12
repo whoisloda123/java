@@ -1,4 +1,4 @@
-package com.liucan.multthread.exchanger;
+package com.liucan.multthread;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.liucan.multthread.queue;
+package com.liucan.multthread;
 
 import com.liucan.pojo.Country;
 

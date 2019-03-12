@@ -1,11 +1,5 @@
 package com.liucan.multthread;
 
-import com.liucan.multthread.cyclicbarrier.CyclicBarrier1;
-import com.liucan.multthread.exchanger.Exchanger1;
-import com.liucan.multthread.executor.Executor1;
-import com.liucan.multthread.future.Future1;
-import com.liucan.multthread.queue.Queue1;
-import com.liucan.multthread.semaphore.Semaphore1;
 import org.springframework.stereotype.Component;
 
 /**
@@ -103,7 +97,6 @@ import org.springframework.stereotype.Component;
  *
  *  网络编程？
  *  netty？
- *  NIO
  *
  * @author liucan
  * @version 19-1-20

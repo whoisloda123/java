@@ -1,4 +1,4 @@
-package com.liucan.multthread.cyclicbarrier;
+package com.liucan.multthread;
 
 import java.util.concurrent.CyclicBarrier;
 

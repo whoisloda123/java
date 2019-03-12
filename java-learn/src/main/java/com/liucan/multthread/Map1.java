@@ -1,4 +1,4 @@
-package com.liucan.multthread.map;
+package com.liucan.multthread;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentNavigableMap;

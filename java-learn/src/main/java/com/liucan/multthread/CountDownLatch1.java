@@ -1,4 +1,4 @@
-package com.liucan.multthread.countdownlatch;
+package com.liucan.multthread;
 
 import java.util.concurrent.CountDownLatch;
 
