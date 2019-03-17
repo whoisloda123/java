@@ -11,15 +11,16 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * https://www.jianshu.com/p/e6f18c74bc3b
  * @author liucan
  * @version 19-3-17
  */
-public class Service implements Runnable {
+public class NioServer implements Runnable {
 
     private Selector selector;
     private ByteBuffer buffer = ByteBuffer.allocate(1024);
 
-    public Service(int port) throws IOException {
+    public NioServer(int port) throws IOException {
         selector = Selector.open();
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.socket().bind(new InetSocketAddress(port));

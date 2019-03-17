@@ -17,7 +17,7 @@ public class Zookeepers {
         ZooKeeper zk;
         try {
             //禁用sasl认证，否则会报错
-            System.setProperty("zookeeper.sasl.client", "false");
+            System.setProperty("zookeeper.sasl.NettyClient", "false");
             // 创建一个与服务器的连接
             zk = new ZooKeeper("192.168.32.128:2181", 15000, new Watcher() {
                 @Override
