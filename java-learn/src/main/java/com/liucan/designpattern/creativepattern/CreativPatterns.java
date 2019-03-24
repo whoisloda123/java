@@ -1,6 +1,7 @@
 package com.liucan.designpattern.creativepattern;
 
 import com.liucan.designpattern.creativepattern.abstractfactory.*;
+import com.liucan.designpattern.creativepattern.builder.Farm;
 import com.liucan.designpattern.creativepattern.factorymethod.AbstractFactory;
 import com.liucan.designpattern.creativepattern.factorymethod.ConcreteFactory1;
 import com.liucan.designpattern.creativepattern.factorymethod.ConcreteFactory2;
@@ -23,12 +24,15 @@ import com.liucan.designpattern.creativepattern.singleton.LazySingleton;
 public class CreativPatterns {
 
     public void test() throws CloneNotSupportedException {
+        //单例模式
         LazySingleton lazySingleton = LazySingleton.getInstance();
         HungrySingleton hungrySingleton = HungrySingleton.getInstance();
 
+        //原型模式
         Realizetype realizetype = new Realizetype();
         Realizetype clone = (Realizetype) realizetype.clone();
 
+        //工厂方法模式
         AbstractFactory factory = new ConcreteFactory1();
         Product product = factory.newProduct();
         product.show();
@@ -37,6 +41,7 @@ public class CreativPatterns {
         product = factory.newProduct();
         product.show();
 
+        //抽象工厂模式
         FarmFactory farmFactory = new CdFarmFactory();
         Anima anima = farmFactory.newAnima();
         Plant plant = farmFactory.newPlant();
@@ -44,5 +49,14 @@ public class CreativPatterns {
         farmFactory = new CqFarmFactory();
         anima = farmFactory.newAnima();
         plant = farmFactory.newPlant();
+
+        //建造者模式(此处是工厂方法模式结合，也可以不用建FarmBuilder抽象类,然后在buildAnima方法上面设置入参)
+        Farm cdFarm = Farm.cdFarmBuilder()
+                .buildAnima()
+                .buildPlant()
+                .build();
+        Farm cqFarm = Farm.cqFarmBuilder()
+                .buildAnima()
+                .build();
     }
 }
