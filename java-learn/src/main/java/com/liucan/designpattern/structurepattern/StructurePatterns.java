@@ -1,5 +1,8 @@
 package com.liucan.designpattern.structurepattern;
 
+import com.liucan.designpattern.structurepattern.adapter.Adaptee;
+import com.liucan.designpattern.structurepattern.adapter.ClassAdapter;
+import com.liucan.designpattern.structurepattern.adapter.ObjectAdapter;
 import com.liucan.designpattern.structurepattern.proxy.*;
 
 /**
@@ -20,11 +23,11 @@ import com.liucan.designpattern.structurepattern.proxy.*;
 public class StructurePatterns {
 
     public void test() {
-        //静态代理
+        //静态代理模式
         ProxySubject proxySubject = new ProxySubject();
         proxySubject.Request();
 
-        //jdk动态代理
+        //jdk动态代理模式
 //        Subject subject = (Subject) Proxy.newProxyInstance(Subject.class.getClassLoader(),
 //                new Class[]{Subject.class},
 //                new JdkDynamicProxy(new RealSubject()));
@@ -32,8 +35,12 @@ public class StructurePatterns {
         Subject jdkProxy = (Subject) JdkDynamicProxy.getProxy(new RealSubject());
         jdkProxy.Request();
 
-        //cglib动态代理
+        //cglib动态代理模式
         Subject cglibProxy = (Subject) CglibDynamicProxy.getProxy(new RealSubject());
         cglibProxy.Request();
+
+        //适配器模式
+        new ClassAdapter().request();
+        new ObjectAdapter(new Adaptee()).request();
     }
 }
