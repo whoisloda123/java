@@ -7,6 +7,9 @@ import com.liucan.designpattern.structurepattern.bridge.Abstraction;
 import com.liucan.designpattern.structurepattern.bridge.ConcreteImplementorA;
 import com.liucan.designpattern.structurepattern.bridge.Implementor;
 import com.liucan.designpattern.structurepattern.bridge.RefinedAbstraction;
+import com.liucan.designpattern.structurepattern.decorator.GirlMorrigan;
+import com.liucan.designpattern.structurepattern.decorator.OriginalMorrigan;
+import com.liucan.designpattern.structurepattern.decorator.SuccubusMorrigan;
 import com.liucan.designpattern.structurepattern.proxy.*;
 
 /**
@@ -51,5 +54,12 @@ public class StructurePatterns {
         Implementor imple = new ConcreteImplementorA();
         Abstraction abs = new RefinedAbstraction(imple);
         abs.Operation();
+
+        //装饰者模式
+        OriginalMorrigan originalMorrigan = new OriginalMorrigan();
+        SuccubusMorrigan succubusMorrigan = new SuccubusMorrigan(originalMorrigan);
+        succubusMorrigan.display();
+        GirlMorrigan girlMorrigan = new GirlMorrigan(originalMorrigan);
+        girlMorrigan.display();
     }
 }
