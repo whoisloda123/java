@@ -3,6 +3,10 @@ package com.liucan.designpattern.structurepattern;
 import com.liucan.designpattern.structurepattern.adapter.Adaptee;
 import com.liucan.designpattern.structurepattern.adapter.ClassAdapter;
 import com.liucan.designpattern.structurepattern.adapter.ObjectAdapter;
+import com.liucan.designpattern.structurepattern.bridge.Abstraction;
+import com.liucan.designpattern.structurepattern.bridge.ConcreteImplementorA;
+import com.liucan.designpattern.structurepattern.bridge.Implementor;
+import com.liucan.designpattern.structurepattern.bridge.RefinedAbstraction;
 import com.liucan.designpattern.structurepattern.proxy.*;
 
 /**
@@ -42,5 +46,10 @@ public class StructurePatterns {
         //适配器模式
         new ClassAdapter().request();
         new ObjectAdapter(new Adaptee()).request();
+
+        //bridge桥接模式
+        Implementor imple = new ConcreteImplementorA();
+        Abstraction abs = new RefinedAbstraction(imple);
+        abs.Operation();
     }
 }
