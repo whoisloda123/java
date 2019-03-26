@@ -10,6 +10,7 @@ import com.liucan.designpattern.structurepattern.bridge.RefinedAbstraction;
 import com.liucan.designpattern.structurepattern.decorator.GirlMorrigan;
 import com.liucan.designpattern.structurepattern.decorator.OriginalMorrigan;
 import com.liucan.designpattern.structurepattern.decorator.SuccubusMorrigan;
+import com.liucan.designpattern.structurepattern.facade.Facade;
 import com.liucan.designpattern.structurepattern.proxy.*;
 
 /**
@@ -61,5 +62,8 @@ public class StructurePatterns {
         succubusMorrigan.display();
         GirlMorrigan girlMorrigan = new GirlMorrigan(originalMorrigan);
         girlMorrigan.display();
+
+        //外观模式
+        new Facade().method();
     }
 }
