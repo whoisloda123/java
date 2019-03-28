@@ -53,7 +53,7 @@ public class Annotation {
         System.out.println("HelloWorld init1 ");
     }
 
-    //destroy-method="destroy一样的效果，在容器中移除bean之后调用
+    //destroy-method="destroy一样的效果，在容器中销毁bean之前调用
     @PreDestroy
     public void close1() {
         System.out.println("HelloWorld close1 ");
