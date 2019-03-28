@@ -1,5 +1,8 @@
 package com.liucan.designpattern.actionpattern;
 
+import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
+import com.liucan.designpattern.actionpattern.command.Invoker;
+import com.liucan.designpattern.actionpattern.command.Recever;
 import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyAbroad;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyInAmerica;
@@ -19,5 +22,9 @@ public class ActionPattern {
 
         //策略方式模式
         new CrabCookingStrategyFactory().getCrabCookingStrategy("braisedCrabs").cookingMethod();
+
+        //命令模式
+        Invoker invoker = new Invoker(new ConcreteCommand(new Recever()));
+        invoker.invoke();
     }
 }
