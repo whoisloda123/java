@@ -7,6 +7,9 @@ import com.liucan.designpattern.structurepattern.bridge.Abstraction;
 import com.liucan.designpattern.structurepattern.bridge.ConcreteImplementorA;
 import com.liucan.designpattern.structurepattern.bridge.Implementor;
 import com.liucan.designpattern.structurepattern.bridge.RefinedAbstraction;
+import com.liucan.designpattern.structurepattern.composite.Component;
+import com.liucan.designpattern.structurepattern.composite.Composite;
+import com.liucan.designpattern.structurepattern.composite.Leaf;
 import com.liucan.designpattern.structurepattern.decorator.GirlMorrigan;
 import com.liucan.designpattern.structurepattern.decorator.OriginalMorrigan;
 import com.liucan.designpattern.structurepattern.decorator.SuccubusMorrigan;
@@ -65,5 +68,14 @@ public class StructurePatterns {
 
         //外观模式
         new Facade().method();
+
+        //组合模式
+        Component root = new Composite();
+        root.add(new Leaf("leaf1"));
+        Composite c1 = new Composite();
+        root.add(c1);
+        c1.add(new Leaf("leaf2"));
+        c1.add(new Leaf("leaf3"));
+        root.operation();
     }
 }
