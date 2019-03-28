@@ -1,5 +1,6 @@
 package com.liucan.designpattern.actionpattern;
 
+import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyAbroad;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyInAmerica;
 
@@ -15,5 +16,8 @@ public class ActionPattern {
         //模板方法模式
         StudyAbroad tm = new StudyInAmerica();
         tm.templateMethod();
+
+        //策略方式模式
+        new CrabCookingStrategyFactory().getCrabCookingStrategy("braisedCrabs").cookingMethod();
     }
 }
