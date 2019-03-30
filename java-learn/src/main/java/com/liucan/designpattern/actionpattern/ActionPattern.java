@@ -1,5 +1,8 @@
 package com.liucan.designpattern.actionpattern;
 
+import com.liucan.designpattern.actionpattern.Chainooresponsibility.Banzhang;
+import com.liucan.designpattern.actionpattern.Chainooresponsibility.Student;
+import com.liucan.designpattern.actionpattern.Chainooresponsibility.Teacher;
 import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
 import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
@@ -35,5 +38,11 @@ public class ActionPattern {
         originator.doCommand(new ConcreteCommand(new Recever("命令2")));
         originator.undo();
         originator.resume();
+
+        //职责链模式
+        Teacher teacher = new Teacher(null, "老师", 3);
+        Banzhang banzhang = new Banzhang(teacher, "班长", 1);
+        new Student().requsetLeave(banzhang, 1);
+        new Student().requsetLeave(banzhang, 2);
     }
 }
