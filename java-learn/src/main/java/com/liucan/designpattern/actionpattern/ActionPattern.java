@@ -3,6 +3,8 @@ package com.liucan.designpattern.actionpattern;
 import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
 import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
+import com.liucan.designpattern.actionpattern.memento.MementoManager;
+import com.liucan.designpattern.actionpattern.memento.Originator;
 import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyAbroad;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyInAmerica;
@@ -26,5 +28,12 @@ public class ActionPattern {
         //命令模式
         Invoker invoker = new Invoker(new ConcreteCommand(new Recever()));
         invoker.invoke();
+
+        //命令模式+备忘录模式,实现动作撤销和恢复
+        Originator originator = new Originator(new MementoManager());
+        originator.doCommand(new ConcreteCommand(new Recever("命令1")));
+        originator.doCommand(new ConcreteCommand(new Recever("命令2")));
+        originator.undo();
+        originator.resume();
     }
 }

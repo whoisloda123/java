@@ -7,8 +7,16 @@ package com.liucan.designpattern.actionpattern.command;
  * @version 19-3-28
  */
 public class Recever {
+    private String msg;
+
+    public Recever() {
+    }
+
+    public Recever(String msg) {
+        this.msg = msg;
+    }
 
     public void action() {
-        System.out.println("接收者的action()方法被调用...");
+        System.out.println("接收者的action()方法被调用..." + msg);
     }
 }
