@@ -1,8 +1,8 @@
 package com.liucan.designpattern.actionpattern;
 
-import com.liucan.designpattern.actionpattern.Chainooresponsibility.Banzhang;
-import com.liucan.designpattern.actionpattern.Chainooresponsibility.Student;
-import com.liucan.designpattern.actionpattern.Chainooresponsibility.Teacher;
+import com.liucan.designpattern.actionpattern.chainooresponsibility.Banzhang;
+import com.liucan.designpattern.actionpattern.chainooresponsibility.Student;
+import com.liucan.designpattern.actionpattern.chainooresponsibility.Teacher;
 import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
 import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
@@ -21,6 +21,7 @@ import com.liucan.designpattern.actionpattern.status.command.*;
 import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyAbroad;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyInAmerica;
+import com.liucan.designpattern.actionpattern.visitor.*;
 
 /**
  * 行为型模式:用于描述程序在运行时复杂的流程控制，即描述多个类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务
@@ -86,5 +87,12 @@ public class ActionPattern {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
+
+        //访问者模式
+        ObjectStructure objectStructure = new ObjectStructure();
+        objectStructure.add(CommonEmployee.builder().job("码农").age(28).build());
+        objectStructure.add(Manager.builder().performance("完成几个大项目").address("成都的").build());
+        objectStructure.accept(new Visitor1());
+        objectStructure.accept(new Visitor2());
     }
 }

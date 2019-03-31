@@ -1,4 +1,4 @@
-package com.liucan.designpattern.actionpattern.Chainooresponsibility;
+package com.liucan.designpattern.actionpattern.chainooresponsibility;
 
 import lombok.Getter;
 
