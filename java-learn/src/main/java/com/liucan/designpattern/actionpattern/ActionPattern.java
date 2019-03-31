@@ -6,6 +6,9 @@ import com.liucan.designpattern.actionpattern.Chainooresponsibility.Teacher;
 import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
 import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
+import com.liucan.designpattern.actionpattern.mediator.ColleagueA;
+import com.liucan.designpattern.actionpattern.mediator.ColleagueB;
+import com.liucan.designpattern.actionpattern.mediator.Mediator;
 import com.liucan.designpattern.actionpattern.memento.MementoManager;
 import com.liucan.designpattern.actionpattern.memento.Originator;
 import com.liucan.designpattern.actionpattern.observer.Bear;
@@ -65,5 +68,12 @@ public class ActionPattern {
         oilFutures.addObserver(new Bear());
         oilFutures.addObserver(new Bull());
         oilFutures.setPrice(7.0f);
+
+        //中介者模式
+        Mediator mediator = new Mediator();
+        ColleagueA colleagueA = new ColleagueA(mediator);
+        ColleagueB colleagueB = new ColleagueB(mediator);
+        colleagueA.send();
+        colleagueB.send();
     }
 }
