@@ -8,6 +8,8 @@ import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
 import com.liucan.designpattern.actionpattern.memento.MementoManager;
 import com.liucan.designpattern.actionpattern.memento.Originator;
+import com.liucan.designpattern.actionpattern.status.ThreadContext;
+import com.liucan.designpattern.actionpattern.status.command.*;
 import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyAbroad;
 import com.liucan.designpattern.actionpattern.templatemethod.StudyInAmerica;
@@ -44,5 +46,15 @@ public class ActionPattern {
         Banzhang banzhang = new Banzhang(teacher, "班长", 1);
         new Student().requsetLeave(banzhang, 1);
         new Student().requsetLeave(banzhang, 2);
+
+        //状态模式
+        ThreadContext threadContext = new ThreadContext();
+        ThreadCommandReceiver commandReceiver = new ThreadCommandReceiver();
+        threadContext.handle(new StartCommand(commandReceiver));
+        threadContext.handle(new GetCpuCommand(commandReceiver));
+        threadContext.handle(new SuspendCommand(commandReceiver));
+        threadContext.handle(new ResumeCommand(commandReceiver));
+        threadContext.handle(new GetCpuCommand(commandReceiver));
+        threadContext.handle(new StopCommand(commandReceiver));
     }
 }
