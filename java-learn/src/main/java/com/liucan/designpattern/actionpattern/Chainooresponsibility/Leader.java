@@ -31,7 +31,6 @@ public abstract class Leader {
         if (days <= powerDays) {
             System.out.println(name + "批准了请假，天数：" + days);
         } else {
-            Leader nextLeader = getNextLeader();
             if (nextLeader == null) {
                 System.out.println("没有人批准请假，天数：" + days);
                 return false;
