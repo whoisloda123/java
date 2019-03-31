@@ -6,6 +6,8 @@ import com.liucan.designpattern.actionpattern.Chainooresponsibility.Teacher;
 import com.liucan.designpattern.actionpattern.command.ConcreteCommand;
 import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
+import com.liucan.designpattern.actionpattern.iterator.Aggregate;
+import com.liucan.designpattern.actionpattern.iterator.Iterator;
 import com.liucan.designpattern.actionpattern.mediator.ColleagueA;
 import com.liucan.designpattern.actionpattern.mediator.ColleagueB;
 import com.liucan.designpattern.actionpattern.mediator.Mediator;
@@ -75,5 +77,14 @@ public class ActionPattern {
         ColleagueB colleagueB = new ColleagueB(mediator);
         colleagueA.send();
         colleagueB.send();
+
+        //迭代器模式
+        Aggregate aggregate = new Aggregate();
+        aggregate.add(1);
+        aggregate.add(2);
+        Iterator iterator = aggregate.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }
