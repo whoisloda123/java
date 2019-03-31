@@ -8,6 +8,9 @@ import com.liucan.designpattern.actionpattern.command.Invoker;
 import com.liucan.designpattern.actionpattern.command.Recever;
 import com.liucan.designpattern.actionpattern.memento.MementoManager;
 import com.liucan.designpattern.actionpattern.memento.Originator;
+import com.liucan.designpattern.actionpattern.observer.Bear;
+import com.liucan.designpattern.actionpattern.observer.Bull;
+import com.liucan.designpattern.actionpattern.observer.OilFutures;
 import com.liucan.designpattern.actionpattern.status.ThreadContext;
 import com.liucan.designpattern.actionpattern.status.command.*;
 import com.liucan.designpattern.actionpattern.strategy.CrabCookingStrategyFactory;
@@ -56,5 +59,11 @@ public class ActionPattern {
         threadContext.handle(new ResumeCommand(commandReceiver));
         threadContext.handle(new GetCpuCommand(commandReceiver));
         threadContext.handle(new StopCommand(commandReceiver));
+
+        //观察者模式
+        OilFutures oilFutures = new OilFutures();
+        oilFutures.addObserver(new Bear());
+        oilFutures.addObserver(new Bull());
+        oilFutures.setPrice(7.0f);
     }
 }
