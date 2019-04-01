@@ -25,6 +25,7 @@ package com.liucan.designpattern.structurepattern.bridge;
  * @version 19-3-26
  */
 public abstract class Abstraction {
+    //可以继续添加其他的具体实现类
     protected Implementor imple;
 
     protected Abstraction(Implementor imple) {

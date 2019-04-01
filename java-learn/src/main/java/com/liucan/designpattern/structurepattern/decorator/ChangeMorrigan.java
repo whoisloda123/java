@@ -19,6 +19,7 @@ public class ChangeMorrigan implements Morrigan {
 
     @Override
     public void display() {
+        //有时想用一些现存的组件。这些组件可能只是完成了一些核心功能。但在不改变其结构的情况下，可以动态地扩展其组件功能
         morrigan.display();
     }
 }

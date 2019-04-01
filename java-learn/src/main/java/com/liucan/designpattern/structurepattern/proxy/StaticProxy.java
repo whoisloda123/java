@@ -28,7 +28,7 @@ package com.liucan.designpattern.structurepattern.proxy;
  * @author liucan
  * @version 19-3-24
  */
-public class ProxySubject implements Subject {
+public class StaticProxy implements Subject {
     private Subject realSubject = new RealSubject();
 
     public void perRequest() {

@@ -35,8 +35,8 @@ public class StructurePatterns {
 
     public void test() {
         //静态代理模式
-        ProxySubject proxySubject = new ProxySubject();
-        proxySubject.Request();
+        StaticProxy staticProxy = new StaticProxy();
+        staticProxy.Request();
 
         //jdk动态代理模式
 //        Subject subject = (Subject) Proxy.newProxyInstance(Subject.class.getClassLoader(),

@@ -1,6 +1,5 @@
 package com.liucan.designpattern;
 
-import com.liucan.designpattern.structurepattern.StructurePatterns;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,8 +11,4 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DesignPattern {
-
-    public void test() {
-        new StructurePatterns().test();
-    }
 }
