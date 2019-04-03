@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * https://www.jianshu.com/p/e6f18c74bc3b
@@ -23,7 +22,7 @@ public class NioServer {
     private ByteBuffer buffer = ByteBuffer.allocate(1024);
     private ExecutorService executorService = Executors.newFixedThreadPool(100);
     private Thread thread;
-    private AtomicBoolean stop = new AtomicBoolean(false);
+    private volatile boolean stop = false;
 
     public NioServer(int port) throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
@@ -39,7 +38,7 @@ public class NioServer {
 
     public void start() {
         thread = new Thread(() -> {
-            while (!stop.get()) {
+            while (!stop) {
                 try {
                     int select = selector.select();
                     if (select == 0) {
@@ -68,7 +67,7 @@ public class NioServer {
     }
 
     public void stop() {
-        stop.getAndSet(true);
+        stop = true;
         try {
             thread.join();
         } catch (InterruptedException e) {

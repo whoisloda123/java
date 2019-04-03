@@ -18,7 +18,7 @@ public class SpinLock implements Lock {
 
     @Override
     public void lock() {
-        while (!atomicReference.compareAndSet(false, true)) ;
+        while (!tryLock()) ;
     }
 
     /**

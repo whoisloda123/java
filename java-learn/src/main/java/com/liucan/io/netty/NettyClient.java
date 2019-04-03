@@ -28,7 +28,8 @@ public class NettyClient {
                             ch.pipeline().addLast(new NettyClientHandle());
                         }
                     })
-                    .connect(host, port).sync()
+                    .connect(host, port)
+                    .sync()
                     .channel()
                     .closeFuture()
                     .sync();
