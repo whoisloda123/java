@@ -12,11 +12,13 @@ public class CountDownLatch1 {
 
     private void test() {
         CountDownLatch countDownLatch = new CountDownLatch(1);
+        new Thread(() -> {
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
         countDownLatch.countDown();
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

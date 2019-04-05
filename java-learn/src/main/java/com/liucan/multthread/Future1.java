@@ -20,10 +20,11 @@ public class Future1 {
             Thread.sleep(2000);
             return "11111";
         });
+        //FutureTask的run执行完成后会唤醒休眠的线程
         new Thread(futureTask).start();
 
         try {
-            //等待线程执行结果
+            //线程休眠等待线程执行结果
             String s = futureTask.get();
             System.out.println(s);
         } catch (Exception e) {

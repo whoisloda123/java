@@ -3,8 +3,7 @@ package com.liucan.multthread;
 import java.util.concurrent.Semaphore;
 
 /**
- * Semaphore可控制同时执行的线程数
- * Semaphore可以控制某个资源可被同时访问的个数
+ * Semaphore可以控制某个资源或代码块可被同时访问的个数
  *  主要用于控制并发数
  *  通过Semaphore控制并发并发数的方式和通过控制线程数来控制并发数的方式相比，粒度更小，因为Semaphore可以通过acquire方法和release方法来控制代码块的并发数
  * @author liucan
