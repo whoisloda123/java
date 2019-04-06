@@ -14,7 +14,7 @@ import java.io.InputStream;
 /**
  * @author liucan
  * @date 2018/5/12
- * @brief:
+ * 参考：https://blog.csdn.net/u014745069/article/details/80788127
  * 1.SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，没有任何理由对它进行清除或重建
  *  两个数据库需要创建两个SqlSessionFactory 实例，每个数据库对应一个
  * 2.每个线程都应该有它自己的 SqlSession 实例。SqlSession 的实例不是线程安全的，因此是不能被共享的
@@ -30,6 +30,19 @@ import java.io.InputStream;
  *  如：select * from table order by case when xxx(condition) then xxx(result)
  *                  when xxx(condition) then xxx(result)
  *                  else xxx(result) end asc
+ *       select * from test order by case when num = -1 then 1
+ *          when age=2 then 0
+ *          else -1 end desc
+ *       当num=-1是排序权值是1，当age=2是排序权值是0，其他是-1
+ * 5.orm:数据库数据和pojo映射框架，mybatis是一个持久层框架，是一个不完全的orm框架，因为需要自己写sql语句
+ * 6.jdbc
+ *  参考：https://blog.csdn.net/zdb292034/article/details/81705876
+ *      a.是访问和操作数据库的规范
+ *      b.常用接口：
+ *      　　  DriverManager：这个类管理数据库驱动程序的列表，查看加载的驱动是否符合JAVA Driver API的规范。
+ * 　　       Connection：与数据库中的所有的通信是通过唯一的连接对象。
+ * 　　       Statement：把创建的SQL对象，转而存储到数据库当中。
+ * 　　       ResultSet：它是一个迭代器，用于检索查询数据。
  *
  */
 @Component
@@ -79,6 +92,7 @@ public class Mybatis {
         SqlSession sqlSession = openSession();
         UserInfo userInfo = null;
         try {
+            //statementId是selectByPrimaryKeyUserInfoMapper.xml里面的id
             userInfo = sqlSession.selectOne("com.liucan.mybatis.mybatis.UserInfoMapper.selectByPrimaryKey", id);
         } catch (Exception e) {
             e.printStackTrace();
