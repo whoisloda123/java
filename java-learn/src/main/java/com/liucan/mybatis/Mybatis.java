@@ -102,6 +102,22 @@ public class Mybatis {
         return userInfo;
     }
 
+    /**
+     * mybatis-spring
+     * MapperFactoryBean这个类的作用是：
+     * <p>
+     * 将传统Mybatis调用数据库的方式：
+     * <p>
+     * xxxMapper mapper = sqlSession.getMapper(xxxMapper.class);
+     * <p>
+     * 变成
+     * <p>
+     * xxxMapper mapper = context.getBean(“xxxMapper”);
+     * <p>
+     * 也就是将mybatis的对象由spring以bean的方式管理
+     * <p>
+     * 形成了一一对应关系，方便在service层直接注入使用。
+     */
     public long getUserCount() {
         SqlSession sqlSession = openSession();
         long count = 0;
