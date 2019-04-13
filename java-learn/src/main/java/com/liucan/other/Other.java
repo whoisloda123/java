@@ -162,7 +162,7 @@ public final class Other {
 
         //linkdeHashMap
         linkedHashMap();
-
+        identityHashMap();
         string();
 
         arrays();
@@ -272,6 +272,16 @@ public final class Other {
         //测试字符串指定区域是否相等
         boolean matches = string.regionMatches(false, 2, "反射31llo", 4, 3);
     }
+
+    private void identityHashMap() {
+        IdentityHashMap<Integer, String> identityHashMap = new IdentityHashMap<>();
+        Integer integer1 = new Integer(1);
+        Integer integer2 = new Integer(1);
+        identityHashMap.put(integer1, "1");
+        identityHashMap.put(integer2, "2");
+        System.out.println(identityHashMap.size()); //2
+    }
+
 
     private void linkedHashMap() {
         //无序的

@@ -145,8 +145,10 @@ public class Document {
      *          c.Entry里面除了有HashMap的可以，value，next之外，还有before，after指针，用于维护双链表
      *          d.默认顺序是插入顺序，可以设置为操作顺序，可以用来实现LRU（最近最少使用）算法
      *      6.IdentityHashMap
-     *          https://blog.csdn.net/f641385712/article/details/81880711
-     *          后续有时间看一下？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+     *          参考：https://blog.csdn.net/f641385712/article/details/81880711
+     *          a.HashMap是通过key.hashCode来生成hash值，通过调用key.equals来和旧值判断是否一样
+     *          b.IdentityHashMap是通过System.IdentityHashCode来生成hash值，通过==指针来和旧值判断是否一样
+     *          c.故key为String,Integer的HashMap，put多次是一样的，而IdentityHashMap则不一样，会生成新值
      *
      *     三.Set
      *      1.HashSet
