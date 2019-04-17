@@ -4,6 +4,8 @@ import com.liucan.mybatis.dao.UserOrderMapper;
 import com.liucan.mybatis.mode.UserOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
@@ -27,7 +29,11 @@ public class StatementTransactionByAnno {
      * 5.@Transactional(noRollbackFor = exception.class, timeout = 2)
      * 6.@Transactional(noRollbackForClassName = "RuntimeException")
      */
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, //传播级别，一个事务方法调用另外一个事务方法
+            isolation = Isolation.REPEATABLE_READ, //隔离基本，2个事务同时运行
+            readOnly = false,
+            timeout = 5000,
+            rollbackFor = Exception.class)
     public void insert() {
         UserOrder userOrder = new UserOrder();
         userOrder.setUserId(354545);
