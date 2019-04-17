@@ -3,7 +3,10 @@ package com.liucan.spring.aop.aspect;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 /**
  * @author liucan
@@ -52,6 +55,13 @@ public class AspectModule {
         Object obj = jp.proceed();
         System.out.println("执行目标方法之后可对其进行再次修改：" + obj);
         return obj;
+    }
+
+    @Around("@annotation(com.liucan.annotation.TestAnnotation)")
+    public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        return joinPoint.proceed();
     }
 
     /**

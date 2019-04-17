@@ -16,6 +16,7 @@ public class Transaction {
     private StatementTransactionByAnno statementTransactionByAnno;
 
     /** 参考：https://blog.csdn.net/bao19901210/article/details/41724355
+     * https://www.cnblogs.com/yixianyixian/p/8372832.html
      * 一.事务的概念
      *  1.原子性：事务应该当作一个单独单元的操作，这意味着整个序列操作要么是成功，要么是失败的
      *  2.一致性：这表示数据库的引用完整性的一致性，表中唯一的主键等
@@ -51,8 +52,6 @@ public class Transaction {
      *   b.默认情况下，只有来自外部的方法调用才会被AOP代理捕获，内部方法调用类内部的其他方法并不会引起事务行为，
      *     即使被调用方法使用@Transactional注解进行修饰
      *   c.作用于类上时，该类的所有 public 方法将都具有该类型的事务属性
-     *
-     *  后面有时间一定详细看一下？
      */
     public void example() {
         //编程式事务管理
