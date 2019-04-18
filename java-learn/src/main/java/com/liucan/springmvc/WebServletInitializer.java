@@ -2,10 +2,14 @@ package com.liucan.springmvc;
 
 import com.liucan.springmvc.config.AppConfig;
 import com.liucan.springmvc.config.WebConfig;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
 /**
  * @author liucan
@@ -14,43 +18,34 @@ import javax.servlet.ServletException;
  *        1.基于XML的Spring配置方式：继承AbstractDispatcherServletInitializer
  *        2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer
  */
-public class WebServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebServletInitializer implements WebApplicationInitializer {
     private static final String SERVLET_NAME = "javalearn-dispatcher";
 
-    /**
-     * AppConfig配置
-     */
     @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class};
+    public void onStartup(ServletContext servletContext) {
+        addListener(servletContext);
+        addServlet(servletContext);
+        addFilter(servletContext);
     }
 
-    /**
-     * ServletConfig配置的定制化
-     */
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class};
+    private void addServlet(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+        dispatcherContext.register(WebConfig.class);
+
+        ServletRegistration.Dynamic dynamic = servletContext.addServlet(SERVLET_NAME, new DispatcherServlet(dispatcherContext));
+        dynamic.setLoadOnStartup(1);
+        dynamic.addMapping("/");
     }
 
-    /**
-     * url过滤器
-     */
-    @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
+    private void addListener(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.register(AppConfig.class);
+
+        servletContext.addListener(new ContextLoaderListener(rootContext));
     }
 
-    @Override
-    protected String getServletName() {
-        return SERVLET_NAME;
+    private void addFilter(ServletContext servletContext) {
+        servletContext.addFilter("characterEncodingFilter", new CharacterEncodingFilter());
     }
 
-    /**
-     * 基类已经做了该做的工作了
-     */
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-    }
 }
