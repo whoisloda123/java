@@ -12,6 +12,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
 /**
+ * spring mvc :https://www.w3cschool.cn/spring_mvc_documentation_linesh_translation/?
  * @author liucan
  * @date 2018/7/1
  * @brief 代替web.xml初始化DispatcherServlet
