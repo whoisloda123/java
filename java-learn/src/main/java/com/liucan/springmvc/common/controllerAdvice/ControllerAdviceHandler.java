@@ -1,14 +1,17 @@
 package com.liucan.springmvc.common.controllerAdvice;
 
+import com.liucan.springmvc.common.customeditor.MyDateEditor;
 import com.liucan.springmvc.common.exception.BizException;
 import com.liucan.springmvc.common.response.CommonResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.format.datetime.DateFormatter;
+import com.sun.beans.editors.IntegerEditor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * @author liucan
@@ -23,19 +26,18 @@ import org.springframework.web.bind.annotation.*;
  *  6.@RestControllerAdvice = @ControllerAdvice + @ResponseBody 相当于 @RestController = @Controller + @ResponseBody
  *  7.如果@ExceptionHandler定义控制器内部定义的，那么它会接收并处理由控制器（或其任何子类）中的@RequestMapping方法抛出的异常
  */
+@Slf4j
 @RestControllerAdvice
 public class ControllerAdviceHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(ControllerAdviceHandler.class);
 
     /**
      * 处理所有不可知的异常
      * ResponseStatus放在方法的上面的时候，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_GATEWAY)
-    CommonResponse handleException(Exception e) {
-        e.printStackTrace();
-        LOG.error(e.getMessage(), e);
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    CommonResponse handleException(Exception e, HttpServletRequest request) {
+        log.error("未捕获异常, uri:{}, method:{}", request.getRequestURI(), request.getMethod(), e);
         return CommonResponse.error("系统错误");
     }
 
@@ -43,9 +45,8 @@ public class ControllerAdviceHandler {
      * 处理所有业务异常
      */
     @ExceptionHandler(BizException.class)
-    CommonResponse handleBusinessException(BizException e) {
-        e.printStackTrace();
-        LOG.error(e.getMessage(), e);
+    CommonResponse handleBusinessException(BizException e, HttpServletRequest request) {
+        log.error("未捕获业务异常, uri:{}, method:{}", request.getRequestURI(), request.getMethod(), e);
         return CommonResponse.error("业务系统错误");
     }
 
@@ -68,6 +69,7 @@ public class ControllerAdviceHandler {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         //定制日期的formatter
-        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd"));
+        binder.registerCustomEditor(Date.class, new MyDateEditor());
+        binder.registerCustomEditor(Integer.class, new IntegerEditor());
     }
 }

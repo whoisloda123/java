@@ -22,12 +22,12 @@ import java.util.Map;
  * @brief @RestController = @Controller + @ResponseBody
  */
 @RestController //一般用于返回数据
-@RequestMapping("/liucan")
+@RequestMapping("liucan")
 public class MyRestController {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @GetMapping(value = "/find_user1")
+    @GetMapping("find_user1")
     public CommonResponse queryUser(@RequestHeader("Content-Type") String contentType,
                                     @RequestHeader HttpHeaders httpHeaders,
                                     @RequestHeader Map<String, String> maps,
@@ -46,24 +46,22 @@ public class MyRestController {
         }
     }
 
-    @GetMapping(value = "/find_user1/{user_Id}/{register_time}")
+    @GetMapping("find_user1/{user_Id}/{register_time}")
     public CommonResponse queryUser1(@PathVariable("user_Id") Integer userId,
                                      @RequestParam("user_id") Integer uId,
-                                     @PathVariable("register_time")
-                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                             LocalDateTime registerTime) {
+                                     @PathVariable("register_time") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime registerTime) {
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserIdEqualTo(userId);
         List<UserInfo> list = userInfoMapper.selectByExample(userInfoExample);
         return CommonResponse.ok(list.get(0));
     }
 
-    @PostMapping(value = "/add_user")
+    @PostMapping("add_user")
     public CommonResponse queryUser2(@RequestBody UserInfo userInfo) {
         return CommonResponse.ok(userInfo);
     }
 
-    @PostMapping(value = "/find_user1/entity")
+    @PostMapping("find_user1/entity")
     public HttpEntity httpEntity(RequestEntity requestEntity) {
         //请求内容
         HttpHeaders requestHeaders = requestEntity.getHeaders();
@@ -80,7 +78,7 @@ public class MyRestController {
     /**
      * 上传文件
      */
-    @PostMapping(value = "/upload_file")
+    @PostMapping("upload_file")
     public CommonResponse uploadFile(@RequestParam(value = "name", required = false) String name,
                                      @RequestParam("file") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
@@ -89,7 +87,7 @@ public class MyRestController {
         return CommonResponse.ok();
     }
 
-    @GetMapping(value = "/bizException")
+    @GetMapping("bizException")
     public CommonResponse bizException() {
         throw new BizException("业务异常");
     }

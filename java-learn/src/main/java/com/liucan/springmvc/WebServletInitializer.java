@@ -17,7 +17,8 @@ import javax.servlet.ServletRegistration;
  * @date 2018/7/1
  * @brief 代替web.xml初始化DispatcherServlet
  *        1.基于XML的Spring配置方式：继承AbstractDispatcherServletInitializer
- *        2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer
+ *        2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer或者WebApplicationInitializer
+ *          然后addListener,addServlet,addFilter
  */
 public class WebServletInitializer implements WebApplicationInitializer {
     private static final String SERVLET_NAME = "javalearn-dispatcher";
