@@ -22,13 +22,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@Controller //一般用于返回页面
-@RequestMapping("/liucan")
+@Controller
+@RequestMapping("liucan")
 public class MyController {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @GetMapping("index")
     public String test(Model model) {
         model.addAttribute("message", "Hello Spring MVC Framework!");
         //返回逻辑视图的名称，xml配置的ViewResolver会定义根据视图名称查找对于的视图
@@ -36,34 +36,34 @@ public class MyController {
     }
 
     //form表单
-    @GetMapping(value = "/student")
+    @GetMapping("student")
     public ModelAndView student() {
         return new ModelAndView("form/student", "command", new Student());
     }
 
     //form表单
-    @GetMapping(value = "/person")
+    @GetMapping("person")
     public ModelAndView person() {
         return new ModelAndView("form/person", "command", new Person());
     }
 
-    @GetMapping(value = "/redirectIndex")
+    @GetMapping("redirectIndex")
     public String index() {
         return "redirect/redirectIndex";
     }
 
     //重定向，就是在controller的方法间重定向
-    @GetMapping(value = "/redirect")
+    @GetMapping("redirect")
     public String redirect() {
         return "redirect:finalPage";
     }
 
-    @GetMapping(value = "/finalPage")
+    @GetMapping("finalPage")
     public String finalPage() {
         return "redirect/final";
     }
 
-    @GetMapping(value = "/find_user")
+    @GetMapping("find_user")
     @ResponseBody
     public CommonResponse queryUser(@RequestParam("user_id") Integer userId) {
         UserInfoExample userInfoExample = new UserInfoExample();
@@ -72,7 +72,7 @@ public class MyController {
         return CommonResponse.ok(list.get(0));
     }
 
-    @GetMapping("/upload")
+    @GetMapping("upload")
     public String upload() {
         return "form/upload";
     }
@@ -97,7 +97,7 @@ public class MyController {
     /**
      * 使用javax的valid校验器
      */
-    @PostMapping(value = "/addStudent")
+    @PostMapping("addStudent")
     public String addStudent(@ModelAttribute("student") @Valid Student student,
                              BindingResult bindingResult,
                              ModelMap model) {
@@ -118,7 +118,7 @@ public class MyController {
     /**
      * 使用spring-jsr303的valid校验器
      */
-    @PostMapping(value = "/addPerson")
+    @PostMapping("addPerson")
     public String addPerson(@ModelAttribute("person") @Valid Person person,
                             BindingResult bindingResult,
                             ModelMap model) {

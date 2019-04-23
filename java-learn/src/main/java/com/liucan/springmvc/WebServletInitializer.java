@@ -30,6 +30,16 @@ public class WebServletInitializer implements WebApplicationInitializer {
         addFilter(servletContext);
     }
 
+    /**
+     * ContextLoaderListener加载Application-context.xml里面的内容
+     */
+    private void addListener(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.register(AppConfig.class);
+
+        servletContext.addListener(new ContextLoaderListener(rootContext));
+    }
+
     private void addServlet(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
         dispatcherContext.register(WebConfig.class);
@@ -39,13 +49,9 @@ public class WebServletInitializer implements WebApplicationInitializer {
         dynamic.addMapping("/");
     }
 
-    private void addListener(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class);
-
-        servletContext.addListener(new ContextLoaderListener(rootContext));
-    }
-
+    /**
+     * 字符编码
+     */
     private void addFilter(ServletContext servletContext) {
         servletContext.addFilter("characterEncodingFilter", new CharacterEncodingFilter());
     }

@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -21,7 +20,6 @@ import java.util.Properties;
  * @brief
  */
 @Configuration
-@Import({DataSourceConfig.class})
 @MapperScan(basePackages = "com.liucan.mybatis.dao", sqlSessionFactoryRef = "sqlSessionFactory")
 public class MyBatisConfig {
     /**

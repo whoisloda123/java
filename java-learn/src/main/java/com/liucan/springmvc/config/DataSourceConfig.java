@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  * @brief mysql配置
  */
 @Configuration
-@PropertySource(value = "classpath:properties/mysql.properties")
+@PropertySource("classpath:properties/mysql.properties")
 public class DataSourceConfig {
     @Value("${mysql.driver}")
     private String driver;
@@ -25,9 +25,6 @@ public class DataSourceConfig {
     @Value("${mysql.password}")
     private String password;
 
-    /**
-     * mysql的dataSource
-     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
