@@ -1,5 +1,6 @@
 package com.liucan.springmvc;
 
+import com.liucan.springmvc.common.servlet.MyServlet;
 import com.liucan.springmvc.config.AppConfig;
 import com.liucan.springmvc.config.WebConfig;
 import org.springframework.web.WebApplicationInitializer;
@@ -14,11 +15,11 @@ import javax.servlet.ServletRegistration;
 /**
  * spring mvc :https://www.w3cschool.cn/spring_mvc_documentation_linesh_translation/?
  * @author liucan
- * @date 2018/7/1
- * @brief 代替web.xml初始化DispatcherServlet
- *        1.基于XML的Spring配置方式：继承AbstractDispatcherServletInitializer
- *        2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer或者WebApplicationInitializer
- *          然后addListener,addServlet,addFilter
+ * 2018/7/1
+ * 代替web.xml初始化DispatcherServlet
+ *   1.基于XML的Spring配置方式：继承AbstractDispatcherServletInitializer
+ *   2.基于Java配置的Spring应用，继承AbstractAnnotationConfigDispatcherServletInitializer或者WebApplicationInitializer
+ *     然后addListener,addServlet,addFilter
  */
 public class WebServletInitializer implements WebApplicationInitializer {
     private static final String SERVLET_NAME = "javalearn-dispatcher";
@@ -47,6 +48,10 @@ public class WebServletInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dynamic = servletContext.addServlet(SERVLET_NAME, new DispatcherServlet(dispatcherContext));
         dynamic.setLoadOnStartup(1);
         dynamic.addMapping("/");
+
+        ServletRegistration.Dynamic dynamic1 = servletContext.addServlet("test", new MyServlet());
+        dynamic1.setLoadOnStartup(1);
+        dynamic1.addMapping("/liucan");
     }
 
     /**
