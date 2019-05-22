@@ -378,6 +378,18 @@ public class Document {
      *          a.保证内网的安全，通常将反向代理作为公网访问地址，Web服务器是内网
      *          b.负载均衡，通过反向代理服务器来优化网站的负载
      *
+     *  37.rpc(远程过程调用)
+     *      一.rpc和restful api区别
+     *      参考：https://blog.csdn.net/wangyunpeng0319/article/details/78651998
+     *          a.RPC 就像本地方法调用，RESTful API 每一次添加接口都可能需要额外地组织开放接口的数据
+     *          b.RESTful API 在应用层使用 HTTP 协议,RPC 传输既可以使用 TCP/UDP，协议一般使用二制度编码，大大降低了数据的大小，减少流量消耗
+     *          c.对接异构第三方服务时，通常使用 HTTP/RESTful 等公有协议，对于内部的服务调用，应用选择性能更高的二进制私有协议
+     *      一.thrift
+     *      参考：https://blog.csdn.net/zkp_java/article/details/81879577
+     *          a.thrift是一个典型的CS结构,支持跨语言,thrift通过IDL(Interface Description Language)来关联客户端和服务端
+     *          b.thrift使用socket进行数据传输
+     *
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货

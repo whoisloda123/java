@@ -7,6 +7,7 @@ import com.thrift.BankliucanQry;
 import org.apache.thrift.TException;
 
 public class BankliucanQryImp implements BankliucanQry.Iface {
+
     public AccountResult serachMoneyByAccountId(int accountId) throws TException {
         AccountResult accountRes = new AccountResult();
         AccountDbMgr dbMgr = new AccountDbMgr();
