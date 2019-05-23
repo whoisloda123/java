@@ -384,10 +384,21 @@ public class Document {
      *          a.RPC 就像本地方法调用，RESTful API 每一次添加接口都可能需要额外地组织开放接口的数据
      *          b.RESTful API 在应用层使用 HTTP 协议,RPC 传输既可以使用 TCP/UDP，协议一般使用二制度编码，大大降低了数据的大小，减少流量消耗
      *          c.对接异构第三方服务时，通常使用 HTTP/RESTful 等公有协议，对于内部的服务调用，应用选择性能更高的二进制私有协议
-     *      一.thrift
+     *      二.thrift
      *      参考：https://blog.csdn.net/zkp_java/article/details/81879577
      *          a.thrift是一个典型的CS结构,支持跨语言,thrift通过IDL(Interface Description Language)来关联客户端和服务端
      *          b.thrift使用socket进行数据传输
+     *
+     *      三.Finagle
+     *      参考：https://www.cnblogs.com/junneyang/p/5383627.html
+     *      https://www.infoq.cn/article/2014/05/twitter-finagle-intro
+     *
+     *      四.dubbo
+     *      参考：https://blog.csdn.net/u010664947/article/details/80007767
+     *
+     *      五.spring cloud
+     *      参考：https://blog.csdn.net/valada/article/details/80892573
+     *      https://www.cnblogs.com/ityouknow/p/7508306.html
      *
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
