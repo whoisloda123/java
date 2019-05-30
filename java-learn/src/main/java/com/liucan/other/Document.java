@@ -400,6 +400,8 @@ public class Document {
      *      参考：https://blog.csdn.net/valada/article/details/80892573
      *      https://www.cnblogs.com/ityouknow/p/7508306.html
      *
+     *  38.jooq
+     *      参考：https://www.breakyizhan.com/springboot/3369.html
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
