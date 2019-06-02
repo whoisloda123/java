@@ -403,6 +403,22 @@ public class Document {
      *  38.jooq
      *      参考：https://www.breakyizhan.com/springboot/3369.html
      *
+     *  39.秒杀
+     *      参考：https://www.cnblogs.com/wangzhongqiu/p/6557596.html
+     *
+     *  40.B-tree，B-plus-tree
+     *      参考：https://www.cnblogs.com/vincently/p/4526560.html
+     *      https://blog.csdn.net/bigtree_3721/article/details/73626663
+     *      a.B-tree:升级版的二叉查找树，在二叉查找树的基础上，每个节点可以包含2个以上的key，且里面的key也是顺序的
+     *      b.B-plus-tree:在B-tree的基础上
+     *          1.非叶子节点只包含导航信息（子节点指针），不包含具体值，具体值保存在所有叶子节点，只有达到叶子结点才命中
+     *          2.所有叶子节点是一颗从小到大的顺序链表，便于区间查找和遍历
+     *          3.更适合文件索引系统，因为磁盘的磁道先统一寻址，再找到具体的值
+     *      c.B+树的优点
+     *          1.非叶子节点不会带上ROWID，这样，一个块中可以容纳更多的索引项，一是可以降低树的高度。二是一个内部节点可以定位更多的叶子节点
+     *          2.叶子节点之间通过指针来连接，范围扫描将十分简单，而对于B树来说，则需要在叶子节点和内部节点不停的往返移动
+     *
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
