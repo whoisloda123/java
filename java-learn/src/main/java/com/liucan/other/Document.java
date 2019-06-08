@@ -136,7 +136,7 @@ public class Document {
      *          b.Hashtable是Dictionary的实现，而Dictionary已经被抛弃了，被map代替了
      *          c.Hashtable是线程安全的，实现方式在修改数据时，直接锁住整个Hashtable，效率低基本上被弃用了，而HashMap线程不安全
      *          d.Hashtable不支持key和value为空，而HashMap，key和value都可以为空，所以通过get来判断是否存在会有问题的
-     *          e.ConcurrentHashMap采用分段锁，一次锁住一个桶，效率高，支持线程安全
+     *          e.ConcurrentHashMap采用分段锁
      *          f.散列表采用拉链法，数组+链表，如果链表的长度太大，则会变成树
      *      5.LinkedHashMap
      *          参考：https://blog.csdn.net/justloveyou_/article/details/71713781
@@ -146,9 +146,19 @@ public class Document {
      *          d.默认顺序是插入顺序，可以设置为操作顺序，可以用来实现LRU（最近最少使用）算法
      *      6.IdentityHashMap
      *          参考：https://blog.csdn.net/f641385712/article/details/81880711
-     *          a.HashMap是通过key.hashCode来生成hash值，通过调用key.equals来和旧值判断是否一样
+     *          a.HashMap是通过key.hashCode来生成hash值找到对应的桶位置，再通过调用key.equals来和旧值判断是否一样，找到在链表中位置
+     *              而Integer,String都是重写了hashCode和equals
      *          b.IdentityHashMap是通过System.IdentityHashCode来生成hash值，通过==指针来和旧值判断是否一样
      *          c.故key为String,Integer的HashMap，put多次是一样的，而IdentityHashMap则不一样，会生成新值
+     *      6.ConcurrentHashMap
+     *          a.读不需要加锁，因为Entry的的value是volatile能保证value是最新的
+     *          b.锁分段技术
+     *              1.多个segment组成，segment继承ReentrantLock，一个segment里面包含多个entry，相对于一次锁多个entry，而读是不需要加锁的，所以很快
+     *              2.java8已经舍弃了分段锁
+     *                  a.基于加入多个分段锁浪费内存空间
+     *                  b.生产环境中， map 在放入时竞争同一个锁的概率非常小，分段锁反而会造成更新等操作的长时间等待。
+     *                  c.采用了synchronized和CAS来操作
+     *          c.fail-safe迭代器
      *
      *     三.Set
      *      1.HashSet
@@ -422,6 +432,12 @@ public class Document {
      *      索引：https://www.cnblogs.com/fuyunbiyi/p/2429297.html
      *      聚簇索引：索引的叶节点就是数据节点。确定表中数据的物理顺序，一个表只能包含一个聚集索引
      *      非聚簇索引：叶节点仍然是索引节点，只不过有一个指针指向对应的数据块
+     *
+     *  42.foreach 循环原理
+     *      1.编译中的语义分析过程中，有一个解除语法糖的操作，（语法糖是啥？可以理解成编译器为方便开发人员开发，会对特定代码做一些特殊处理，
+     *          方便开发人员使用，除了foreach，java中还有泛型、装箱、拆箱、变长字符串等）
+     *      2.对于list，编译器会调用Iterable接口的 iterator方法来循环遍历数组的元素
+     *      3.对于数组，就是转化为对数组中的每一个元素的循环引用
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
