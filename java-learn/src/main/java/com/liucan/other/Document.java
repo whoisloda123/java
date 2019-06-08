@@ -109,6 +109,23 @@ public class Document {
      *      b.LinkList是基于双链表实现的，且可以当做栈，双端队列使用，并实现了相应的接口,而ArrayList没有，因为插入和删除的效率比较低
      *      c.实现List接口的常用类有LinkedList，ArrayList，Vector和Stack,而Stack是继承与Vector
      *      d.ArrayList实现了Serializable接口（ObjectOutputStream,ObjectInputStream操作类）,序列化writeObject先写入size，再写入元素
+     *      e.CopyOnWrite（COW，写时复制）
+     *      参考：https://www.cnblogs.com/dolphin0520/p/3938914.html
+     *          https://yq.aliyun.com/articles/665359
+     *          1.CopyOnWriteArrayList
+     *             a.是Vector另外一种线程安全的高效list,ArrayList对应的安全同步容器
+     *             b.修改时add，set等加锁，复制出一个新的数组进行操作，完成后将数组指针指向新的数组
+     *             c.读操作时size，get等不需要加锁，直接读取数组内容
+     *             d.优点:读写分离，线程安全，高效
+     *             e.缺点:
+     *                  只能保证最终一致性，但不能保证实时一致性
+     *                  每次修改时，内存会有2分数据，耗内存
+     *             f.应用场景：读多写少的并发场景，如网站搜索，会有黑名单搜索不会出现，而黑名单列表每天晚上更新一次，
+     *                  用户读黑名单的机会很多，但是更新
+     *          2.CopyOnWriteArraySet
+     *              a.里面用的是CopyOnWriteArrayList
+     *              b.装饰者模式，add的时候调用CopyOnWriteArrayList的addIfAbsent方法，如果元素不存在，才加入容器
+     *
      *     二.Map
      *      1.TreeMap
      *          a.是通过红黑树实现的(http://www.cnblogs.com/skywang12345/p/3245399.html)，
