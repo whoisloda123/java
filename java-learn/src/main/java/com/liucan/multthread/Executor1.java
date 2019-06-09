@@ -27,7 +27,7 @@ import java.util.concurrent.*;
  *
  *  1.newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
  *      线程池为无限大，60秒超时时间，当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程
- *  2.newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+ *  2.newFixedThreadPool 创建一个定长线程池，0秒超时时间,可控制线程最大并发数，超出的线程会在队列中等待。
  *  3.newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。ScheduledExecutorService比Timer更安全，功能更强大
  *  4.newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
  *

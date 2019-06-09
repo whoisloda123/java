@@ -11,6 +11,15 @@ import org.springframework.stereotype.Component;
  * 3.在Daemon线程中产生的新线程也是Daemon的
  * 4.守护线程应该永远不去访问固有资源，如文件、数据库，因为它会在任何时候甚至在一个操作的中间发生中断
  * 5.调用start方法的顺序不代表线程启动顺序
+ * 6.多次start()一个线程会抛异常，因为线程状态已经变了
+ * 7.线程状态：
+ *      NEW 状态是指线程刚创建, 尚未启动
+ *      RUNNABLE 状态是线程正在正常运行中,
+ *      BLOCKED  这个状态下, 是在多个线程有同步操作的场景, 比如正在等待另一个线程的synchronized 块的执行释放,
+ *          或者可重入的 synchronized块里别人调用wait() 方法, 也就是这里是线程在等待进入临界区
+ *      WAITING  这个状态下是指线程拥有了某个锁之后, 调用了他的wait方法, 等待其他线程/锁拥有者调用 notify / notifyAll
+ *      TIMED_WAITING  这个状态就是有限的(时间限制)的WAITING, 一般出现在调用wait(long)
+ *      TERMINATED 这个状态下表示 该线程的run方法已经执行完毕了
  * <p
  * 二.sleep和yield区别：https://www.cnblogs.com/hypnotizer/p/5579095.html
  * sleep线程处于阻塞状态，让出cpu时间片给其他线程执行，结束后才会转入就绪状态
