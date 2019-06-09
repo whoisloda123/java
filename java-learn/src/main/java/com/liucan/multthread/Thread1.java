@@ -77,7 +77,8 @@ import org.springframework.stereotype.Component;
  *          1.悲观锁认为对于同一个数据操作其他线程会修改，一定要加锁：常用锁
  *          2.乐观锁认为对于同一个数据操作其他线程不会修改，不需要加锁：用自旋锁
  *      e.偏向锁/轻量级锁/重量级锁:指的是锁的状态，是针对synchronized的---synchronized锁的优化
- *          1.偏向锁:一段代码一直被一个线程所访问，该线程会自动获取锁。降低获取锁的代价,无实际竞争，且将来只有第一个申请锁的线程会使用锁
+ *      参考：https://www.jianshu.com/p/36eedeb3f912
+ *          1.偏向锁:一段代码一直被一个线程所访问，该线程会自动获取锁（有个获取锁的过程）。降低获取锁的代价,无实际竞争，且将来只有第一个申请锁的线程会使用锁
  *          2.轻量级锁:指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能。
  *          3.重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，
  *              该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低
@@ -96,7 +97,7 @@ import org.springframework.stereotype.Component;
  *              2.其他线程获取锁先通过同步状态status来判断是否可以获取锁（如ReentrantLock的status如果不是当前线程最多是1
  *                  如果是1，则不能获取锁除非是0），如果能获取则获取，否则构造队列节点放入尾部，然后将当前线程挂起
  *              3.释放锁时，释放同步状态status（如ReentrantLock将状态变为0），同时唤醒后继节点
- *              4.在写自定义同步器的时候只需重写tryAcquire，tryAcquireShared，tryRelease，tryReleaseShared几个方法，来决定同步状态的释放和获取即可
+ *              4.在写自定义同步器的时候只需重写tryAcquire，tryRelease，tryAcquireShared, tryReleaseShared几个方法，来决定同步状态的释放和获取即可
  *              5.有共享模式和独占模式：ReentrantLock独占模式，一次只有一个获取锁的线程接口，CountDownLatch共享模式，一次有多个获取锁的线程节点
  *      d.CountDownLatch，Semaphore等线程同步类
  *          CountDownLatch控制同时等待多少个线程执行结束后再进行，Semaphore可控制有多少个线程同时执行
