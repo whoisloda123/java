@@ -51,6 +51,7 @@ import org.springframework.stereotype.Component;
  *      c.notify/notifyAll和wait方法都依赖Monitor锁
  *      d.synchronized方法，和方法块是基本Monitor锁实现，执行时候进入获取锁，离开释放锁
  *      e.所以notify/notifyAll和wait方法都必须位于synchronized内，否者抛异常
+ *      f.wait()方法立即释放对象监视器，notify()/notifyAll()方法则会等待线程剩余代码执行完毕才会放弃对象监视器
  *
  * 六.线程同步
  *  参考：https://www.cnblogs.com/szlbm/p/5588457.html

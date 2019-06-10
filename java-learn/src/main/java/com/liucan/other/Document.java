@@ -171,6 +171,7 @@ public class Document {
      *          a.读不需要加锁，因为Entry的的value是volatile能保证value是最新的
      *          b.锁分段技术
      *              1.多个segment组成，segment继承ReentrantLock，一个segment里面包含多个entry，相对于一次锁多个entry，而读是不需要加锁的，所以很快
+     *                  ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap
      *              2.java8已经舍弃了分段锁
      *                  a.基于加入多个分段锁浪费内存空间
      *                  b.生产环境中， map 在放入时竞争同一个锁的概率非常小，分段锁反而会造成更新等操作的长时间等待。
@@ -265,7 +266,7 @@ public class Document {
      *      6.而用补码来进行加减，可以得到正确结果，而且补码计算出来的-128（1000 0000）就是用反码表示的-0，计算出来的+0（0000 0000）可以表示0
      *        所以用补码来进行加减运算既能够解决+0和-0问题，而且能够多表示一位数字-128，所以说为什么byte的取值范围是[-128~127]
      *
-     *   31.java内存区域分配和gc（garbage collection）机制
+     *   31.jvm内存区域分配和gc（garbage collection）机制
      *      参考：https://www.cnblogs.com/zymyes2020/p/9052651.html
      *      https://www.cnblogs.com/xiaoxi/p/6486852.html
      *      gc青年代，老年代，永久代理论是基于大多数对象的很快就会变得不可达，只有极少数情况会出现旧对象持有新对象的引用
@@ -456,6 +457,9 @@ public class Document {
      *      2.对于list，编译器会调用Iterable接口的 iterator方法来循环遍历数组的元素
      *      3.对于数组，就是转化为对数组中的每一个元素的循环引用
      *
+     *   43.java内存模型：后续再详细看一下
+     *      https://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html
+     *      主内存与工作内存：线程对变量的所有操作（读取、赋值）都必须在工作内存中进行，而不能直接读写主内存中的变量
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货

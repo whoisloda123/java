@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class Map1 {
 
     private void test() {
-        //采用分段锁，一次只锁住一个桶
+        //采用分段锁
         ConcurrentHashMap<Integer, String> concurrentHashMap = new ConcurrentHashMap<>();
         concurrentHashMap.put(1, "2");
 
