@@ -457,9 +457,16 @@ public class Document {
      *      2.对于list，编译器会调用Iterable接口的 iterator方法来循环遍历数组的元素
      *      3.对于数组，就是转化为对数组中的每一个元素的循环引用
      *
-     *   43.java内存模型：后续再详细看一下
+     *  43.java内存模型：后续再详细看一下
      *      https://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html
      *      主内存与工作内存：线程对变量的所有操作（读取、赋值）都必须在工作内存中进行，而不能直接读写主内存中的变量
+     *
+     *  44.mybatis的#{}和${}区别
+     *   参考：http://www.mybatis.cn/archives/70.html
+     *      #{}:只是占位符，在sql语句预编译阶段会用？替换，执行的时候才传入值，可防止sql注入
+     *      ${}:是直接替换，然后sql语句预编译，这样有可能会sql注入，因为SQL注入是发生在预编译的过程中
+     *      使用#{}可以有效的防止SQL注入，提高系统安全性。原因在于：预编译机制。预编译完成之后，SQL的结构已经固定，
+     *          即便用户输入非法参数，也不会对SQL的结构产生影响，从而避免了潜在的安全风险
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
