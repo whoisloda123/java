@@ -341,7 +341,9 @@ public class Document {
      *          b.扩展类加载器：Extension ClassLoader,加载JAVA_HOME/lib/ext下的class类库
      *          c.应用程序类加载器：Application ClassLoader,加载用户路径（classpath）上的类库
      *      2.机制:双亲委派
-     *          双亲委派加载，调用父类的加载器加载，如果不行才自己加载，好处是安全，防止自己写string等,而且加载出来的只有一个object类
+     *      https://blog.csdn.net/Dopamy_BusyMonkey/article/details/79739748
+     *          双亲委派加载，调用父类的加载器加载，如果不行才自己加载，好处是安全，如防止自己写string被jvm当做是系统的string,
+     *          而且加载出来的只有一个object类
      *      3.Class.forName和ClassLoader.loaderClass区别
      *          Class.forName得到的class是已经初始化完成的，ClassLoader.loaderClass得到的class是还没有链接的
      *
@@ -457,9 +459,16 @@ public class Document {
      *      2.对于list，编译器会调用Iterable接口的 iterator方法来循环遍历数组的元素
      *      3.对于数组，就是转化为对数组中的每一个元素的循环引用
      *
-     *  43.java内存模型：后续再详细看一下
+     *  43.java内存模型：
      *      https://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html
-     *      主内存与工作内存：线程对变量的所有操作（读取、赋值）都必须在工作内存中进行，而不能直接读写主内存中的变量
+     *      1.主内存与工作内存：线程对变量的所有操作（读取、赋值）都必须在工作内存中进行，而不能直接读写主内存中的变量
+     *      2.happens-before：
+     *          a.happens-before的概念来指定两个操作之间的执行顺序,两个操作可以在一个线程之内，也可以是在不同线程之间
+     *          b.可以通过happens-before关系向程序员提供跨线程的内存可见性保证
+     *          c.如果一个操作happens-before另一个操作，那么第一个操作的执行结果将对第二个操作可见，
+     *              而且第一个操作的执行顺序排在第二个操作之前(程序员视角)，
+     *              有可能会指令重排序（JVM视角）
+     *          d.具体规则:有6种
      *
      *  44.mybatis的#{}和${}区别
      *   参考：http://www.mybatis.cn/archives/70.html
