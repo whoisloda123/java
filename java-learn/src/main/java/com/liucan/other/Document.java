@@ -297,8 +297,11 @@ public class Document {
      *          b.老年代
      *              Serial Old收集器（单线程标记-整理算法）
      *              Parallel Old收集器（多线程标记-整理算法）
-     *              CMS（Concurrent Mark Sweep）收集器（以获取最短回收停顿时间为目标的收集器。使用标记 - 清除算法）
-     *                  执行可以分为四个阶段：初始标记（Initial Mark）、并发标记（Concurrent Mark）、再次标记（Remark）、并发清除
+     *              CMS（Concurrent Mark Sweep）收集器
+     *                  1.以获取最短回收停顿时间为目标的收集器。使用标记 - 清除算法
+     *                  2.缺点是在同步标记的会使用多线程耗费资源
+     *                  3.在同步标记过程中产生新的对象，只能在下一次清除，带来的问题是如果这次失败了，那么下一次会很多，导致stop-the-world的时间很长
+     *                  4.执行可以分为四个阶段：初始标记（Initial Mark）、并发标记（Concurrent Mark）、再次标记（Remark）、并发清除
      *              G1收集器:标记整理算法
      *              https://blog.csdn.net/moakun/article/details/80648253
      *              http://www.importnew.com/23752.html
