@@ -305,7 +305,7 @@ public class Document {
      *              G1收集器:标记整理算法
      *              https://blog.csdn.net/moakun/article/details/80648253
      *              http://www.importnew.com/23752.html
-     *                  1.将java堆内存分成很多独立的区域，每个区域有优先级，也有青年代和老年代
+     *                  1.将java堆内存分成很多独立的区域（3000多个），每个区域有优先级，也有青年代和老年代
      *                      执行阶段：初始标记，并发标记，重新标记，复制/清除
      *                  2.老年代的清除算法有点像CMS算法，青年代的清除算法有点像停止复制算法
      *            在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑Parallel Scavenge收集器+Parallel Old收集器的组合
@@ -398,10 +398,18 @@ public class Document {
      *                  可以避免“幻像读”，每一次读取的都是数据库中真实存在数据，事务A与事务B串行，而不并发
      *                  幻读的重点在于insert
      *       d.mvcc(多版本并发控制)
+     *       https://www.cnblogs.com/chinesern/p/7592537.html
+     *       https://blog.csdn.net/w2064004678/article/details/83012387
      *          1.解决不可重复读
      *          2.每一行多了创建事务版本号和删除事务版本号
-     *          3.插入时、删除时保存当前事务版本号，查询时查询创建版本号小于等于当前事务版本，删除版本号大于等于当前事务版本号
-     *              更新时新插入一行，并以当前事务的版本号作为新行的创建版本号，同时将原记录行的删除版本号设置为当前事务版本号
+     *          3.过程
+     *             insert-当前的A事务-create_version=1，delete_version=null
+     *             update-新插入一行B事务-create_version=2,delete_version=null 同时A事务-delete_version=2
+     *             delete 最新的一行C事务-create_version=2,delete_version=3
+     *             select 如何查找出A事务的数据
+     *                 a.创建版本小于等于当前版本 create_version <= 1，确保读取的行的是在当前事务版本之前的
+     *                 b.删除版本大于等于当前版本 delete_version >=1,确保事务之前行没有被删除
+     *
      *       e.快照读和当前读
      *          快照读：读取的是快照版本，也就是历史版本
      *          当前读：读取的是最新版本
