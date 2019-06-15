@@ -288,11 +288,23 @@ public class Document {
      *        满足以上3个可以进行垃圾回收，但并不是马上就回收
      *      5.收集器：一般jvm是HotSpot
      *          新生代一般用停止复制算法，老年代一般用标记-清除和标记-整理算法
-     *          a.新生代：Serial收集器(单线程停止复制算法)，ParNew收集器（多线程停止复制算法），Parallel Scavenge收集器（多线程停止复制算法）
+     *          a.新生代
+     *              Serial New收集器(单线程停止复制算法)
+     *              ParNew收集器（多线程停止复制算法）
+     *              Parallel Scavenge收集器（多线程停止复制算法）
      *            Parallel Scavenge收集器关注的是吞吐量（垃圾器收集的时间和总运行时间比例），虚拟机运行在Server模式下的默认垃圾收集器，
      *            而其他2个关注的是每次停顿时间
-     *          b.老年代：Serial Old收集器（单线程标记-整理算法），Parallel Old收集器（多线程标记-整理算法）
-     *            CMS（Concurrent Mark Sweep）收集器（以获取最短回收停顿时间为目标的收集器。使用标记 - 清除算法），G1收集器
+     *          b.老年代
+     *              Serial Old收集器（单线程标记-整理算法）
+     *              Parallel Old收集器（多线程标记-整理算法）
+     *              CMS（Concurrent Mark Sweep）收集器（以获取最短回收停顿时间为目标的收集器。使用标记 - 清除算法）
+     *                  执行可以分为四个阶段：初始标记（Initial Mark）、并发标记（Concurrent Mark）、再次标记（Remark）、并发清除
+     *              G1收集器:标记整理算法
+     *              https://blog.csdn.net/moakun/article/details/80648253
+     *              http://www.importnew.com/23752.html
+     *                  1.将java堆内存分成很多独立的区域，每个区域有优先级，也有青年代和老年代
+     *                      执行阶段：初始标记，并发标记，重新标记，复制/清除
+     *                  2.老年代的清除算法有点像CMS算法，青年代的清除算法有点像停止复制算法
      *            在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑Parallel Scavenge收集器+Parallel Old收集器的组合
      *       6.注意：
      *         可能存在年老代对象引用新生代对象的情况，如果需要执行Young GC，则可能需要查询整个老年代以确定是否可以清理回收，这显然是低效的。解决的方法是，
