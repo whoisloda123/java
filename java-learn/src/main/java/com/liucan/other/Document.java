@@ -498,7 +498,20 @@ public class Document {
      *      #{}:只是占位符，在sql语句预编译阶段会用？替换，执行的时候才传入值，可防止sql注的过入
      *      ${}:是直接替换，然后sql语句预编译，这样有可能会sql注入，因为SQL注入是发生在预编译程中
      *      使用#{}可以有效的防止SQL注入，提高系统安全性。原因在于：预编译机制。预编译完成之后，SQL的结构已经固定，
-     *          即便用户输入非法参数，也不会对SQL的结构产生影响，从而避免了潜在的安全风险
+     *          即便用户输入非法参数，也不会对SQL的结构产生影响，从而避免了潜在的安全风险\
+     *
+     *  45.分布式session实现的几种方式
+     *  https://blog.csdn.net/woaigaolaoshi/article/details/50902010
+     *      1.粘性session，用户每次请求都只落到某个服务节点上，可通过nginx配置
+     *      2.session复制，当session发生变化时广播到其他节点上面，可通过tomcat配置
+     *      3.缓存方案，redis，memcached
+     *      4.数据库方案
+     *
+     *  46.forward和redirect的区别
+     *      1.forward转发：服务器行为，转发的路径必须是同一个web容器下的url，其不能转向到其他的web路径上去，中间传递的是自己的容器内的request
+     *          相对于转发到同一个web容器下的servlet程序处理，request是共享的
+     *      2.redirect重定向：客户端行为，服务器返回重定向url，客户端从新请求
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
