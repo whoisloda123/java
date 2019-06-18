@@ -473,6 +473,7 @@ public class Document {
      *
      *  41.innodb索引
      *      索引：https://www.cnblogs.com/fuyunbiyi/p/2429297.html
+     *      mysql中普遍使用B+Tree做索引
      *      聚簇索引：索引的叶节点就是数据节点。确定表中数据的物理顺序，一个表只能包含一个聚集索引
      *      非聚簇索引：叶节点仍然是索引节点，只不过有一个指针指向对应的数据块
      *
@@ -528,6 +529,16 @@ public class Document {
      *      1.第一范式：每列是不可在分割单元，且不能有重复
      *      2.第二范式：每列要有主键，相当于有主属性
      *      3.第三范式：每列的非主属性必须直接依赖于主属性，而不是间接依赖
+     *
+     *  49.MySQL存储引擎-InnoDB&MyISAM区别
+     *  https://www.cnblogs.com/liqiangchn/p/9066686.html
+     *      两者最大的区别就是InnoDB支持事务，和行锁，而MyISAM是不支持的
+     *      1.InnoDB的数据存储基于聚簇索引（数据和索引是存在一起，主键索引就是，不过他的二级索引（非主键索引）必须包含主键列）的，
+     *          而MyISAM是基于非聚簇索引进行存储的，索引和数据是分开的
+     *      2.InnoDB支持事务，MyISAM不支持
+     *      3.InnoDB支持行锁，MyISAM不支持
+     *      4.MyisAM支持全文索引（FULLTEXT）、压缩索引，InnoDB不支持
+     *      5.InnoDB关注事务和并发，MyISAM关注查询性能
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
