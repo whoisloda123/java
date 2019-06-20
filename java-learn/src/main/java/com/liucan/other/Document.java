@@ -575,6 +575,10 @@ public class Document {
      *          b.hash算法,redis是ip对的hash值对16384个哈希槽取模
      *          c.一致性hash算法,memcached client使用
      *
+     *   52.nio,aio,bio的区别
+     *     https://www.cnblogs.com/barrywxx/p/8430790.html
+     *      1.BIO:
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
