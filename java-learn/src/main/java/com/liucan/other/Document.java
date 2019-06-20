@@ -563,15 +563,17 @@ public class Document {
      *              d.mysql有机制去检查死锁
      *
      *  51.负载均衡算法
+     *  https://www.cnblogs.com/saixing/p/6730201.html
      *      1.应用服务器:只需要转发请求即可
      *          a.Random 随机:
      *              缺点:随机数的特点是在数据量大到一定量时才能保证均衡，所以如果请求量有限的话，可能会达不到均衡负载的要求
      *          b.轮询和加权轮询:
      *          c.最少连接:记录每个应用服务器正在处理的连接数，然后将新来的请求转发到最少的那台上
      *          d.hash地址:根据ip地址hash之后所有请求都是同一个服务器
-     *      2.分布式缓存集群:如redis,memerchaed
+     *      2.分布式缓存集群:如redis,memcached
      *          a.取模,HashCode对服务节点取模
-     *          b.一致性hash算法
+     *          b.hash算法,redis是ip对的hash值对16384个哈希槽取模
+     *          c.一致性hash算法,memcached client使用
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
