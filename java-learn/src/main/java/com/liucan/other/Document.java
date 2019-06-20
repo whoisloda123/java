@@ -513,7 +513,7 @@ public class Document {
      *          相对于转发到同一个web容器下的servlet程序处理，request是共享的
      *      2.redirect重定向：客户端行为，服务器返回重定向url，客户端从新请求
      *
-     *  47.一致性hash算法（分布式算法）
+     *  47.一致性hash算法（分布式缓存负载均衡算法）
      *      https://www.cnblogs.com/moonandstar08/p/5405991.html
      *      1.负载均衡算法
      *      2.常用的算法：取模算法，HashCode对服务节点取模，这种方式简单高效，
@@ -562,6 +562,16 @@ public class Document {
      *              c.找DBA执行下show InnoDB STATUS看看最近死锁的日志
      *              d.mysql有机制去检查死锁
      *
+     *  51.负载均衡算法
+     *      1.应用服务器:只需要转发请求即可
+     *          a.Random 随机:
+     *              缺点:随机数的特点是在数据量大到一定量时才能保证均衡，所以如果请求量有限的话，可能会达不到均衡负载的要求
+     *          b.轮询和加权轮询:
+     *          c.最少连接:记录每个应用服务器正在处理的连接数，然后将新来的请求转发到最少的那台上
+     *          d.hash地址:根据ip地址hash之后所有请求都是同一个服务器
+     *      2.分布式缓存集群:如redis,memerchaed
+     *          a.取模,HashCode对服务节点取模
+     *          b.一致性hash算法
      *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
