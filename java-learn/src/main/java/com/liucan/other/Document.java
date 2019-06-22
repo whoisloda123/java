@@ -587,6 +587,10 @@ public class Document {
      *      3.AIO:异步非阻塞模式
      *          不需要轮询等待，而是通过操作系统处理后，会自动通知服务处理相应的请求，相对于轮训操作交给操作系统
      *
+     *  53.MySQL数据库优化的几种方式
+     *  https://blog.51cto.com/yangshufan/2168952?source=drh
+     *  后续再看下
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
