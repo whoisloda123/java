@@ -593,6 +593,12 @@ public class Document {
      *  https://blog.51cto.com/yangshufan/2168952?source=drh
      *  后续再看下
      *
+     *  54.覆盖索引：
+     *  https://www.jianshu.com/p/77eaad62f974
+     *      a.查询语句覆盖了索引时（查询结果和条件里面都只是索引），只通过索引而不用通过获取行数据就可以获取到结果
+     *      b.select选择的字段中含有不在索引中的字段 ，即索引没有覆盖全部的列,不会选择覆盖索引查询
+     *      c..where条件中不能含有对索引进行like的操作。不会选择覆盖索引查询
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
