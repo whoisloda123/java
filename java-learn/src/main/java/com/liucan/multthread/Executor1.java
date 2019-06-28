@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  * 二.ThreadPoolExecutor线程池里面的4种拒绝策略
  *  场景,当一个任务通过execute(Runnable)方法欲添加到线程池时：
  *      a.池中线程数小于corePoolSize，新任务都不排队而是直接添加新线程
- *      b.池中线程数大于等于corePoolSize，workQueue未满，首选将新任务假如workQueue而不是添加新线程
+ *      b.池中线程数大于等于corePoolSize，workQueue未满，首选将新任务加入workQueue而不是添加新线程
  *      c.池中线程数大于等于corePoolSize，workQueue已满，但是线程数小于maximumPoolSize，添加新的线程来处理被添加的任务
  *      d.池中线程数大于大于corePoolSize，workQueue已满，并且线程数大于等于maximumPoolSize，新任务被拒绝，使用handler处理被拒绝的任务
  *  也就是：处理任务的优先级为：核心线程corePoolSize、任务队列workQueue、最大线程maximumPoolSize，如果三者都满了，使用handler处理被拒绝的任务

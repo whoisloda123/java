@@ -622,6 +622,31 @@ public class Document {
      *      2.分区：一个表的物理文件分为，索引文件，数据文件，表结构文件，分区就是把这些文件分成不同的小块
      *      3.分表：把表内容分成不同的表
      *
+     *  58.分布式事务
+     *  https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html
+     *  https://blog.csdn.net/hanruikai/article/details/82659223
+     *      1.本质上,分布式事务是为了保证不同数据库的数据一致性
+     *      2.表象:数据库分区分表,服务器soq化
+     *      1.cap理论:web服务器无法同时满足3个属性
+     *          a.数据的一致性
+     *          b.系统的可用性
+     *          c.分区容错性:单个组件无法可用,操作依然可以完成
+     *      2.base理论
+     *          理论的核心思想就是：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性
+     *      2.jta:java-transaction-api是对2阶段提交的实现,有spring实现了jta
+     *      3.kafka的事务就是分布式事务
+     *      4.实现方式:
+     *          a.强一致性
+     *          b.最终一致性
+     *      5.2pc:2阶段提交采用XA协议
+     *          a.事务管理器对每个事务参与的数据库,询问是否可以提交
+     *          b.事务管理器对每个事务参与的数据库,发出提交命令
+     *          c.如果其中某一个参与者在是否可以提交和提交失败都会失败回滚
+     *          d.属于强一致性
+     *      6.tcc:补偿事务
+     *          a.和2pc流程差不多
+     *      7.
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
