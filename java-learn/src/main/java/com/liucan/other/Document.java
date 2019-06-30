@@ -460,6 +460,10 @@ public class Document {
      *
      *  39.秒杀
      *      参考：https://www.cnblogs.com/wangzhongqiu/p/6557596.html
+     *      a.秒杀系统特点是并发量极大，但实际秒杀成功的请求数量却很少
+     *      b.设计思路
+     *          将请求拦截在系统上游，降低下游压力
+     *          后端接口，必须能够支持高并发请求，必须尽可能“快”，在最短的时间里返回用户的请求结果
      *
      *  40.B-tree，B-plus-tree
      *      参考：https://www.cnblogs.com/vincently/p/4526560.html
@@ -653,7 +657,7 @@ public class Document {
      *  59.单点登录（single-single-on SSO）
      *  https://www.cnblogs.com/morethink/p/8047711.html
      *  https://www.cnblogs.com/zhuchenglin/p/8968530.html
-     *      概念：用户用户名和密码登录了一个a子系统后，登录其他子系统如b系统不需要重新输入了
+     *      概念：用户用户名和密码登录了一个a系统后，登录b系统不需要重新输入了
      *      实现方式：
      *          1.cookie方式
      *              a.用户登录a系统，跳转至sso认证中心拿到返回的cookie，去登录b系统
@@ -662,7 +666,7 @@ public class Document {
      *                  不安全，如果cookie可能会被破解
      *          2.服务节点内部认证的方式
      *              a.用户登录a系统，跳转至sso认证中心登录成功
-     *              b.sso认证中心创建全局回话，保存全局的令牌信息,用户信息，用户名，密码等等，将局部令牌发送给a系统
+     *              b.sso认证中心创建全局会话，保存的令牌信息,用户信息，用户名，密码等等，将局部令牌发送给a系统
      *              c.认证中心带着令牌跳转到用户最初请求的地址，a系统拿到令牌信息，到sso认证中心验证是否登录了
      *              d.如果登录了，则保存局部会话
      *              e.用户登录b系统，跳转至sso认证中心发现用户已经登录，则执行c步骤
