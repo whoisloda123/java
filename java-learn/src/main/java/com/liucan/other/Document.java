@@ -692,6 +692,15 @@ public class Document {
      *              慢开始和拥塞避免
      *              慢慢的增加发送数据的大小
      *
+     * 什么时候触发full gc
+     *
+     *
+     * 限流
+     * JVM优化，优化参数
+     * sql优化
+     * mysql集群主从复制，主从同步
+     * spring-boot如何实现自动配置的
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
