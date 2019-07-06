@@ -333,6 +333,20 @@ public class Document {
      *      5.程序计数器（PC寄存器）：记录当前线程执行的字节码到第几行
      *      其中堆区和方法区线程共享，其他非线程共享
      *
+     *     三.jvm调优
+     *      https://www.jianshu.com/p/4b4519f97c92
+     *      1.看下jvm相关的书
+     *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20-XX:+UseConcMarkSweepGC -XX:+UseParNewG
+     *      2.调优常用命令：
+     *          -Xms:初始内存大小
+     *          -Xmx:最大内存大小
+     *          -Xss:每个线程堆栈大小
+     *          -Xmn:年轻代大小
+     *          -XX:NewSize=n设置年轻代大小
+     *          -XX:NewRatio=n:设置年轻代和年老代的比值
+     *          -XX:MaxPermSize=n:设置持久代大小
+     *          -XX:+UseSerialGC:设置串行收集器
+     *
      *   32.jvm
      *    1.每个java程序运行起来就会产生一个jvm实例，java程序结束jvm实例就会消失
      *
@@ -698,21 +712,26 @@ public class Document {
      *          b.实现方式
      *              慢开始和拥塞避免
      *              慢慢的增加发送数据的大小
-     *  61.jvm调优
-     *      https://www.jianshu.com/p/4b4519f97c92
-     *      1.看下jvm相关的书
-     *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20-XX:+UseConcMarkSweepGC -XX:+UseParNewG
-     *      2.调优常用命令：
-     *          -Xms:初始内存大小
-     *          -Xmx:最大内存大小
-     *          -Xss:每个线程堆栈大小
-     *          -Xmn:年轻代大小
-     *          -XX:NewSize=n设置年轻代大小
-     *          -XX:NewRatio=n:设置年轻代和年老代的比值
-     *          -XX:MaxPermSize=n:设置持久代大小
-     *          -XX:+UseSerialGC:设置串行收集器
      *
-     * 什么时候触发full gc
+     *  61.常用的几种分布式id的设计方案
+     *  参考：https://www.jianshu.com/p/b2337d954ff0
+     *      a.UUID（里面有通过网卡）
+     *          优点：简单，高效
+     *          缺点：不支持递增，无时间信息，数据比较长
+     *      b.数据库自增id
+     *          优点：写入效率高
+     *          缺点：分布式架构，多个Mysql实例可能会导致ID重复,容易被识破
+     *      c.redis
+     *          优点：不依赖于数据库，灵活方便，且性能优于数据库
+     *          缺点：AOF和RDB依然会存在数据丢失，造成ID重复。
+     *      d.zookeeper
+     *      e.雪花算法-SnowFlake:机制和UUID差不多，是生成一个long的整数
+     *          1.第一位：最高位是符号位0
+     *          2.第二部分：41bit时间戳，精确到毫秒级，41位的长度可以使用69年-（一般是当前时间-开始时间）
+     *          3.第三部分：10位的机器标识（5位数据标识位，5位机器标识位）
+     *          4.第四部分：12位的计数序列号-自增id，最多支持同一毫秒内4096个
+     *          优点：高效，有时间，且递增
+     *          缺点：依赖与时钟，不能回拨
      *
      *
      * 限流
@@ -722,7 +741,6 @@ public class Document {
      *
      * ssl协议，对称加密，非对称加密
      * 如何判断对象是否可以回收或存活？
-     * 常用的几种分布式id的设计方案？
      * 计算机网络？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
