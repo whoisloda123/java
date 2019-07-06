@@ -315,6 +315,13 @@ public class Document {
      *         可能存在年老代对象引用新生代对象的情况，如果需要执行Young GC，则可能需要查询整个老年代以确定是否可以清理回收，这显然是低效的。解决的方法是，
      *         年老代中维护一个512 byte的块——”card table“，所有老年代对象引用新生代对象的记录都记录在这里。Young GC时，只要查这里即可，
      *         不用再去查全部老年代，因此性能大大提高
+     *       7.何时触发young gc和full gc
+     *          a.yong gc:伊甸园区满的时候
+     *          b.full gc:
+     *              1.青年代进入老年代的时候，老年代的剩余空间不足
+     *              2.system.gc()
+     *              3.永久代的空间不足
+     *              4.cms gc时因浮动垃圾太多，空间不足，也会full gc
      *
      *     二.运行内存分布
      *      1.堆区
@@ -695,7 +702,7 @@ public class Document {
      *      https://www.jianshu.com/p/4b4519f97c92
      *      1.看下jvm相关的书
      *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20-XX:+UseConcMarkSweepGC -XX:+UseParNewG
-     *      2.调匀后常用命令：
+     *      2.调优常用命令：
      *          -Xms:初始内存大小
      *          -Xmx:最大内存大小
      *          -Xss:每个线程堆栈大小
@@ -716,6 +723,7 @@ public class Document {
      * ssl协议，对称加密，非对称加密
      * 如何判断对象是否可以回收或存活？
      * 常用的几种分布式id的设计方案？
+     * 计算机网络？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
