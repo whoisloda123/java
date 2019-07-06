@@ -691,16 +691,31 @@ public class Document {
      *          b.实现方式
      *              慢开始和拥塞避免
      *              慢慢的增加发送数据的大小
+     *  61.jvm调优
+     *      https://www.jianshu.com/p/4b4519f97c92
+     *      1.看下jvm相关的书
+     *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20-XX:+UseConcMarkSweepGC -XX:+UseParNewG
+     *      2.调匀后常用命令：
+     *          -Xms:初始内存大小
+     *          -Xmx:最大内存大小
+     *          -Xss:每个线程堆栈大小
+     *          -Xmn:年轻代大小
+     *          -XX:NewSize=n设置年轻代大小
+     *          -XX:NewRatio=n:设置年轻代和年老代的比值
+     *          -XX:MaxPermSize=n:设置持久代大小
+     *          -XX:+UseSerialGC:设置串行收集器
      *
      * 什么时候触发full gc
      *
      *
      * 限流
-     * JVM优化，优化参数
      * sql优化
      * mysql集群主从复制，主从同步
      * spring-boot如何实现自动配置的
      *
+     * ssl协议，对称加密，非对称加密
+     * 如何判断对象是否可以回收或存活？
+     * 常用的几种分布式id的设计方案？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
