@@ -760,7 +760,15 @@ public class Document {
      *      b.该注解会import一个AutoConfigurationImportSelector，里面会加载META-INF/spring.factories里面配置好的各种类，放到ioc容器里面
      *      c.如redis，es，kafka等等，而这些配置类默认会读取application.yml文件里面的配置
      *
-     * ssl协议，对称加密，非对称加密
+     *  65.https工作流程,ssl协议，对称加密，非对称加密
+     *  https://www.cnblogs.com/hai-blog/p/8311671.html
+     *      a.对称加密：A（客户端）和B（服务端）都用的是同一个私钥来加密和解密
+     *      b.非对称加密：
+     *          1.A请求
+     *          2.B返回证书和公钥
+     *          3.A随机产生一个对称密钥，用公钥对这个对称密钥加密发给B
+     *          4.B收到后用私钥解密拿到对称密钥
+     *          5.至此A和B都拿到了同一个对称密钥了，相互就可以加密和解密了
      *
      * 计算机网络？
      * sql优化？
