@@ -750,13 +750,20 @@ public class Document {
      *      b.漏桶：桶里面以一定速率滴水，入桶的水可以速度很快也很小，反正多了就溢出不管
      *      c.计数器：计算请求的数量，然后限制
      *
-     * sql优化
-     * mysql集群主从复制，主从同步
-     * spring-boot如何实现自动配置的
+     *  63.mysql集群主从复制，主从同步
+     *      a.集群中每个节点都是全部内容
+     *      b.master节点上面记录的binlog-记录了所有操作，然后复制到slave上面
+     *
+     *  64.spring-boot如何实现自动配置的
+     *  https://www.cnblogs.com/leihuazhe/p/7743479.html
+     *      a.通过SpringBootApplication注解下面的EnableAutoConfiguration注解
+     *      b.该注解会import一个AutoConfigurationImportSelector，里面会加载META-INF/spring.factories里面配置好的各种类，放到ioc容器里面
+     *      c.如redis，es，kafka等等，而这些配置类默认会读取application.yml文件里面的配置
      *
      * ssl协议，对称加密，非对称加密
      *
      * 计算机网络？
+     * sql优化？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
