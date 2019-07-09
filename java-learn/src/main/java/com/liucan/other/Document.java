@@ -690,11 +690,14 @@ public class Document {
      *                  a.相对于2pc来说，多了perCommit和超时机制（参与者和管理者都有）
      *          3.tcc(Try-Confirm-Cancel):补偿事务 和2pc流程差不多
      *              a.针对每个操作都要注册一个与其对应的确认和补偿（撤销操作）
-     *          4.本地消息表：基于本地事务+mq
+     *          4.mq方式：基于本地事务+mq
      *              其实也是基于2阶段提交，预提交，提交过程，只是交给mq处理了
      *              A事务先二阶段执行，mq会有个回调，如果失败需要回滚就执行回调
-     *              A事务执行成功，然后给B事务发送成功消息，B事务开始执行
+     *              A事务执行成功，会修改mq里面的一个状态，然后给B事务发送成功消息，B事务开始执行
      *              属于最终一致性
+     *          5.本地消息表
+     *          https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html
+     *          有点模糊，后续再看下
      *
      *  59.单点登录（single-single-on SSO）
      *  https://www.cnblogs.com/morethink/p/8047711.html
@@ -770,8 +773,12 @@ public class Document {
      *          4.B收到后用私钥解密拿到对称密钥
      *          5.至此A和B都拿到了同一个对称密钥了，相互就可以加密和解密了
      *
+     *  66.tcp粘包/拆包，及解决办法
+     *  https://www.cnblogs.com/panchanggui/p/9518735.html
+     *
      * 计算机网络？
      * sql优化？
+     * 如何防止sql注入？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货

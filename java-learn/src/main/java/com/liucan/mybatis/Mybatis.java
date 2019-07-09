@@ -44,6 +44,9 @@ import java.io.InputStream;
  * 　　       Statement：把创建的SQL对象，转而存储到数据库当中。
  * 　　       ResultSet：它是一个迭代器，用于检索查询数据。
  *
+ *
+ * https://blog.csdn.net/ma15732625261/article/details/81123349
+ *
  */
 @Component
 public class Mybatis {
