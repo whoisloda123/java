@@ -776,6 +776,9 @@ public class Document {
      *  66.tcp粘包/拆包，及解决办法
      *  https://www.cnblogs.com/panchanggui/p/9518735.html
      *
+     * http1.0和http2.0的区别?
+     * 什么时候索引失效？
+     * tcp滑动窗口
      * 计算机网络？
      * sql优化？
      * 如何防止sql注入？

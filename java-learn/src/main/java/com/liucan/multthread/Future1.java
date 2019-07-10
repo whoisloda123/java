@@ -22,7 +22,6 @@ public class Future1 {
         });
         //FutureTask的run执行完成后会唤醒休眠的线程
         new Thread(futureTask).start();
-
         try {
             //线程休眠等待线程执行结果
             String s = futureTask.get();
