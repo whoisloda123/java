@@ -1,5 +1,6 @@
 package com.liucan.multthread;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -112,6 +113,7 @@ import org.springframework.stereotype.Component;
  * @author liucan
  * @version 19-1-20
  */
+@Scope
 @Component
 public class Thread1 {
 
