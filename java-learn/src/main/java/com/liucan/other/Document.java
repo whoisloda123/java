@@ -783,10 +783,15 @@ public class Document {
      *      c.类型是字符串,但是没有用引号包含起来
      *      d.mysql估计全部扫描的时间,比使用索引的时间快时(数据量很大,查询出20%-30%数据,因索引会查找2次才能查到数据)
      *
+     *  68.如何防止sql注入？
+     *  https://www.cnblogs.com/jiangxueqiao/p/7444127.html
+     *      a.转义字符特殊处理
+     *      b.Prepared Statement预处理语句(如mybatis#{} 预编译阶段用?代替,然后正在执行的时候在替换)
+     *
      * tcp滑动窗口
      * 计算机网络？
      * sql优化？
-     * 如何防止sql注入？
+     *
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
