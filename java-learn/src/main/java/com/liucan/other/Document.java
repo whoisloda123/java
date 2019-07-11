@@ -776,8 +776,13 @@ public class Document {
      *  66.tcp粘包/拆包，及解决办法
      *  https://www.cnblogs.com/panchanggui/p/9518735.html
      *
-     * http1.0和http2.0的区别?
-     * 什么时候索引失效？
+     *  67.什么时候索引失效？
+     *  https://www.e-learn.cn/content/mysql/1045218
+     *      a.like查询%在前面
+     *      b.or操作但没有把所有字段加上索引,!=, is null, not in等操作
+     *      c.类型是字符串,但是没有用引号包含起来
+     *      d.mysql估计全部扫描的时间,比使用索引的时间快时(数据量很大,查询出20%-30%数据,因索引会查找2次才能查到数据)
+     *
      * tcp滑动窗口
      * 计算机网络？
      * sql优化？
