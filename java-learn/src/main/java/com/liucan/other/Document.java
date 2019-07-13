@@ -798,7 +798,16 @@ public class Document {
      *        负载均衡：
      *        mq流量消峰：
      *        数据库分库分表：
+     *
      *  71.如何保证mysql和redis，数据一致性，解决数据库与缓存双写的时候数据不一致的情况
+     *  https://www.cnblogs.com/lingqin/p/10279393.html
+     *      a.延时双删策略
+     *          1.如果先更新数据库，再删缓存，会出更新成功，删除缓存失败，造成数据不一致
+     *          2.先删redis，再更新mysql，会出现再删除后，另外请求过来，然后拿到了老数据
+     *          3.解决上面的问题，先删除缓存，再更新mysql，sleep一段时间（等待另外一个请求读取到老数据，然后更新到缓存里面，返回给前端后），再删除缓存
+     *      b.订阅mysql binlog增量消息（只要更新数据就会更新binlog） + mq如kafka + redis
+     *          1.订阅mysql binlog增量消息 ，通过kafka发送给redis，然后更新
+     *
      * tcp滑动窗口
      * 计算机网络？
      * sql优化？
