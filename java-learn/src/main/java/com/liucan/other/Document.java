@@ -145,6 +145,7 @@ public class Document {
      *              2.再哈希法：对key继续用新的hash函数，直到不产生冲突为止
      *              3.拉链法：hashMap实现方式
      *              4.建立公共溢出区：将哈希表分为 基本表 和 溢出表 两部分。凡是和 基本表 发生冲突的记录都被存到 溢出表
+     *          e.java1.8里面，如果链表长度大于8时，会变成红黑树
      *      3.Hashtable
      *          和HashMap实现差不多，只是是线程安全
      *      4.WeakHashMap
@@ -176,9 +177,9 @@ public class Document {
      *      6.ConcurrentHashMap
      *          a.读不需要加锁，因为Entry的的value是volatile能保证value是最新的
      *          b.锁分段技术
-     *              1.多个segment组成，segment继承ReentrantLock，一个segment里面包含多个entry，相对于一次锁多个entry，而读是不需要加锁的，所以很快
+     *              1.java1.7采用多个segment组成，segment继承ReentrantLock，一个segment里面包含多个entry，相对于一次锁多个entry，而读是不需要加锁的，所以很快
      *                  ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap
-     *              2.java8已经舍弃了分段锁
+     *              2.java1.88已经舍弃了分段锁
      *                  a.基于加入多个分段锁浪费内存空间
      *                  b.生产环境中， map 在放入时竞争同一个锁的概率非常小，分段锁反而会造成更新等操作的长时间等待。
      *                  c.采用了synchronized和CAS来操作
@@ -813,6 +814,19 @@ public class Document {
      *          3.解决上面的问题，先删除缓存，再更新mysql，sleep一段时间（等待另外一个请求读取到老数据，然后更新到缓存里面，返回给前端后），再删除缓存
      *      b.订阅mysql binlog增量消息（只要更新数据就会更新binlog） + mq如kafka + redis
      *          1.订阅mysql binlog增量消息 ，通过kafka发送给redis，然后更新
+     *
+     *  72.数据库水平切分和垂直切分
+     *  https://uule.iteye.com/blog/2122627
+     *  https://blog.csdn.net/5hongbing/article/details/78024897
+     *      a.垂直切分：垂直一刀，根据不同的业务拆分到不同的数据库，或者比较大的数据单独放一个表
+     *          优点：拆分简单，业务明确
+     *          缺点.事务不好处理，过度切分导致系统复杂
+     *      b.水平拆分：水平一刀，分表操作，
+     *          优点：事务处理比较简单，不会存在性能问题
+     *          缺点：分表逻辑不好控制，数据迁移比较麻烦（可采用一致性hash算法），跨节点join，排序等等比较麻烦
+     *      c.数据切分应引发的问题
+     *          1.分布式事务（垂直切分）
+     *          2.跨节点Join的问题，排序等等问题
      *
      * tcp滑动窗口
      * 计算机网络？
