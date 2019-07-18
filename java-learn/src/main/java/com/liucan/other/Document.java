@@ -667,7 +667,7 @@ public class Document {
      *      2.分区：一个表的物理文件分为，索引文件，数据文件，表结构文件，分区就是把这些文件分成不同的小块
      *      3.分表：把表内容分成不同的表
      *
-     *  58.分布式事务
+     *  58.分布式事务Redis缓存雪崩？击穿？穿透？
      *  https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html
      *  https://blog.csdn.net/hanruikai/article/details/82659223
      *      a.目的：因为出现数据库分区分表，服务器soa话，但是本质上分布式事务是为了保证不同数据库的数据一致性
@@ -700,7 +700,7 @@ public class Document {
      *          4.mq方式：基于本地事务+mq
      *              其实也是基于2阶段提交，预提交，提交过程，只是交给mq处理了
      *              A事务先二阶段执行，mq会有个回调，如果失败需要回滚就执行回调
-     *              A事务执行成功，会修改mq里面的一个状态，然后给B事务发送成功消息，B事务开始执行
+     *              A事Redis缓存雪崩？击穿？穿透？务执行成功，会修改mq里面的一个状态，然后给B事务发送成功消息，B事务开始执行
      *              属于最终一致性
      *          5.本地消息表
      *          https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html
@@ -851,7 +851,8 @@ public class Document {
      * tcp滑动窗口
      * 计算机网络？
      *
-     *
+     *  说一下自己的优缺点？
+     *  说一下碰到最有难度的问题，如何解决？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
