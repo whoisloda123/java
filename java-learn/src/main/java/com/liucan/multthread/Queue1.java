@@ -12,6 +12,18 @@ import java.util.concurrent.*;
  */
 public class Queue1 {
 
+    /**
+     * 同步队列
+     * http://ifeve.com/java-synchronousqueue/
+     * 1.队列的大小为0
+     * 2.在put的时候，要等待另外的线程take，反之一样
+     * 3.相对于生产者和消费者相互等待，直到握手一起离开
+     * 4.Executors.newCachedThreadPool()里面用的就是SynchronousQueue
+     */
+    private void synchronousQueue() {
+        SynchronousQueue<String> synchronousQueue = new SynchronousQueue<>();
+    }
+
     private void arrayBlockingQueue() {
         //ArrayBlockingQueue
         BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1024);
