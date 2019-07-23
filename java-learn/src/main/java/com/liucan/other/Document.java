@@ -875,6 +875,9 @@ public class Document {
      *  个人平时怎么提升技术？
      *  在工作中和生活中遇见最大的挑战是什么？
      *  学习方向？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+     *
+     *
+     *  笔试题目->计算机网络，排序，算法的等->项目经验->简历
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
      */
