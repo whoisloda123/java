@@ -764,7 +764,7 @@ public class Document {
      *
      *  63.mysql集群主从复制，主从同步
      *      a.集群中每个节点都是全部内容
-     *      b.master节点上面记录的binlog-记录了所有操作，然后复制到slave上面
+     *      b.master节点上面记录的binlog-记录了所有操作，从数据库启动一个io线程复制binlog到从
      *
      *  64.spring-boot如何实现自动配置的
      *  https://www.cnblogs.com/leihuazhe/p/7743479.html
@@ -851,6 +851,7 @@ public class Document {
      *
      *  76.rpc框架
      *  http://youzhixueyuan.com/implementation-principle-of-rpc-framework.html
+     *  我说了主要是协议栈+数据格式+序列化方式，然后需要有服务注册中心管理生产者和消费者。
      *
      *  77.spring如何解决循环依赖的？
      *  https://blog.csdn.net/lzhcoder/article/details/84144381
@@ -865,6 +866,9 @@ public class Document {
      *              里面依赖A，这个时候如果发现A正在创建中，会从缓存里面拿到创建好的A（没有填充属性）
      *          3.实例化完成后，会填充属性，初始化
      *
+     *  78.Java栈什么时候会发生内存溢出
+     *      a.递归调用方法
+     *      b.死循环调用，里面有局部变量
      *
      * dubbo?
      * tcp滑动窗口
