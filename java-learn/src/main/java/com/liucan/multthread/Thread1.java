@@ -113,6 +113,7 @@ import org.springframework.stereotype.Component;
  * @author liucan
  * @version 19-1-20
  */
+//singleton单例模式,.prototype原型模式,request,session,global session
 @Scope
 @Component
 public class Thread1 {
