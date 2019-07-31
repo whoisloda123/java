@@ -15,7 +15,7 @@ public class XiangMu {
      * 8.kafka
      * 9.下单抽免单
      * 10.加购抽奖-大促活动
-     *      用户将商品加入购物车，即可抽奖，然后优先发发加入购物车商品对应的有库存的专场券，其次发b类运营给的有库存的券
+     *      介绍：用户将商品加入购物车，即可抽奖，然后优先发发加入购物车商品对应的有库存的专场券，其次发b类运营给的有库存的券
      *  a.kafka消费用户的加入购物车消息，保存到mysql
      *  b.redis保存有券库存的信息
      *  c.通过quartz任务调度系统执行定时任务
@@ -36,10 +36,15 @@ public class XiangMu {
      *              q.负债均衡
      *
      *  oversea-competitor
+     *      介绍：抓取亚马逊网站上面的数据，和自营店铺的数据，入es库，然后同步hive
      *  1.分为core，crawler,web3个模块
-     *  2.core:公共模块，包括mybatis相关的文件
-     *  3.web,spring-boot，后台管理页面，api接口
-     *  4.crawler抓取模块
+     *  2.core:公共模块，包括mybatis-generator相关的文件,公用的类
+     *  3.web,spring-boot，提供api接口和后台管理页面
+     *  4.crawler抓取模块：包括
+     *      定时任务模块
+     *      kafka消费模块
+     *      评论抓取模块
+     *  5.设计到的难点和需要考虑到的地方
      *
      */
 }
