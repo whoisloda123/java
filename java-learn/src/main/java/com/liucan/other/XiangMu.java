@@ -20,7 +20,7 @@ public class XiangMu {
      *  b.redis保存有券库存的信息
      *  c.通过quartz任务调度系统执行定时任务
      *  d.通过thrift调用券服务的查询券信息和发券
-     *  e.通过mysql-mybatis保存用户发券记录
+     *  e.通过mysql-mybatis，jooq保存用户发券记录
      *  f.活动的一些信息，如开始结束时间，券配置保存在zk里面
      *  g.后台管理系统配置券信息freemarker
      *  h.设计到的难点和需要考虑到的地方：
@@ -34,6 +34,12 @@ public class XiangMu {
      *              e.分布式集群
      *              f.分库分表
      *              q.负债均衡
+     *
+     *  oversea-competitor
+     *  1.分为core，crawler,web3个模块
+     *  2.core:公共模块，包括mybatis相关的文件
+     *  3.web,spring-boot，后台管理页面，api接口
+     *  4.crawler抓取模块
      *
      */
 }
