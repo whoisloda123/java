@@ -179,10 +179,11 @@ public class Document {
      *          b.锁分段技术
      *              1.java1.7采用多个segment组成，segment继承ReentrantLock，一个segment里面包含多个entry，相对于一次锁多个entry，而读是不需要加锁的，所以很快
      *                  ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap
-     *              2.java1.88已经舍弃了分段锁
+     *              2.java1.8已经舍弃了分段锁
      *                  a.基于加入多个分段锁浪费内存空间
      *                  b.生产环境中， map 在放入时竞争同一个锁的概率非常小，分段锁反而会造成更新等操作的长时间等待。
      *                  c.采用了synchronized和CAS来操作
+     *              3.当链表长度大于8时，会变成红黑树，红黑树小于6时会退化为链表
      *          c.fail-safe迭代器
      *
      *     三.Set
@@ -354,7 +355,7 @@ public class Document {
      *     三.jvm调优
      *      https://www.jianshu.com/p/4b4519f97c92
      *      1.看下jvm相关的书
-     *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20-XX:+UseConcMarkSweepGC -XX:+UseParNewG
+     *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20 -XX:+UseConcMarkSweepGC -XX:+UseParNewG
      *      2.调优常用命令：
      *          -Xms:初始内存大小
      *          -Xmx:最大内存大小
@@ -740,7 +741,7 @@ public class Document {
      *  参考：https://www.jianshu.com/p/b2337d954ff0
      *      a.UUID（里面有通过网卡）
      *          优点：简单，高效
-     *          缺点：不支持递增，无时间信息，数据比较长
+     *          缺点：不支持递增，数据比较长
      *      b.数据库自增id
      *          优点：写入效率高
      *          缺点：分布式架构，多个Mysql实例可能会导致ID重复,容易被识破
@@ -822,7 +823,7 @@ public class Document {
      *  https://blog.csdn.net/5hongbing/article/details/78024897
      *      a.垂直切分：垂直一刀，根据不同的业务拆分到不同的数据库，或者比较大的数据单独放一个表
      *          优点：拆分简单，业务明确
-     *          缺点.事务不好处理，过度切分导致系统复杂
+     *          缺点.事务不好处理，过度切分导致系统复杂，存在性能问题
      *      b.水平拆分：水平一刀，分表操作，
      *          优点：事务处理比较简单，不会存在性能问题
      *          缺点：分表逻辑不好控制，数据迁移比较麻烦（可采用一致性hash算法），跨节点join，排序等等比较麻烦
@@ -894,7 +895,7 @@ public class Document {
      *      a.一天事情比较多，但是又必须自己解决，然后有的事情必须在某个时间点完成，
      *      b.通过分先后级别，然后不重要的先不做
      *  5.什么机缘下转的java-------之前是搞c++的，现在web服务
-     *      a.之前搞c++的，然后做个一年的c++服务器编程，公司之前搞从c++的不多，刚好老大问我转不转，然后就转了
+     *      a.之前搞c++的，然后做个c++服务器编程，公司之前搞从c++的不多，刚好老大问我转不转，然后就转了
      *
      *  6.离职原因
      *
@@ -906,6 +907,5 @@ public class Document {
      *  写今目标的项目-写一个现在做的项目
      *  https://www.cnblogs.com/szlbm/p/5437498.html
      *  http://youzhixueyuan.com/各种干货
-     *  找小涛要王宏的微信
      */
 }
