@@ -61,7 +61,7 @@
 
      1. 公司网站双十一,618等大促活动期间活动，用户参加活动可以参与抽奖或获取优惠券
      2. 涉及到的有加购抽奖，扭蛋活动，下单抽免单，红包雨等活动
-     3. 采用spring框架（spring boot）、数据库（mysql）、缓存（mysql,redis）、MQ（kafka）、服务集群（zk）,服务治理（thirft） ，任务调度（quartz），模板（freemarker）等框架实现
+     3. 采用spring框架（spring boot）、数据库（mysql）、缓存（redis）、MQ（kafka）、服务集群（zk）、任务调度（quartz），模板（freemarker）等框架实现
 
   - 项目职责 
 
