@@ -363,7 +363,7 @@ public class Document {
      *      https://www.jianshu.com/p/4b4519f97c92
      *      1.看下jvm相关的书
      *      2.一般jvm调优的话，就是java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20 -XX:+UseConcMarkSweepGC -XX:+UseParNewG
-     *      2.调优常用命令：
+     *      3.调优常用命令：
      *          -Xms:初始内存大小
      *          -Xmx:最大内存大小
      *          -Xss:每个线程堆栈大小
@@ -372,6 +372,8 @@ public class Document {
      *          -XX:NewRatio=n:设置年轻代和年老代的比值
      *          -XX:MaxPermSize=n:设置持久代大小
      *          -XX:+UseSerialGC:设置串行收集器
+     *       4.一般堆的初始大小和最大大小设为一样的
+     *       为什么了？为了减少堆扩容的时候，消除扩容时候stop-the-world的，表现在应用上面可能是有时候会出现卡顿
      *
      *   32.jvm
      *    1.每个java程序运行起来就会产生一个jvm实例，java程序结束jvm实例就会消失
