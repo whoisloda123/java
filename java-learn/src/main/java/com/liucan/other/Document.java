@@ -940,5 +940,6 @@ public class Document {
      *  频繁full gc
      *  mysql乐观锁和悲观锁的实现
      *  AQS里面的condition
+     *  平安科技
      */
 }
