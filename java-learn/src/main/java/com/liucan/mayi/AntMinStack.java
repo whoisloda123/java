@@ -1,118 +1,117 @@
 package com.liucan.mayi;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
- * AntMinStack
- *
- * @author commons
+ * @author liucan
+ *  通过最小栈保存数据栈里面栈底元素，以及比栈底元素小或相等的元素
  */
 public class AntMinStack {
-
+    /*
+     * 数据栈
+     */
     private final Stack<Integer> dataStack = new Stack<>();
-
+    /*
+     * 最小栈
+     */
     private final Stack<Integer> minStack = new Stack<>();
 
-    private volatile Integer minValue;
-
+    /**
+     * push 放入元素
+     *
+     * @param data 元素
+     */
     public void push(int data) {
         dataStack.push(data);
 
         if (minStack.empty()) {
             minStack.push(data);
         } else {
-            Integer peek = minStack.peek();
-            if (peek > data) {
+            Integer min = minStack.peek();
+            if (min != null && min >= data) {
                 minStack.push(data);
             }
         }
-
     }
 
+    /**
+     * pop 推出元素,如果pop出来的数据和最小栈元素一样，则同时也pop出最小栈
+     * @return 栈顶元素
+     * @throws EmptyStackException  if this stack is empty.
+     */
     public int pop() {
         if (dataStack.empty() || minStack.empty()) {
-            throw new IllegalStateException("Stack is empty");
+            throw new EmptyStackException();
         }
 
-        int popData = dataStack.pop();
-        int peekMin = minStack.peek();
-
-        if (popData == peekMin) {
-            minValue = peekMin;
-        } else if (popData < peekMin) {
+        System.out.println("pop前 -> " + toString());
+        Integer data = dataStack.pop();
+        if (data != null && data.intValue() == minStack.peek()) {
             minStack.pop();
-            minStack.push(popData);
-            minValue = popData;
         }
-        print();
-        return popData;
+
+        System.out.println("pop后 -> " + toString());
+        return data;
     }
 
+    /**
+     * min 最小函数，调用该函数，可直接返回当前AntMinStack的栈的最小值
+     *
+     * @return 栈最小值
+     * @throws EmptyStackException  if this stack is empty.
+     */
     public int min() {
-        if (dataStack.empty() || minStack.empty()) {
-            throw new IllegalStateException("Stack is empty");
-        }
-
-        Integer peek = minStack.peek();
-        if (minValue != null) {
-            if (peek.compareTo(minValue) > 0) {
-                return minValue;
-            }
-            return peek;
-        }
         return minStack.peek();
     }
 
-    public void pushAll(int... data) {
-        Arrays.stream(data).forEach(this::push);
+    @Override
+    public String toString() {
+        try {
+            return "AntMinStack-> dataStack:" + dataStack.toString() +
+                    ", minStack:" + minStack.toString() +
+                    ", minValue:" + min();
+        } catch (Exception e) {
+            System.out.println("toString exception:" + e);
+            return "";
+        }
     }
 
     public void clear() {
         dataStack.clear();
         minStack.clear();
-        minValue = null;
     }
 
-    @Override
-    public String toString() {
-        return "AntMinStack-> dataStack:" + dataStack.toString() + ", minStack:" + minStack.toString();
-    }
-
-    public void print() {
-        System.out.println(toString());
+    public void pushAll(int... values) {
+        Arrays.stream(values).forEach(this::push);
     }
 
     public static void main(String[] args) {
         AntMinStack antMinStack = new AntMinStack();
 
-        antMinStack.pushAll(2, 1, 3, 2, 1);
+        antMinStack.pushAll(3, 2, 1, 4, 2, 1);
         antMinStack.pop();
         antMinStack.pop();
         antMinStack.pop();
         antMinStack.pop();
         antMinStack.pop();
-        //antMinStack.pop();
-        System.out.println("min:" + antMinStack.min());
         antMinStack.clear();
 
         antMinStack.pushAll(1, 2, 3, 2, 1);
         antMinStack.pop();
         antMinStack.pop();
         antMinStack.pop();
-        System.out.println("min:" + antMinStack.min());
+        antMinStack.pop();
+        antMinStack.pop();
         antMinStack.clear();
 
-        antMinStack.pushAll(1, 2, 3, 4, 5);
-        System.out.println("min:" + antMinStack.min());
-        antMinStack.clear();
-
-        antMinStack.pushAll(5, 4, 3, 2, 1);
-        System.out.println("min:" + antMinStack.min());
-        antMinStack.clear();
-
-        antMinStack.pushAll(5, 4, 1, 2, 3);
-        System.out.println("min:" + antMinStack.min());
+        antMinStack.pushAll(5, 4, 1, 3, 2);
+        antMinStack.pop();
+        antMinStack.pop();
+        antMinStack.pop();
+        antMinStack.pop();
+        antMinStack.pop();
         antMinStack.clear();
     }
 }

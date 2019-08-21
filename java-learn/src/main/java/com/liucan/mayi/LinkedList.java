@@ -1,6 +1,9 @@
 package com.liucan.mayi;
 
+import java.util.Arrays;
+
 /**
+ * @author liucan
  * 这是一个链表，提供是否有环以及跟另一个链表是否相交的判断功能
  * 1. 判断有环实现函数 isCycleExist函数
  * 2. 判断两个链表是否相交，前置条件是两个链表均无环，故不用考虑有环的情况，实现函数isIntersect
@@ -9,15 +12,15 @@ public class LinkedList {
     /**
      * 链表节点
      */
-    class Node {
+    public class Node {
         /**
          * Node值，为一个整数
          */
-        int value;
+        private int value;
         /**
          * 指向下一个节点，最后一个节点指向null
          */
-        Node next;
+        private Node next;
 
         public void setNext(Node next) {
             this.next = next;
@@ -94,13 +97,9 @@ public class LinkedList {
         while (tailFirst.getNext() != null) {
             tailFirst = tailFirst.getNext();
         }
-        Node tailFirstTmp = tailFirst;
         tailFirst.setNext(linkedList.getHead());
 
-        Node cycleExistNode = isCycleExist();
-        //保存head的尾节点用于操作后不影响原来的节点
-        tailFirstTmp = null;
-        return cycleExistNode;
+        return isCycleExist();
     }
 
     public void setHead(Node head) {
@@ -119,6 +118,10 @@ public class LinkedList {
         return current;
     }
 
+    public void addAll(int... values) {
+        Arrays.stream(values).forEach(this::initData);
+    }
+
     public void initData(int value) {
         if (null == head) {
             head = new Node();
@@ -134,6 +137,11 @@ public class LinkedList {
         }
     }
 
+    /**
+     * 添加有环节点
+     *
+     * @param value 需要添加有环的节点的值
+     */
     public void addCycleByValue(int value) {
         Node tmp = head;
         while (tmp != null) {
@@ -145,7 +153,13 @@ public class LinkedList {
         }
     }
 
-    public void addCycleByIndex(Node node, int index) {
+    /**
+     * 将节点添加到相应的index之后
+     *
+     * @param node  待添加节点
+     * @param index 位置
+     */
+    public void addByIndex(Node node, int index) {
         Node tmp = head;
         int i = 0;
         while (tmp != null) {
@@ -159,12 +173,63 @@ public class LinkedList {
         }
     }
 
+    /*
+     * 打印链表
+     */
     public void print() {
+        System.out.println("链表初始化成功，打印链表内容");
         Node tmp = head;
         while (tmp != null) {
             System.out.print(tmp.getValue() + " ");
             tmp = tmp.getNext();
         }
-        System.out.println("");
+        System.out.println(" ");
+    }
+
+    public static void testCycle() {
+        System.out.println("测试链表是否有环开始");
+        LinkedList linkedList = new LinkedList();
+        linkedList.addAll(1, 2, 3, 4, 5);
+        linkedList.print();
+
+        linkedList.addCycleByValue(2);
+        System.out.println("构建有环链表成功");
+
+        System.out.println("开始判断链表是否有环");
+        LinkedList.Node cycleExistNode = linkedList.isCycleExist();
+        if (null != cycleExistNode) {
+            System.out.println("发现链表1有环，节点为：" + cycleExistNode.getValue());
+        }
+        System.out.println("测试链表是否有环结束");
+    }
+
+    public static void testIntersect() {
+        System.out.println("测试2个链表是否相交开始");
+        LinkedList linkedListA = new LinkedList();
+        LinkedList.Node node = linkedListA.new Node();
+        node.setValue(8);
+
+        //A链表
+        linkedListA.addAll(5, 6, 3, 4, 7);
+        linkedListA.addByIndex(node, 2);
+        linkedListA.print();
+
+        //B链表
+        LinkedList linkedListB = new LinkedList();
+        linkedListB.addAll(1, 2, 3, 4, 5);
+        linkedListB.addByIndex(node, 3);
+        linkedListB.print();
+
+        LinkedList.Node intersectNode = linkedListA.isIntersect(linkedListB);
+        if (null != intersectNode) {
+            System.out.println("发现2个链表相交，节点为：" + intersectNode.getValue());
+        }
+        System.out.println("测试2个链表是否相交结束");
+    }
+
+    public static void main(String[] args) {
+        testCycle();
+        System.out.println("---------------------------------------------");
+        testIntersect();
     }
 }
