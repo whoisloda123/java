@@ -101,6 +101,11 @@ import org.springframework.stereotype.Component;
  *              3.释放锁时，释放同步状态status（如ReentrantLock将状态变为0），同时唤醒后继节点
  *              4.在写自定义同步器的时候只需重写tryAcquire，tryRelease，tryAcquireShared, tryReleaseShared几个方法，来决定同步状态的释放和获取即可
  *              5.有共享模式和独占模式：ReentrantLock独占模式，一次只有一个获取锁的线程接口，CountDownLatch共享模式，一次有多个获取锁的线程节点
+ *              6.condition
+ *              https://www.jianshu.com/p/4d4c7398e187
+ *                  ReentrantLock里面的条件变量就是直接用aqs里面写好了的，
+ *                  实现方式是，有个条件变量队列，保存调用wait后的线程，
+ *
  *      d.CountDownLatch，Semaphore等线程同步类
  *          CountDownLatch控制同时等待多少个线程执行结束后再进行，Semaphore可控制有多少个线程同时执行
  *
