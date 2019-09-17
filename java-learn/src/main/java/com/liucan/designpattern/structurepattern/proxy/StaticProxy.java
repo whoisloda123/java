@@ -23,7 +23,11 @@ package com.liucan.designpattern.structurepattern.proxy;
  * 1.jdk动态代理只能针对接口类实现代理，而cglib没有限制
  * 2.cglib动态代理针对类实现代理，通过生成子类来覆盖其中方法，所以说不能代理final修饰的方法
  * <p>
- * spring会自动在JDK动态代理和CGLIB之间转换
+ *
+ * 1、如果目标对象实现了接口，默认情况下会采用JDK的动态代理实现AOP
+ * 2、如果目标对象实现了接口，可以强制使用CGLIB实现AOP
+ *
+ * 3、如果目标对象没有实现了接口，必须采用CGLIB库，spring会自动在JDK动态代理和CGLIB之间转换
  *
  * @author liucan
  * @version 19-3-24

@@ -60,6 +60,16 @@ public class BinaryTreeUtil {
         return root;
     }
 
+    //头插法
+    public void resvert(BinTree<Integer> head) {
+        BinTree<Integer> root = new BinTree<>();
+        root.left = null;
+        BinTree<Integer> next = head.left;
+        while (next != null) {
+
+        }
+    }
+
     //按照层次遍历二叉树
     public void bianliBinaryTree(BinTree root) {
         LinkedList<BinTree> binTrees = new LinkedList<>();
