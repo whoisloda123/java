@@ -29,6 +29,10 @@ package com.liucan.designpattern.structurepattern.proxy;
  *
  * 3、如果目标对象没有实现了接口，必须采用CGLIB库，spring会自动在JDK动态代理和CGLIB之间转换
  *
+ * 为何jdk动态代理只会代理接口类？
+ *  1.生成代理类的会继承Proxy类
+ *  2.由于java不能多继承，这里已经继承了Proxy类了，不能再继承其他的类，所以JDK的动态代理不支持对实现类的代理，只支持接口的代理。
+ *
  * @author liucan
  * @version 19-3-24
  */
