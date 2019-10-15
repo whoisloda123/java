@@ -374,6 +374,7 @@ public class Document {
      *          -XX:+UseSerialGC:设置串行收集器
      *       4.一般堆的初始大小和最大大小设为一样的
      *       为什么了？为了减少堆扩容的时候，消除扩容时候stop-the-world的，表现在应用上面可能是有时候会出现卡顿
+     *       5.频繁出现fullgc的原因和解决版办法？
      *
      *   32.jvm
      *    1.每个java程序运行起来就会产生一个jvm实例，java程序结束jvm实例就会消失
@@ -490,7 +491,7 @@ public class Document {
      *          c.对接异构第三方服务时，通常使用 HTTP/RESTful 等公有协议，对于内部的服务调用，应用选择性能更高的二进制私有协议
      *      二.thrift
      *      参考：https://blog.csdn.net/zkp_java/article/details/81879577
-     *          a.thrift是一个典型的CS结构,支持跨语言,thrift通过IDL(Interface Description Language)来关联客户端和服务端
+     *          a.thrift是一个典型 的CS结构,支持跨语言,thrift通过IDL(Interface Description Language)来关联客户端和服务端
      *          b.thrift使用socket进行数据传输
      *
      *      三.Finagle
