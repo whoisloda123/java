@@ -15,6 +15,20 @@ import java.util.stream.Stream;
 
 @Component
 public final class Other {
+
+    public static void main(String[] args) {
+        LinkedList<String> integers = new LinkedList<>();
+        integers.add("1");
+        integers.add("2");
+        integers.add("3");
+        integers.add("4");
+        integers.add("5");
+        for (int i = 0; i < 5; i++) {
+            integers.remove("4");
+        }
+        System.out.println(integers);
+    }
+
     /* *
      * java.util.Date和SimpleDateFormatter都不是线程安全的，java8而LocalDate和LocalTime和最基本的String一样，
      * 是不变类型，不但线程安全，而且不能修改

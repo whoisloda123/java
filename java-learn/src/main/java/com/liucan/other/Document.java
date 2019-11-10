@@ -375,6 +375,7 @@ public class Document {
      *       4.一般堆的初始大小和最大大小设为一样的
      *       为什么了？为了减少堆扩容的时候，消除扩容时候stop-the-world的，表现在应用上面可能是有时候会出现卡顿
      *       5.频繁出现fullgc的原因和解决版办法？
+     *       https://www.jianshu.com/p/e749782fff2b
      *
      *   32.jvm
      *    1.每个java程序运行起来就会产生一个jvm实例，java程序结束jvm实例就会消失
@@ -918,7 +919,12 @@ public class Document {
      *      a.组合索引在b+树里面存储的结构和普通的索引是一样的
      *      b.其非叶子节点存储的是第一个关键字的索引，只是叶子节点保存的是联合索引的所有索引，然后按照声明的顺序保存的
      *
-     *  84.http缓存
+     *  84.springboot上下文如何加载的
+     *   https://blog.csdn.net/qq_34173549/article/details/79929071
+     *
+     *  85.springcloud了解下
+     *
+     *  86.http缓存
      *  https://www.jianshu.com/p/227cee9c8d15
      *  https://www.cnblogs.com/ranyonsue/p/8918908.html
      *  浏览器缓存分为强缓存和协商缓存
@@ -928,6 +934,12 @@ public class Document {
      *   c.如果未命中协商缓存，则服务器会将完整的资源返回给浏览器，浏览器加载新资源，并更新缓存。
      *   d.强缓存cache-control,expires,协商缓存ETag/If-Not-Match 、Last-Modified/If-Modified-Since
      *
+     *  87.为何mysql事务隔离级别默认是可重复读，而oracle的隔离级别是都已提交
+     *  https://www.iteye.com/blog/pre-2438968
+     *      因为mysql的主从复制里面binlog日志的原因，binlog模式，Statement：记录的是可能改变数据的SQL语句
+     *      可能会导致主从复制的一致性问题
+     *
+     *  88.
      *
      *
      *

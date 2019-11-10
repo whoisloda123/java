@@ -10,6 +10,7 @@ package com.liucan.designpattern.creativepattern.singleton;
  */
 public class LazySingleton {
     private static volatile LazySingleton instance = null;
+    private static final Object lock = new Object();
 
     private LazySingleton() {
     }
@@ -25,9 +26,13 @@ public class LazySingleton {
 
     }
 
-    public synchronized static LazySingleton getInstance() {
+    public static LazySingleton getInstance() {
         if (instance == null) {
-            instance = new LazySingleton();
+            synchronized (lock) {
+                if (instance == null) {
+                    instance = new LazySingleton();
+                }
+            }
         }
         return instance;
     }
