@@ -31,6 +31,11 @@ import java.util.concurrent.*;
  *  3.newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。ScheduledExecutorService比Timer更安全，功能更强大
  *  4.newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
  *
+ * 四.异常处理机制
+ *  https://my.oschina.net/alvinlkk/blog/1925286
+ *  1.execute会抛出异常，submit不会抛出
+ *  2.创建线程池的时候可重写afterExecute,因在执行task的时候，会try-finally，在finally里面调用afterExecute
+ *
  * @author liucan
  * @version 19-3-4
  */
