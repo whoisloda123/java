@@ -939,7 +939,7 @@ public class Document {
      *      因为mysql的主从复制里面binlog日志的原因，binlog模式，Statement：记录的是可能改变数据的SQL语句
      *      可能会导致主从复制的一致性问题
      *
-     *  88.netty,es
+     *  88.netty,es,spring security
      *
      *
      *
