@@ -13,7 +13,21 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @version 19-3-17
  */
 public class NettyServer {
-
+    public int maxSubArray(int[] nums) {
+        int sum=nums[0];
+        int n=nums[0];
+        for(int i=1;i<nums.length;i++) {
+            if(n>0) {
+                n+=nums[i];
+            } else {
+                n=nums[i];
+            }
+            if(sum<n) {
+                sum=n;
+            }
+        }
+        return sum;
+    }
     public void run() throws Exception {
         //bossGroup 用来接收进来的连接
         EventLoopGroup bossGroup = new NioEventLoopGroup();
