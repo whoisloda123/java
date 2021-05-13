@@ -35,7 +35,7 @@ import java.util.concurrent.*;
  *  https://my.oschina.net/alvinlkk/blog/1925286
  *  1.execute会抛出异常，submit不会抛出
  *  2.创建线程池的时候可重写afterExecute,因在执行task的时候，会try-finally，在finally里面调用afterExecute
- *
+ * 五.这个线程池总结的好-必须看https://zhuanlan.zhihu.com/p/73990200
  * @author liucan
  * @version 19-3-4
  */
