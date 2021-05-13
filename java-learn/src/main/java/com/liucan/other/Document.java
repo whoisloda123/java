@@ -789,6 +789,8 @@ public class Document {
      *  63.mysql集群主从复制，主从同步
      *      a.集群中每个节点都是全部内容
      *      b.master节点上面记录的binlog-记录了所有操作，从数据库启动一个io线程复制binlog到从
+            c.通过binlog传到中继日志里面
+            d.半同步，异步，同步
      *
      *  64.spring-boot如何实现自动配置的
      *  https://www.cnblogs.com/leihuazhe/p/7743479.html
@@ -967,7 +969,7 @@ public class Document {
      *      b.通过分先后级别，然后不重要的先不做
      *  5.什么机缘下转的java-------之前是搞c++的，现在web服务
      *      a.之前搞c++的，然后做个c++服务器编程，公司之前搞从c++的不多，刚好老大问我转不转，然后就转了
-     *
+     *  6.说有offer，然后带个人
      *
      *  笔试题目->计算机网络，排序，算法的等->项目经验->简历
      *  看下面试总结
