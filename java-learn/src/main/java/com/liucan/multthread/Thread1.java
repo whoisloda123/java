@@ -119,7 +119,16 @@ import org.springframework.stereotype.Component;
  *  https://blog.csdn.net/qwed070/article/details/76199082
  *   a.非公平锁，lock的时候，会无视正在等待锁资源的队列里面是否有成员，而直接尝试一次获取，若不成功，则还是会进入AQS的CLH等待队列，然后阻塞，顺序等待唤醒，获取。
  *   b.公平锁，lock的时候，则不能无视正在等待锁资源的队列里面的成员。
- *
+ *  十一.这个讲的好：https://zhuanlan.zhihu.com/p/65349219
+     await的流程
+
+await()：当前线程处于阻塞状态，直到调用signal()或中断才能被唤醒。
+
+1）将当前线程封装成node且等待状态为CONDITION。
+2）释放当前线程持有的所有资源，让下一个线程能获取资源。
+3）加入到条件队列后，则阻塞当前线程，等待被唤醒。
+4）如果是因signal被唤醒，则节点会从条件队列转移到等待队列；如果是因中断被唤醒，则记录中断状态。两种情况都会跳出循环。
+5）若是因signal被唤醒，就自旋获取资源；否则处理中断异常
  * @author liucan
  * @version 19-1-20
  */
