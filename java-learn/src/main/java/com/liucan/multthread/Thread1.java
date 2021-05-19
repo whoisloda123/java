@@ -129,6 +129,8 @@ condtion原理
 3）加入到条件队列后，则阻塞当前线程，等待被唤醒。
 4）如果是因signal被唤醒，则节点会从条件队列转移到等待队列。
 5）若是因signal被唤醒，就自旋获取锁；否则处理中断异常
+ 十二.读写锁实现原理
+ https://www.toutiao.com/i6714450210241643019/?tt_from=weixin&utm_campaign=client_share&wxshare_count=1&timestamp=1621379437&app=news_article&utm_source=weixin&utm_medium=toutiao_ios&use_new_style=1&req_id=2021051907103701021207020508213DB6&share_token=CB9AE682-983C-4000-84C1-0A6EDF768EFC&group_id=6714450210241643019&wid=1621386976742
  * @author liucan
  * @version 19-1-20
  */
